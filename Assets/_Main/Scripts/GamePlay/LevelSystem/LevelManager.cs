@@ -34,5 +34,12 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             _tileManager.CreateTiles(_levelScriptableObject.Data);
             _personManager.CreatePeople(_tileManager.Tiles);
         }
+
+        public void UnloadLevel()
+        {
+            _slotManager.ReleaseSlots();
+            _tileManager.ReleaseTiles();
+            _personManager.ReleasePeople();
+        }
     }
 }
