@@ -61,3 +61,8 @@ MonoBehaviour:
     softCap: 7
     hardCap: 10
     createAtStart: 1
+  - tag: Bus
+    prefab: {fileID: 2397257571570040259, guid: 1f7d5255b19031240bf9e6ddc70892fe, type: 3}
+    softCap: 5
+    hardCap: 10
+    createAtStart: 1

@@ -1,5 +1,6 @@
 using System;
 using _Main.GamePlay.TileSystem;
+using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
@@ -7,6 +8,8 @@ namespace _Main.Scripts.GamePlay.LevelSystem
     [Serializable]
     public class LevelData
     {
+        public BusData[] Buses;
+        
         public int SlotWidth = 5;
         public int SlotHeight = 1;
         public SlotData[] Slots;

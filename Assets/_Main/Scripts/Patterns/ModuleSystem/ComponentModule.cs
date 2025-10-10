@@ -9,7 +9,7 @@ namespace _Main.Patterns.ModuleSystem
 
         internal virtual void Initialize()
         {
-            if (HasInitialized)
+            if (HasInitialized) 
                 return;
 
             BaseComp = GetComponent<TBaseComponent>();
