@@ -8,8 +8,9 @@ namespace _Main.GamePlay.TileSystem
     public struct TileData
     {
         public TileType Type;
-        [ShowIf("IsPersonType")]public PersonData PersonData;
         
+        [ShowIf("IsPersonType")] public PersonData PersonData;
+
         private bool IsPersonType()
         {
             return Type == TileType.Person;
