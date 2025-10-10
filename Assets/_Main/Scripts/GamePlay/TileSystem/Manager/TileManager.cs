@@ -16,6 +16,8 @@ namespace _Main.GamePlay.TileSystem.Manager
         private Grid<Tile> _grid;
         private const float CELL_SIZE = 1.25f;
         private const string POOL_TAG = "Tile";
+        private int _width;
+        private int _height;
 
         public Tile[,] TilesMatrix;
 
@@ -23,16 +25,15 @@ namespace _Main.GamePlay.TileSystem.Manager
         public void CreateTiles(LevelData levelData)
         {
             levelData.Initialize();
-            var width = levelData.TileWidth;
-            var height = levelData.TileHeight;
-            Tiles = new List<Tile>(width * height);
-            TilesMatrix = new Tile[height,width];
-            _grid = new Grid<Tile>(height, width, CELL_SIZE,_gridParent.position);
-            var isExitTile = false;
-            for (int i = 0; i < height; i++)
+            _width = levelData.TileWidth;
+            _height = levelData.TileHeight;
+            Tiles = new List<Tile>(_width * _height);
+            TilesMatrix = new Tile[_height,_width];
+            _grid = new Grid<Tile>(_height, _width, CELL_SIZE,_gridParent.position);
+            for (int i = 0; i < _height; i++)
             {
-                isExitTile = i == 0;
-                for (int j = 0; j < width; j++)
+                var isExitTile = i == 0;
+                for (int j = 0; j < _width; j++)
                 {
                     var tileData = levelData.GetTile(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
@@ -55,23 +56,23 @@ namespace _Main.GamePlay.TileSystem.Manager
         }
 
         [Button]
-        public void GetPath(Tile tile)
+        public bool GetPath(Tile tile, out List<Tile> path)
         {
-            List<Tile> path = PathFinding.FindPathToClosestExit(tile, TilesMatrix);
+            path = PathFinding.FindPathToClosestExit(tile, TilesMatrix,_height,_width);
 
             if (path != null)
             {
                 Debug.Log($"Path found! Tile count: {path.Count}");
-                for (var i = 0; i < path.Count; i++)
+                foreach (var t in path)
                 {
-                    var t = path[i];
                     Debug.Log("Path element indexes x : "+ t.X +  " y: " + t.Y , t.transform);
                 }
+
+                return true;
             }
-            else
-            {
-                Debug.Log("No path to exit found!");
-            }
+
+            Debug.Log("No path to exit found!");
+            return false;
         }
 
     }
