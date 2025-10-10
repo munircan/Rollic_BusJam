@@ -13,6 +13,23 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   Data:
+    SlotWidth: 7
+    SlotHeight: 1
+    Slots:
+    - IsLocked: 1
+      LockedLevel: 15
+    - IsLocked: 0
+      LockedLevel: 0
+    - IsLocked: 0
+      LockedLevel: 0
+    - IsLocked: 0
+      LockedLevel: 0
+    - IsLocked: 0
+      LockedLevel: 0
+    - IsLocked: 0
+      LockedLevel: 0
+    - IsLocked: 1
+      LockedLevel: 30
     TileWidth: 3
     TileHeight: 3
     Tiles:

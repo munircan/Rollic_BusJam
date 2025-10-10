@@ -1,11 +1,19 @@
 using System;
 using _Main.GamePlay.TileSystem;
+using _Main.Scripts.GamePlay.SlotSystem;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
 {
     [Serializable]
     public class LevelData
     {
+        public int SlotWidth = 5;
+        public int SlotHeight = 1;
+        public SlotData[] Slots;
+        
+        private SlotData[,] _slotsData;
+        
+        
         public int TileWidth = 5;
         public int TileHeight = 5;
         public TileData[]  Tiles;
@@ -14,6 +22,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem
         
         public void Initialize()
         {
+            InitializeSlots();
             InitializeTiles();
         }
 
@@ -35,8 +44,27 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             }
         }
         
+        private void InitializeSlots()
+        {
+            if (Slots == null || Slots.Length != SlotWidth * SlotHeight)
+            {
+                Slots = new SlotData[SlotWidth * SlotHeight];
+            }
+
+            _slotsData = new SlotData[SlotHeight, SlotWidth];
+
+            for (int x = 0; x < SlotHeight; x++)
+            {
+                for (int y = 0; y < SlotWidth; y++)
+                {
+                    _slotsData[x, y] = Slots[x * SlotWidth + y];
+                }
+            }
+        }
+        
         public TileData GetTile(int x, int y) => _tilesData[x, y];
         
+        public SlotData GetSlot(int x, int y) => _slotsData[x, y];
         
     }
 }

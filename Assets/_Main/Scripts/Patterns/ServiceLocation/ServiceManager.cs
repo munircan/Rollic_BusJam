@@ -1,5 +1,6 @@
 ﻿using _Main.GamePlay.TileSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
+using _Main.Scripts.GamePlay.SlotSystem;
 using UnityEngine;
 
 namespace _Main.Patterns.ServiceLocation
@@ -9,6 +10,7 @@ namespace _Main.Patterns.ServiceLocation
     {
         [SerializeField] private TileManager _tileManager;
         [SerializeField] private PersonManager _personManager;
+        [SerializeField] private SlotManager  _slotManager;
 
         private void Awake()
         {
@@ -22,6 +24,7 @@ namespace _Main.Patterns.ServiceLocation
         {
             ServiceLocator.RegisterService(_personManager);
             ServiceLocator.RegisterService(_tileManager);
+            ServiceLocator.RegisterService(_slotManager);
         }
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace _Main.Patterns.ServiceLocation
         {
             ServiceLocator.UnregisterService<PersonManager>();
             ServiceLocator.UnregisterService<TileManager>();
+            ServiceLocator.UnregisterService<SlotManager>();
         }
 
         private void OnDestroy()

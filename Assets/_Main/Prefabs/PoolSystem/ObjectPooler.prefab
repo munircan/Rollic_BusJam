@@ -56,3 +56,8 @@ MonoBehaviour:
     softCap: 10
     hardCap: 50
     createAtStart: 1
+  - tag: Slot
+    prefab: {fileID: 4867770401009991869, guid: 33dd2c474487b7145b23820630c0583f, type: 3}
+    softCap: 7
+    hardCap: 10
+    createAtStart: 1
