@@ -39,14 +39,17 @@ namespace _Main.Scripts.GamePlay.PathFinding
                 }
                 
                 var neighbours = GetNeighbors(current, tilesMatrix, width, height);
-                foreach (var neighbor in neighbours)
+                for (var i = 0; i < neighbours.Count; i++)
                 {
-                    if (!visited.Contains(neighbor) && !neighbor.IsOccupied)
+                    var neighbor = neighbours[i];
+                    if (visited.Contains(neighbor) || neighbor.IsOccupied)
                     {
-                        queue.Enqueue(neighbor);
-                        visited.Add(neighbor);
-                        cameFrom[neighbor] = current;
+                        continue;
                     }
+                        
+                    queue.Enqueue(neighbor);
+                    visited.Add(neighbor);
+                    cameFrom[neighbor] = current;
                 }
             }
 
