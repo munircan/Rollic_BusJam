@@ -30,5 +30,13 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             }
         }
 
+        public void ReleasePeople()
+        {
+            foreach (var person in _personList)
+            {
+                person.Reset();
+                ObjectPooler.Instance.ReleasePooledObject(POOL_TAG, person);
+            }
+        }
     }
 }

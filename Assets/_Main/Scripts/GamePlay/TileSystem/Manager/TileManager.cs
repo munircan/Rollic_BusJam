@@ -36,5 +36,14 @@ namespace _Main.GamePlay.TileSystem.Manager
             }
         }
 
+        public void ReleaseTiles()
+        {
+            foreach (var tile in Tiles)
+            {
+                tile.Reset();
+                ObjectPooler.Instance.ReleasePooledObject(POOL_TAG, tile);
+            }
+        }
+
     }
 }
