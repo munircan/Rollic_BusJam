@@ -17,7 +17,7 @@ namespace _Main.GamePlay.TileSystem.Manager
         private const float CELL_SIZE = 1.25f;
         private const string POOL_TAG = "Tile";
 
-        private void OnEnable()
+        private void Start()
         {
             CreateTiles();
         }
