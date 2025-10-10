@@ -18,7 +18,7 @@ namespace _Main.GamePlay.GridSystem
             _cellSize = cellSize;
             _originPosition = originPosition;
             _gridArray = new T[height, width];
-        }
+        }   
 
         public Vector3 GetWorldPosition(int x, int y)
         {

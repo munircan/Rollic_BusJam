@@ -22,7 +22,13 @@ namespace _Main.GamePlay.TileSystem
 
         #region Encapsulated Variables
 
-        public bool IsOccupied { get; set; }
+        public bool IsOccupied
+        {
+            get
+            {
+                return Data.Type == TileType.None || TileObject != null;
+            }
+        }
 
         public ITileObject TileObject { get; set; }
         public TileData Data { get; set; }

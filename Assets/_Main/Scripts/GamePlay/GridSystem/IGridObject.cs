@@ -2,6 +2,6 @@
 {
     public interface IGridObject
     {
-        public bool IsOccupied { get; set; }
+        public bool IsOccupied { get; }
     }
 }

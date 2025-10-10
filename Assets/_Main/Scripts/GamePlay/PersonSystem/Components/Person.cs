@@ -56,7 +56,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         {
             Tile = tile;
             Tile.TileObject = this;
-            Tile.IsOccupied = true;
         }
 
         private void SetColor()
