@@ -5,6 +5,6 @@ namespace _Main.GamePlay.TileSystem
     {
         public Tile Tile { get; set; }
 
-        public void ClickAction() { }
+        public void ClickAction();
     }
 }

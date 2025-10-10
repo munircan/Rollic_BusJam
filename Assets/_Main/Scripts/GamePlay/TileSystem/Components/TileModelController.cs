@@ -6,11 +6,22 @@ namespace _Main.GamePlay.TileSystem
 {
     public class TileModelController : ComponentModule<Tile>
     {
+        #region SerializeField Variables
+
         [SerializeField] private Transform _personTransform;
 
         // REMEMBER TO CLOSE MODELS IN PREFAB
         [SerializeField] private GameObject _tileModel;
         [SerializeField] private GameObject _obstacleModel;
+
+
+        #endregion
+
+        #region Encapsulated Variables
+    
+        public Vector3 PersonPosition => _personTransform.position;
+
+        #endregion
         
 
         #region Override Methods

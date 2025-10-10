@@ -12,10 +12,15 @@ namespace _Main.GamePlay.TileSystem
 
         #endregion
 
+        #region Encapsulated Variables
+
         public bool IsOccupied { get; set; }
 
         public ITileObject TileObject { get; set; }
         public TileData Data { get; set; }
+
+        #endregion
+      
 
 
         #region Unity Event Methods
@@ -45,5 +50,16 @@ namespace _Main.GamePlay.TileSystem
         }
 
         #endregion
+
+        #region Helpers
+
+        public Vector3 GetPersonPosition()
+        {
+            return _modelController.PersonPosition;
+        }
+
+        #endregion
+        
+        
     }
 }
