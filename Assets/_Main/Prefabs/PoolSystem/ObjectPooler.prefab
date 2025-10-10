@@ -51,3 +51,8 @@ MonoBehaviour:
     softCap: 10
     hardCap: 50
     createAtStart: 1
+  - tag: Person
+    prefab: {fileID: 5595784595774144345, guid: 33f6668bc6a823445be1416d3097d98c, type: 3}
+    softCap: 10
+    hardCap: 50
+    createAtStart: 1
