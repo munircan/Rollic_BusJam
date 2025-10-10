@@ -12,6 +12,14 @@ namespace _Main.GamePlay.TileSystem
 
         #endregion
 
+
+        // TODO: WE SHOULD SELECT FROM LEVEL DATA IF WE WANT
+        public bool IsExitTile { get; set; }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
+
         #region Encapsulated Variables
 
         public bool IsOccupied { get; set; }
@@ -20,8 +28,6 @@ namespace _Main.GamePlay.TileSystem
         public TileData Data { get; set; }
 
         #endregion
-      
-
 
         #region Unity Event Methods
 
@@ -34,13 +40,22 @@ namespace _Main.GamePlay.TileSystem
 
         #region Init-Reset Methods
 
-        public void Initialize(TileData data)
+        public void Initialize(TileData data,int x,int y, bool isExitTile)
         {
             Data = data;
+            SetIndexes(x,y);
+            IsExitTile = isExitTile;
+            
             _modelController.Initialize();
 
 
             _modelController.SetModelsActive(Data.Type);
+        }
+
+        public void SetIndexes(int x, int y)
+        {
+            X = x;
+            Y = y;
         }
 
 
@@ -59,7 +74,5 @@ namespace _Main.GamePlay.TileSystem
         }
 
         #endregion
-        
-        
     }
 }

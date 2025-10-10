@@ -23,14 +23,17 @@ namespace _Main.GamePlay.TileSystem.Manager
             var width = levelData.TileWidth;
             var height = levelData.TileHeight;
             _grid = new Grid<Tile>(width, height, CELL_SIZE,_gridParent.position);
+            var isExitTile = false;
             for (int i = 0; i < height; i++)
             {
+                isExitTile = i == 0;
                 for (int j = 0; j < width; j++)
                 {
                     var tileData = levelData.GetTile(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
                     var tile = ObjectPooler.Instance.SpawnSc<Tile>(POOL_TAG, pos, Quaternion.identity, _gridParent);
-                    tile.Initialize(tileData);
+                    tile.Initialize(tileData,i,j,isExitTile);
+                    tile.SetIndexes(i,j);
                     Tiles.Add(tile);
                 }
             }
