@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Main.GamePlay.GridSystem;
 using _Main.Patterns.ObjectPooling;
+using _Main.Scripts.GamePlay.LevelSystem;
 using UnityEngine;
 
 namespace _Main.GamePlay.TileSystem.Manager
@@ -8,31 +9,25 @@ namespace _Main.GamePlay.TileSystem.Manager
     public class TileManager : MonoBehaviour
     {
         [SerializeField] private Transform _gridParent;
-        [SerializeField] private int _width;
-        [SerializeField] private int _height;
-
         public List<Tile> Tiles { get; private set; }
 
         private Grid<Tile> _grid;
         private const float CELL_SIZE = 1.25f;
         private const string POOL_TAG = "Tile";
 
-        private void Start()
-        {
-            CreateTiles();
-        }
-
-        public void CreateTiles()
+   
+        public void CreateTiles(LevelData levelData)
         {
             Tiles = new List<Tile>();
-           
-            _grid = new Grid<Tile>(_width, _height, CELL_SIZE,_gridParent.position);
-            for (int i = 0; i < _height; i++)
+            levelData.Initialize();
+            var width = levelData.TileWidth;
+            var height = levelData.TileHeight;
+            _grid = new Grid<Tile>(width, height, CELL_SIZE,_gridParent.position);
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < _width; j++)
+                for (int j = 0; j < width; j++)
                 {
-                    var tileData = new TileData();
-                    tileData.Type = TileType.Default;
+                    var tileData = levelData.GetTile(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
                     var tile = ObjectPooler.Instance.SpawnSc<Tile>(POOL_TAG, pos, Quaternion.identity, _gridParent);
                     tile.Initialize(tileData);
