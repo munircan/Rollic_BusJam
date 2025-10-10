@@ -2,27 +2,28 @@ using System;
 using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
+using Sirenix.OdinInspector;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
 {
     [Serializable]
     public class LevelData
     {
-        public BusData[] Buses;
-        
-        public int SlotWidth = 5;
-        public int SlotHeight = 1;
-        public SlotData[] Slots;
-        
+        [FoldoutGroup("Bus")] public BusData[] Buses;
+
+        [FoldoutGroup("Slot")] public int SlotWidth = 5;
+        [FoldoutGroup("Slot")] public int SlotHeight = 1;
+        [FoldoutGroup("Slot")] public SlotData[] Slots;
+
         private SlotData[,] _slotsData;
-        
-        
-        public int TileWidth = 5;
-        public int TileHeight = 5;
-        public TileData[]  Tiles;
+
+
+        [FoldoutGroup("Tile")] public int TileWidth = 5;
+        [FoldoutGroup("Tile")] public int TileHeight = 5;
+        [FoldoutGroup("Tile")] public TileData[] Tiles;
 
         private TileData[,] _tilesData;
-        
+
         public void Initialize()
         {
             InitializeSlots();
@@ -46,7 +47,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem
                 }
             }
         }
-        
+
         private void InitializeSlots()
         {
             if (Slots == null || Slots.Length != SlotWidth * SlotHeight)
@@ -64,10 +65,9 @@ namespace _Main.Scripts.GamePlay.LevelSystem
                 }
             }
         }
-        
+
         public TileData GetTile(int x, int y) => _tilesData[x, y];
-        
+
         public SlotData GetSlot(int x, int y) => _slotsData[x, y];
-        
     }
 }
