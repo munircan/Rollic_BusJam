@@ -2,6 +2,7 @@ using _Main.GamePlay.TileSystem.Manager;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
+using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ namespace _Main.Scripts.GamePlay.LevelSystem
 {
     public class LevelManager : MonoBehaviour
     {
-        [SerializeField] private LevelScriptableObject _levelScriptableObject;
         private TileManager _tileManager;
         private PersonManager _personManager;
         private SlotManager _slotManager;
@@ -32,10 +32,11 @@ namespace _Main.Scripts.GamePlay.LevelSystem
 
         public void LoadLevel()
         {
-            _slotManager.CreateSlots(_levelScriptableObject.Data);
-            _tileManager.CreateTiles(_levelScriptableObject.Data);
+            var currentLevelData = LevelSettings.Instance.GetCurrentLevel();
+            _slotManager.CreateSlots(currentLevelData);
+            _tileManager.CreateTiles(currentLevelData);
             _personManager.CreatePeople(_tileManager.Tiles);
-            _busManager.CreateBuses(_levelScriptableObject.Data);
+            _busManager.CreateBuses(currentLevelData);
         }
 
         public void UnloadLevel()
