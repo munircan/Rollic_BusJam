@@ -62,15 +62,15 @@ MonoBehaviour:
     - Type: 0
       PersonData:
         Color: 0
+    - Type: 1
+      PersonData:
+        Color: 2
     - Type: 0
       PersonData:
         Color: 0
-    - Type: 0
+    - Type: 1
       PersonData:
-        Color: 0
-    - Type: 0
-      PersonData:
-        Color: 0
+        Color: 2
     - Type: 0
       PersonData:
         Color: 0
