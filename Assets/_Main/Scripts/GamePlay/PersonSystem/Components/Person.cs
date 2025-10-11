@@ -13,6 +13,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         #region SerializeField Variables
 
         [SerializeField] private PersonModelController _modelController;
+        [SerializeField] private PersonMovementController _movementController;
 
         #endregion
 
@@ -43,14 +44,15 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         {
             Data = data;
             _modelController.Initialize();
-
-
+            _movementController.Initialize();
+            
             SetColor();
         }
 
         public void Reset()
         {
             _modelController.Reset();
+            _movementController.Reset();
         }
 
         #endregion
@@ -75,9 +77,18 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         public void Execute()
         {
-            if (ServiceLocator.TryGetService(out PersonManager manager))
+            if(ServiceLocator.TryGetService(out PersonManager manager))
             {
-                manager.FollowPathCommand(this);
+                var pathData = manager.GetPersonPathData(this);
+                if (pathData.HasPath)
+                {
+                    _movementController.MovePath(pathData.PathPositions);
+                    Debug.Log("Hell Yeah!");
+                }
+                else
+                {
+                    Debug.Log("I can't walk man!");
+                }
             }
         }
 

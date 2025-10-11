@@ -73,11 +73,13 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     }
 
                     var hasPath = tileManager.GetPath(personTile, out var path);
-                    var personPathData = new PersonPathData
+                    var personPathData = new PersonPathData();
+                    personPathData.HasPath = hasPath;
+                    if (hasPath)
                     {
-                        CanWalk = hasPath,
-                        Tiles = path
-                    };
+                        personPathData.PathPositions = new List<Vector3>(path.GetPathAsVector3List());
+                    }
+                    
                     _personPathDictionary.Add(person, personPathData);
                 }
             }
@@ -88,23 +90,16 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             SetPeopleCanWalk();
         }
 
-        public void FollowPathCommand(Person person)
+        public PersonPathData GetPersonPathData(Person person)
         {
-            var personPathData = _personPathDictionary[person];
-            if (personPathData.CanWalk)
-            {
-                Debug.Log("Move my man!");
-            }
-            else
-            {
-                Debug.Log("You can't walk mate!");
-            }
+            return _personPathDictionary[person];
         }
+        
     }
 
     public struct PersonPathData
     {
-        public bool CanWalk;
-        public List<Tile> Tiles;
+        public bool HasPath;
+        public List<Vector3> PathPositions;
     }
 }

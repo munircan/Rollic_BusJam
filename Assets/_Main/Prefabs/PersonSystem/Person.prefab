@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 8001230870449592558}
   - component: {fileID: 5595784595774144345}
   - component: {fileID: 1235504890058391812}
+  - component: {fileID: 3295910548849967161}
   m_Layer: 0
   m_Name: Person
   m_TagString: Untagged
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modelController: {fileID: 1235504890058391812}
+  _movementController: {fileID: 3295910548849967161}
 --- !u!114 &1235504890058391812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +145,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 3157381659344138424}
+--- !u!114 &3295910548849967161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635415251506052512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39b081bc3ce418cbd0249d5d0d46bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementData: {fileID: 11400000, guid: a71016a75efe97e4cb3c4a2bb3c6ae58, type: 2}

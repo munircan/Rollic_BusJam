@@ -74,6 +74,6 @@ namespace _Main.GamePlay.TileSystem.Manager
             Debug.Log("No path to exit found!");
             return false;
         }
-
+        
     }
 }
