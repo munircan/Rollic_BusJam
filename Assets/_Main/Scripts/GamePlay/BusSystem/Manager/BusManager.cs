@@ -3,6 +3,7 @@ using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Manager
@@ -12,7 +13,6 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
         [SerializeField] private Transform _busParent;
         [SerializeField] private Transform _startTransform;
         [SerializeField] private Transform _endTransform;
-        private const string POOL_TAG = "Bus";
         private const float BUS_OFFSET = 5;
         private List<Bus> _buses;
         private int _currentIndex;
@@ -27,7 +27,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             {
                 var data = busesData[i];
                 var pos = new Vector3(startPos.x - (i * BUS_OFFSET) , startPos.y,startPos.z);
-                var bus = ObjectPooler.Instance.SpawnSc<Bus>(POOL_TAG, pos, Quaternion.identity, _busParent);
+                var bus = ObjectPooler.Instance.SpawnSc<Bus>(Keys.BUS_POOL_TAG, pos, Quaternion.identity, _busParent);
                 bus.Initialize(data);
             }
         }
@@ -38,7 +38,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             foreach (var bus in _buses)
             {
                 bus.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(POOL_TAG,bus);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.BUS_POOL_TAG,bus);
             }
         }
     }

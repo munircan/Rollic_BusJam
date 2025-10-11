@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
 using _Main.Patterns.ObjectPooling;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PersonSystem.Manager
@@ -9,8 +10,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
     {
         [SerializeField] private Transform _personParent;
         private List<Person> _personList;
-       
-        private const string POOL_TAG = "Person";
+        
 
         public void CreatePeople(List<Tile> tiles)
         {
@@ -22,7 +22,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 {
                     var personPosition = tile.GetPersonPosition();
                     var personData = tile.Data.PersonData;
-                    var person = ObjectPooler.Instance.SpawnSc<Person>(POOL_TAG,personPosition,Quaternion.identity,_personParent);
+                    var person = ObjectPooler.Instance.SpawnSc<Person>(Keys.PERSON_POOL_TAG,personPosition,Quaternion.identity,_personParent);
                     person.Initialize(personData);
                     person.SetTile(tile);
                     _personList.Add(person);
@@ -35,7 +35,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             foreach (var person in _personList)
             {
                 person.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(POOL_TAG, person);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.PERSON_POOL_TAG, person);
             }
         }
     }

@@ -3,6 +3,7 @@ using _Main.GamePlay.GridSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.PathFinding;
+using _Main.Scripts.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,7 +16,6 @@ namespace _Main.GamePlay.TileSystem.Manager
 
         private Grid<Tile> _grid;
         private const float CELL_SIZE = 1.25f;
-        private const string POOL_TAG = "Tile";
         private int _width;
         private int _height;
 
@@ -37,7 +37,7 @@ namespace _Main.GamePlay.TileSystem.Manager
                 {
                     var tileData = levelData.GetTile(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
-                    var tile = ObjectPooler.Instance.SpawnSc<Tile>(POOL_TAG, pos, Quaternion.identity, _gridParent);
+                    var tile = ObjectPooler.Instance.SpawnSc<Tile>(Keys.TILE_POOL_TAG, pos, Quaternion.identity, _gridParent);
                     tile.Initialize(tileData,i,j,isExitTile);
                     tile.SetIndexes(i,j);
                     Tiles.Add(tile);
@@ -51,7 +51,7 @@ namespace _Main.GamePlay.TileSystem.Manager
             foreach (var tile in Tiles)
             {
                 tile.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(POOL_TAG, tile);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.TILE_POOL_TAG, tile);
             }
         }
 

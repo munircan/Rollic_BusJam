@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using _Main.GamePlay.GridSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.LevelSystem;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.SlotSystem
@@ -15,7 +16,6 @@ namespace _Main.Scripts.GamePlay.SlotSystem
 
         private Grid<Slot> _grid;
         private const float CELL_SIZE = 1.25f;
-        private const string POOL_TAG = "Slot";
         
         public void CreateSlots(LevelData levelData)
         {
@@ -30,7 +30,7 @@ namespace _Main.Scripts.GamePlay.SlotSystem
                 {
                     var tileData = levelData.GetSlot(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
-                    var tile = ObjectPooler.Instance.SpawnSc<Slot>(POOL_TAG, pos, Quaternion.identity, _gridParent);
+                    var tile = ObjectPooler.Instance.SpawnSc<Slot>(Keys.SLOT_POOL_TAG, pos, Quaternion.identity, _gridParent);
                     tile.Initialize(tileData);
                     Slots.Add(tile);
                 }
@@ -42,7 +42,7 @@ namespace _Main.Scripts.GamePlay.SlotSystem
             foreach (var slot in Slots)
             {
                 slot.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(POOL_TAG, slot);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.SLOT_POOL_TAG, slot);
             }
         }
     }
