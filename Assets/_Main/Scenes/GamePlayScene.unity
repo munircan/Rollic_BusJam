@@ -523,14 +523,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1963194085586291115, guid: b46f2b7b5ae2fbe4f90e87486609d05a, type: 3}
-      propertyPath: _width
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1963194085586291115, guid: b46f2b7b5ae2fbe4f90e87486609d05a, type: 3}
-      propertyPath: _height
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8308047143298226579, guid: b46f2b7b5ae2fbe4f90e87486609d05a, type: 3}
       propertyPath: m_Name
       value: TileManager
