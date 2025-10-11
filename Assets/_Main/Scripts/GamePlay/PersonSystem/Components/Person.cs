@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
 using _Main.Patterns.ModuleSystem;
+using _Main.Patterns.ServiceLocation;
+using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PersonSystem
@@ -20,16 +22,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public Tile Tile { get; set; }
 
         public PersonData Data { get; private set; }
-
-        public bool CanWalk { get; set; }
-
-        #endregion
-
-        #region Private Variables
-
-        private List<Tile> _path;
+        
 
         #endregion
+        
 
 
         #region Unity Event Methods
@@ -71,29 +67,18 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         {
             _modelController.SetColor(Data.Color);
         }
-
-        public void SetCanWalk(bool canWalk)
-        {
-            CanWalk = canWalk;
-        }
-
-        public void SetPath(List<Tile> path)
-        {
-            if (path == null)
-            {
-                return;
-            }
-            _path = new List<Tile>(path);
-        }
-
+        
         #endregion
 
 
         #region Implemented Methods
 
-        public void Action()
+        public void Execute()
         {
-            Debug.Log("I have to MOVE!");
+            if (ServiceLocator.TryGetService(out PersonManager manager))
+            {
+                manager.FollowPathCommand(this);
+            }
         }
 
         #endregion

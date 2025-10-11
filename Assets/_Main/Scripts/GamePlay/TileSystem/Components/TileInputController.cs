@@ -17,7 +17,7 @@ namespace _Main.GamePlay.TileSystem
             var tileObject = BaseComp.TileObject;
             if (tileObject != null)
             {
-                tileObject.Action();
+                tileObject.Execute();
             }
         }
     }

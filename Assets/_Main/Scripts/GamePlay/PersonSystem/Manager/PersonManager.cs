@@ -15,6 +15,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
     {
         [SerializeField] private Transform _personParent;
         private List<Person> _personList;
+        private Dictionary<Person, PersonPathData> _personPathDictionary;
 
         private void Awake()
         {
@@ -59,13 +60,26 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         private void SetPeopleCanWalk()
         {
-            ServiceLocator.TryGetService(out TileManager tileManager);
-            foreach (var person in _personList)
+            _personPathDictionary = new();
+            if (ServiceLocator.TryGetService(out TileManager tileManager))
             {
-                var personTile = person.Tile;
-                var hasPath = tileManager.GetPath(personTile, out List<Tile> path);
-                person.SetCanWalk(hasPath);
-                person.SetPath(path);
+                for (var i = 0; i < _personList.Count; i++)
+                {
+                    var person = _personList[i];
+                    var personTile = person.Tile;
+                    if (personTile == null)
+                    {
+                        continue;
+                    }
+
+                    var hasPath = tileManager.GetPath(personTile, out var path);
+                    var personPathData = new PersonPathData
+                    {
+                        CanWalk = hasPath,
+                        Tiles = path
+                    };
+                    _personPathDictionary.Add(person, personPathData);
+                }
             }
         }
 
@@ -73,5 +87,24 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
         {
             SetPeopleCanWalk();
         }
+
+        public void FollowPathCommand(Person person)
+        {
+            var personPathData = _personPathDictionary[person];
+            if (personPathData.CanWalk)
+            {
+                Debug.Log("Move my man!");
+            }
+            else
+            {
+                Debug.Log("You can't walk mate!");
+            }
+        }
+    }
+
+    public struct PersonPathData
+    {
+        public bool CanWalk;
+        public List<Tile> Tiles;
     }
 }
