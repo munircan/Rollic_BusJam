@@ -11,7 +11,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         // ADD DIFFERENT BUS MODELS AND PARENT LIST LATER
         [SerializeField] private List<Transform> _personParents;
 
-        private const float PERSON_OFFSET = 1.25f;
+        
         private List<Person> _people = new();
         private int _limit;
 

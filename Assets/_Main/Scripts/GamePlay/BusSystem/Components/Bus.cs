@@ -30,7 +30,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
             ModelController.Initialize();
             PersonController.Initialize();
 
-            PersonController.SetPersonLimit(Data.PersonCount);
+            PersonController.SetPersonLimit(Data.PersonLimit);
             ModelController.SetColor(Data.PersonColor);
         }
 

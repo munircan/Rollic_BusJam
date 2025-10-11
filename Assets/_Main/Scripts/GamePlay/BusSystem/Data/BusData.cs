@@ -6,7 +6,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Data
     [Serializable]
     public struct BusData
     {
-        public int PersonCount;
+        public int PersonLimit;
         public PersonColor PersonColor;
     }
 }

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     Buses:
-    - PersonCount: 3
+    - PersonLimit: 3
       PersonColor: 1
-    - PersonCount: 3
+    - PersonLimit: 3
       PersonColor: 2
     SlotWidth: 7
     SlotHeight: 1

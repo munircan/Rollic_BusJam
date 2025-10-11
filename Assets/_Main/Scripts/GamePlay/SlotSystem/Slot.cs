@@ -34,6 +34,11 @@ namespace _Main.Scripts.GamePlay.SlotSystem
             _person = person;
         }
 
+        public Person GetPerson()
+        {
+            return _person;
+        }
+
         public void Reset()
         {
             SetPerson(null);
