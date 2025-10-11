@@ -1,5 +1,6 @@
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
+using _Main.Scripts.GamePlay.Settings;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Components
@@ -11,20 +12,9 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         
         public void SetColor(PersonColor color)
         {
-            _meshRenderer.material.color = GetColor(color);
+            _meshRenderer.material= ColorSettings.Instance.GetMaterial(color);
         }
-
-
-        private Color GetColor(PersonColor color)
-        {
-            return color switch
-            {
-                PersonColor.White => Color.white,
-                PersonColor.Blue => Color.blue,
-                PersonColor.Red => Color.red,
-                PersonColor.Green => Color.green,
-            };
-        }
+        
 
         internal override void Reset()
         {

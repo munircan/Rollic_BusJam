@@ -1,5 +1,6 @@
 using System;
 using _Main.Scripts.GamePlay.PersonSystem;
+using _Main.Scripts.GamePlay.Settings;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Data
 {

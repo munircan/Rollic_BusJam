@@ -11,8 +11,6 @@ namespace _Main.Scripts.GamePlay.InputSystem
         private RaycastHit _hit;
         private bool _isHandling;
         private IPressable _handlingInteractable;
-        private float _elapsedPressHoldTime;
-        private bool _isPressAlreadyHold;
 
         bool IInputHandler.IsHandling
         {
@@ -59,9 +57,7 @@ namespace _Main.Scripts.GamePlay.InputSystem
                 return;
 
             _handlingInteractable.OnPressUp();
-            _elapsedPressHoldTime = 0;
             _isHandling = false;
-            _isPressAlreadyHold = false;
         }
 
         public PressableInputHandler(Camera mainCamera)

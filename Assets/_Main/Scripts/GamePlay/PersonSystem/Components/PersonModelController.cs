@@ -1,4 +1,5 @@
 using _Main.Patterns.ModuleSystem;
+using _Main.Scripts.GamePlay.Settings;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PersonSystem
@@ -7,22 +8,9 @@ namespace _Main.Scripts.GamePlay.PersonSystem
     {
         [SerializeField] private MeshRenderer _meshRenderer;
 
-
         public void SetColor(PersonColor color)
         {
-            _meshRenderer.material.color = GetColor(color);
-        }
-
-
-        private Color GetColor(PersonColor color)
-        {
-            return color switch
-            {
-                PersonColor.White => Color.white,
-                PersonColor.Blue => Color.blue,
-                PersonColor.Red => Color.red,
-                PersonColor.Green => Color.green,
-            };
+            _meshRenderer.material = ColorSettings.Instance.GetMaterial(color);
         }
     }
 }

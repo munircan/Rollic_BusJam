@@ -1,4 +1,5 @@
 using System;
+using _Main.Scripts.GamePlay.Settings;
 
 namespace _Main.Scripts.GamePlay.PersonSystem
 {
@@ -13,11 +14,5 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         }
     }
 
-    public enum PersonColor
-    {
-        White,
-        Blue,
-        Red,
-        Green
-    }
+   
 }
