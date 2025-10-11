@@ -75,11 +75,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     var hasPath = tileManager.GetPath(personTile, out var path);
                     var personPathData = new PersonPathData();
                     personPathData.HasPath = hasPath;
-                    if (hasPath)
-                    {
-                        personPathData.PathPositions = new List<Vector3>(path.GetPathAsVector3List());
-                    }
-                    
+                    personPathData.PathPositions = path;
                     _personPathDictionary.Add(person, personPathData);
                 }
             }

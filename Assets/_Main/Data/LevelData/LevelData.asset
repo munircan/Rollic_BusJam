@@ -38,7 +38,7 @@ MonoBehaviour:
     TileWidth: 4
     TileHeight: 3
     Tiles:
-    - Type: 0
+    - Type: 1
       PersonData:
         Color: 0
     - Type: -1

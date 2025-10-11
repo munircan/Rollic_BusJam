@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _Main.GamePlay.GridSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.LevelSystem;
@@ -12,6 +13,7 @@ namespace _Main.GamePlay.TileSystem.Manager
     public class TileManager : MonoBehaviour
     {
         [SerializeField] private Transform _gridParent;
+        [SerializeField] private Transform _exitTransform;
         public List<Tile> Tiles { get; private set; }
 
         private Grid<Tile> _grid;
@@ -54,20 +56,16 @@ namespace _Main.GamePlay.TileSystem.Manager
                 ObjectPooler.Instance.ReleasePooledObject(Keys.TILE_POOL_TAG, tile);
             }
         }
-
-        [Button]
-        public bool GetPath(Tile tile, out List<Tile> path)
+        
+        public bool GetPath(Tile tile, out List<Vector3> path)
         {
-            path = PathFinding.FindPathToClosestExit(tile, TilesMatrix,_height,_width);
+            var tilePath = PathFinding.FindPathToClosestExit(tile, TilesMatrix,_height,_width);
 
-            if (path != null)
+            path = new List<Vector3>();
+            if (tilePath != null)
             {
-                Debug.Log($"Path found! Tile count: {path.Count}");
-                foreach (var t in path)
-                {
-                    Debug.Log("Path element indexes x : "+ t.X +  " y: " + t.Y , t.transform);
-                }
-
+                path = tilePath.GetPathAsVector3List().ToList();
+                path.Add(_exitTransform.position);
                 return true;
             }
 
