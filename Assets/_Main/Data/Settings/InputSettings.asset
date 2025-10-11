@@ -16,4 +16,4 @@ MonoBehaviour:
   _holdDuration: 0.25
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

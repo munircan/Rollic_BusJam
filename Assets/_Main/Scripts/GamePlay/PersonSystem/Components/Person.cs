@@ -68,9 +68,9 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         #region Implemented Methods
 
-        public void ClickAction()
+        public void Action()
         {
-            Debug.Log("I have been clicked!");
+            Debug.Log("I have to MOVE!");
         }
 
         #endregion

@@ -9,6 +9,7 @@ namespace _Main.GamePlay.TileSystem
         #region SerializeField Variables
 
         [SerializeField] private TileModelController _modelController;
+        [SerializeField] private TileInputController _inputController;
 
         #endregion
 
@@ -53,6 +54,7 @@ namespace _Main.GamePlay.TileSystem
             IsExitTile = isExitTile;
             
             _modelController.Initialize();
+            _inputController.Initialize();
 
 
             _modelController.SetModelsActive(Data.Type);
@@ -68,6 +70,7 @@ namespace _Main.GamePlay.TileSystem
         public void Reset()
         {
             _modelController.Reset();
+            _inputController.Reset();
         }
 
         #endregion
