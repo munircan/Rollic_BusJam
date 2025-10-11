@@ -33,7 +33,7 @@ namespace _Main.Scripts.GamePlay.PathFinding
             {
                 Tile current = queue.Dequeue();
 
-                if (current.IsExitTile)
+                if (current.IsExitTile && !current.IsOccupied)
                 {
                     return ReconstructPath(cameFrom, current, startTile);
                 }
