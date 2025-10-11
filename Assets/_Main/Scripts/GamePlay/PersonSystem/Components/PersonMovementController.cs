@@ -39,7 +39,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             }
             else if (firstEmptySlot != null)
             {
-                firstEmptySlot.SetPerson(BaseComp);
+                BaseComp.SetSlot(firstEmptySlot);
                 MoveToSlot(firstEmptySlot);
             }
             else

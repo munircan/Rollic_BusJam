@@ -73,6 +73,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 {
                     Debug.Log("Level is finished");
                 }
+                else
+                {
+                    EventManager.Publish(EventBusChanged.Create(GetCurrentBus()));
+                }
             }
         }
 
@@ -84,7 +88,13 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             }
 
             var currentBus = GetCurrentBus();
+            currentBus.MovementController.SetOnMovementCompleteEvent(OnBusMovedIn);
             currentBus.MovementController.Move(_startTransform.position, MovementType.In);
+        }
+
+        private void OnBusMovedIn()
+        {
+            EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus()));
         }
 
         public Bus GetCurrentBus()

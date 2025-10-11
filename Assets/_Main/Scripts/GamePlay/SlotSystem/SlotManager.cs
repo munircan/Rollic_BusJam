@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using _Main.GamePlay.GridSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.LevelSystem;
+using _Main.Scripts.GamePlay.PersonSystem;
 using _Main.Scripts.Utilities;
 using UnityEngine;
 
@@ -62,6 +63,17 @@ namespace _Main.Scripts.GamePlay.SlotSystem
             Debug.Log("There is no empty slot");
             return null;
         }
-        
+
+        public IEnumerable<Person> GetSlotPersonList()
+        {
+            for (var i = 0; i < Slots.Count; i++)
+            {
+                var slot = Slots[i];
+                if (slot.IsOccupied)
+                {
+                    yield return slot.GetPerson();
+                }
+            }
+        }
     }
 }

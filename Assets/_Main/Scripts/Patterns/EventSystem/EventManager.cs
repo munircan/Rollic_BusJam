@@ -6,7 +6,7 @@ namespace _Main.Patterns.EventSystem
 {
     public delegate void CustomEventAction<TCustomEvent>(TCustomEvent customEvent) where TCustomEvent : ICustomEvent;
 
-    public class EventManager : Singleton<EventManager>
+    public class EventManager
     {
         public static void Publish<TCustomEvent>(TCustomEvent customEvent) where TCustomEvent : ICustomEvent
         {

@@ -4,6 +4,7 @@ using _Main.GamePlay.TileSystem;
 using _Main.Patterns.ModuleSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
+using _Main.Scripts.GamePlay.SlotSystem;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PersonSystem
@@ -22,11 +23,13 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         public Tile Tile { get; set; }
 
+        public Slot Slot { get; set; }
+
         public PersonData Data { get; private set; }
         
+        public PersonMovementController MovementController =>  _movementController;
 
         #endregion
-        
 
 
         #region Unity Event Methods
@@ -45,7 +48,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             Data = data;
             _modelController.Initialize();
             _movementController.Initialize();
-            
+
             SetColor();
         }
 
@@ -62,14 +65,26 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public void SetTile(Tile tile)
         {
             Tile = tile;
-            Tile.SetTileObject(this, true);
+            if (tile != null)
+            {
+                Tile.SetTileObject(this, true);
+            }
+        }
+
+        public void SetSlot(Slot slot)
+        {
+            Slot = slot;
+            if (slot != null)
+            {
+                Slot.SetPerson(this);
+            }
         }
 
         private void SetColor()
         {
             _modelController.SetColor(Data.Color);
         }
-        
+
         #endregion
 
 
@@ -77,7 +92,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         public void Execute()
         {
-            if(ServiceLocator.TryGetService(out PersonManager manager))
+            if (ServiceLocator.TryGetService(out PersonManager manager))
             {
                 var pathData = manager.GetPersonPathData(this);
                 if (pathData.HasPath)
