@@ -83,6 +83,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                 if (pathData.HasPath)
                 {
                     _movementController.MovePath(pathData.PathPositions);
+                    Tile.SetTileObject(null);
                     Debug.Log("Hell Yeah!");
                 }
                 else
