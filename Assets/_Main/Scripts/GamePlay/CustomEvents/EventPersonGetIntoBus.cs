@@ -1,12 +1,17 @@
 using _Main.Patterns.EventSystem;
+using _Main.Scripts.GamePlay.PersonSystem;
 
 namespace _Main.Scripts.GamePlay.CustomEvents
 {
+    // TODO: CHANGE THIS EVENT LIKE LAST PERSON GET INTO BUS
     public class EventPersonGetIntoBus : ICustomEvent
     {
-        public static EventPersonGetIntoBus Create()
+        public Person Person { get; set; }
+        public static EventPersonGetIntoBus Create(Person person)
         {
-            return new EventPersonGetIntoBus();
+            var eventLastPersonGetIntoBus = new EventPersonGetIntoBus();
+            eventLastPersonGetIntoBus.Person = person;
+            return eventLastPersonGetIntoBus;
         }
     }
 }

@@ -68,8 +68,7 @@ namespace _Main.GamePlay.TileSystem.Manager
                 path.Add(_exitTransform.position);
                 return true;
             }
-
-            Debug.Log("No path to exit found!");
+            
             return false;
         }
         

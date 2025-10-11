@@ -66,7 +66,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         private void OnPersonMoveToBus()
         {
-            EventManager.Publish(EventPersonGetIntoBus.Create());
+            EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
         }
         
         public void KillPath()

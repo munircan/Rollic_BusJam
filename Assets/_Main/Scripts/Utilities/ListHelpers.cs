@@ -16,5 +16,10 @@ namespace _Main.Scripts.Utilities
             return array[index % lenght];
         }
 
+
+        public static T GetLastElement<T>(this List<T> list)
+        {   
+            return list[list.Count - 1];
+        }
     }
 }

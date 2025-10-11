@@ -20,6 +20,8 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
         private List<Bus> _buses;
         private int _currentIndex;
 
+        public bool IsBusesFinished => _currentIndex >= _buses.Count;
+
         private void Awake()
         {
             EventManager.Subscribe<EventPersonGetIntoBus>(OnPersonGetIntoBus);
@@ -59,21 +61,30 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
+            var person = customEvent.Person;
             var currentBus = GetCurrentBus();
-            if (currentBus.PersonController.IsBusFull)
+            var isLastPerson = currentBus.PersonController.IsLastPerson(person);
+            if (isLastPerson)
             {
-                currentBus.MovementController.Move(_endTransform.position,MovementType.Out);
                 _currentIndex++;
-                if (_currentIndex > _buses.Count)
+                currentBus.MovementController.SetOnMovementCompleteEvent(SetNextBus);
+                currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
+                if (IsBusesFinished)
                 {
-                    Debug.Log("Level finished i guess");
-                }
-                else
-                {
-                    currentBus = GetCurrentBus();
-                    currentBus.MovementController.Move(_startTransform.position,MovementType.In);
+                    Debug.Log("Level is finished");
                 }
             }
+        }
+
+        private void SetNextBus()
+        {
+            if (IsBusesFinished)
+            {
+                return;
+            }
+
+            var currentBus = GetCurrentBus();
+            currentBus.MovementController.Move(_startTransform.position, MovementType.In);
         }
 
         public Bus GetCurrentBus()

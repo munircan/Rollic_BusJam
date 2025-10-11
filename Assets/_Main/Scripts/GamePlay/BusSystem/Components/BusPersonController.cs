@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Components
@@ -14,15 +15,15 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         private List<Person> _people = new();
         private int _limit;
 
-        public bool IsBusFull =>  _limit == _people.Count;
-        
-    
+        public bool IsBusFull => _limit == _people.Count;
+
+
         public void SetPersonLimit(int limit)
         {
             _limit = limit;
         }
-        
-        public void AddPerson(Person  person)
+
+        public void AddPerson(Person person)
         {
             _people.Add(person);
         }
@@ -36,6 +37,11 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         private int GetPersonIndex(Person person)
         {
             return _people.IndexOf(person);
+        }
+
+        public bool IsLastPerson(Person person)
+        {
+            return IsBusFull && _people.GetLastElement() == person;
         }
 
         internal override void Reset()
