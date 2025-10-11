@@ -1,5 +1,6 @@
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
+using _Main.Scripts.GamePlay.PersonSystem;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Components
@@ -9,30 +10,35 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         [SerializeField] private BusMovementController _movementController;
         [SerializeField] private BusModelController _modelController;
         [SerializeField] private BusPersonController _personController;
-        
-        private BusData  _busData;
+
+        #region Encapulsation
+
+        public BusMovementController MovementController => _movementController;
+
+        public BusModelController ModelController => _modelController;
+        public BusPersonController PersonController => _personController;
+
+        public BusData Data { get; set; }
+
+        #endregion
+
+
         public void Initialize(BusData data)
         {
-            _busData = data;
-            _movementController.Initialize();
-            _modelController.Initialize();
-            _personController.Initialize();
-            
-            _personController.SetPersonLimit(_busData.PersonCount);
-            _modelController.SetColor(_busData.PersonColor);
-            
+            Data = data;
+            MovementController.Initialize();
+            ModelController.Initialize();
+            PersonController.Initialize();
+
+            PersonController.SetPersonLimit(Data.PersonCount);
+            ModelController.SetColor(Data.PersonColor);
         }
 
         public void Reset()
         {
-            _movementController.Reset();
-            _modelController.Reset();
-            _personController.Reset();
-        }
-
-        public void Move(Vector3 position, MovementType movementType)
-        {
-            _movementController.Move(position, movementType);
+            MovementController.Reset();
+            ModelController.Reset();
+            PersonController.Reset();
         }
     }
 }

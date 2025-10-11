@@ -5,15 +5,19 @@ using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.SlotSystem
 {
-    public class Slot  :MonoBehaviour, IGridObject
+    public class Slot : MonoBehaviour, IGridObject
     {
+        [SerializeField] private Transform  _personTransform;
+        
+        
+        public Transform  PersonTransform => _personTransform;
+        
+        
         public bool IsOccupied
         {
-            get
-            {
-                return _person != null;
-            }
+            get { return _person != null; }
         }
+        public bool IsLocked {get; private set;}
 
         private SlotData _slotData;
 
@@ -21,7 +25,8 @@ namespace _Main.Scripts.GamePlay.SlotSystem
 
         public void Initialize(SlotData data)
         {
-            _slotData  = data;
+            _slotData = data;
+            IsLocked = _slotData.IsStillLocked();
         }
 
         public void SetPerson(Person person)

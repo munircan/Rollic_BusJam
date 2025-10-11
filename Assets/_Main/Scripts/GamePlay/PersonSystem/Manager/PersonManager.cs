@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
 using _Main.GamePlay.TileSystem.Manager;
@@ -60,7 +59,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         private void SetPeopleCanWalk()
         {
-            _personPathDictionary = new();
+            _personPathDictionary = new Dictionary<Person, PersonPathData>();
             if (ServiceLocator.TryGetService(out TileManager tileManager))
             {
                 for (var i = 0; i < _personList.Count; i++)

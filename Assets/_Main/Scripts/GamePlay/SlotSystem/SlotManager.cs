@@ -45,5 +45,23 @@ namespace _Main.Scripts.GamePlay.SlotSystem
                 ObjectPooler.Instance.ReleasePooledObject(Keys.SLOT_POOL_TAG, slot);
             }
         }
+
+        public Slot GetFirstEmptySlot()
+        {
+            for (var i = 0; i < Slots.Count; i++)
+            {
+                var slot = Slots[i];
+                if (slot.IsLocked || slot.IsOccupied)
+                {
+                    continue;
+                }
+
+                return slot;
+            }
+
+            Debug.Log("There is no empty slot");
+            return null;
+        }
+        
     }
 }

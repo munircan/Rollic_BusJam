@@ -1,4 +1,5 @@
 using System;
+using _Main.Scripts.GamePlay.Settings;
 
 namespace _Main.Scripts.GamePlay.SlotSystem
 {
@@ -7,5 +8,10 @@ namespace _Main.Scripts.GamePlay.SlotSystem
     {
         public bool IsLocked;
         public int LockedLevel;
+
+        public bool IsStillLocked()
+        {
+            return LevelSettings.Instance.CurrentLevel < LockedLevel;
+        }
     }
 }

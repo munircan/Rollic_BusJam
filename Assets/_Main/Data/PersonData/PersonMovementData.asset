@@ -17,3 +17,11 @@ MonoBehaviour:
     PathType: 1
     PathMode: 1
     Ease: 1
+  SlotMovementData:
+    Duration: 0.5
+    Ease: 1
+  BusMovementData:
+    Duration: 1
+    JumpPower: 2
+    JumpCount: 1
+    Ease: 4

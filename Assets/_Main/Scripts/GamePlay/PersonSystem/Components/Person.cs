@@ -84,7 +84,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                 {
                     _movementController.MovePath(pathData.PathPositions);
                     Tile.SetTileObject(null);
-                    Debug.Log("Hell Yeah!");
                 }
                 else
                 {
