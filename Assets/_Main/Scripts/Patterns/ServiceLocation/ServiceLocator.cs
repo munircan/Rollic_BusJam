@@ -53,6 +53,7 @@ namespace _Main.Patterns.ServiceLocation
                 return true;
             }
 
+            Debug.LogError($"{type} is not registered in the service locator.");
             service = null;
             return false;
         }

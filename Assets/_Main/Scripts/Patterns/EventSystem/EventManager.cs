@@ -8,17 +8,17 @@ namespace _Main.Patterns.EventSystem
 
     public class EventManager : Singleton<EventManager>
     {
-        public void Publish<TCustomEvent>(TCustomEvent customEvent) where TCustomEvent : ICustomEvent
+        public static void Publish<TCustomEvent>(TCustomEvent customEvent) where TCustomEvent : ICustomEvent
         {
             EventList<TCustomEvent>.Instance.Publish(customEvent);
         }
 
-        public void Subscribe<TCustomEvent>(CustomEventAction<TCustomEvent> action) where TCustomEvent : ICustomEvent
+        public static void Subscribe<TCustomEvent>(CustomEventAction<TCustomEvent> action) where TCustomEvent : ICustomEvent
         {
             EventList<TCustomEvent>.Instance.Subscribe(action);
         }
 
-        public void Unsubscribe<TCustomEvent>(CustomEventAction<TCustomEvent> action) where TCustomEvent : ICustomEvent
+        public static void Unsubscribe<TCustomEvent>(CustomEventAction<TCustomEvent> action) where TCustomEvent : ICustomEvent
         {
             EventList<TCustomEvent>.Instance.Unsubscribe(action);
         }

@@ -1,5 +1,7 @@
 using _Main.GamePlay.GridSystem;
+using _Main.Patterns.EventSystem;
 using _Main.Patterns.ModuleSystem;
+using _Main.Scripts.GamePlay.CustomEvents;
 using UnityEngine;
 
 namespace _Main.GamePlay.TileSystem
@@ -71,6 +73,19 @@ namespace _Main.GamePlay.TileSystem
         {
             _modelController.Reset();
             _inputController.Reset();
+        }
+
+        #endregion
+
+        #region Setter Methods
+
+        public void SetTileObject(ITileObject tileObject,bool initialValue = false)
+        {
+            TileObject = tileObject;
+            if (!initialValue)
+            {
+                EventManager.Publish(EventTileChanged.Create(this));
+            }
         }
 
         #endregion

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
 using _Main.Patterns.ModuleSystem;
 using UnityEngine;
@@ -19,6 +20,14 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public Tile Tile { get; set; }
 
         public PersonData Data { get; private set; }
+
+        public bool CanWalk { get; set; }
+
+        #endregion
+
+        #region Private Variables
+
+        private List<Tile> _path;
 
         #endregion
 
@@ -55,12 +64,22 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public void SetTile(Tile tile)
         {
             Tile = tile;
-            Tile.TileObject = this;
+            Tile.SetTileObject(this, true);
         }
 
         private void SetColor()
         {
             _modelController.SetColor(Data.Color);
+        }
+
+        public void SetCanWalk(bool canWalk)
+        {
+            CanWalk = canWalk;
+        }
+
+        public void SetPath(List<Tile> path)
+        {
+            _path = new List<Tile>(path);
         }
 
         #endregion
