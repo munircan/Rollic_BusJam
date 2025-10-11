@@ -79,6 +79,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         public void SetPath(List<Tile> path)
         {
+            if (path == null)
+            {
+                return;
+            }
             _path = new List<Tile>(path);
         }
 
