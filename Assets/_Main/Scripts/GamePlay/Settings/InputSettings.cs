@@ -9,7 +9,9 @@ namespace _Main.Scripts.GamePlay.Settings
         [SerializeField] private float _holdDuration;
         [SerializeField] private LayerMask _layerMask;
 
+
+        public float HoldDuration => _holdDuration;
         
-        
+        public LayerMask LayerMask => _layerMask;
     }
 }
