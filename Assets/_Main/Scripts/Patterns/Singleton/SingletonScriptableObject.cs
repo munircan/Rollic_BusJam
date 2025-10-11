@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace _Main.Patterns.Singleton
 {
@@ -8,12 +9,11 @@ namespace _Main.Patterns.Singleton
 
         public abstract void Terminate();
     }
-    
+
     public abstract class SingletonScriptableObject<T> : SingletonScriptableObject where T : SingletonScriptableObject
     {
-        //[HideInEditorMode]
-        [SerializeField] private T _instance;
-        
+        [HideInEditorMode] [SerializeField] private T _instance;
+
         protected static object _lock = new object();
         public static T Instance;
         protected bool _hasInstance = false;
@@ -36,7 +36,7 @@ namespace _Main.Patterns.Singleton
             {
                 if (_instance != null)
                     return;
-                
+
                 var clone = Instantiate(this);
                 _instance = clone as T;
                 Instance = clone as T;
