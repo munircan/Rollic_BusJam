@@ -10,7 +10,7 @@ namespace _Main.Scripts.GamePlay.UI.Manager
     public class UIManager : SingletonMonoBehaviour<UIManager>
     {
         private List<AbstractUIWindowMono> _liveUIWindowList = new List<AbstractUIWindowMono>();
-        [SerializeField] private Transform _uiWindowContainer;
+        [SerializeField] private RectTransform _uiWindowContainer;
 
 
         private void Start()
@@ -78,7 +78,7 @@ namespace _Main.Scripts.GamePlay.UI.Manager
         
         private AbstractUIWindowMono CreateWindow(UIWindowInfo windowInfo)
         {
-            var createdWindowMono = Instantiate(windowInfo.WindowPrefab, Vector3.zero, Quaternion.identity, _uiWindowContainer);
+            var createdWindowMono = Instantiate(windowInfo.WindowPrefab, _uiWindowContainer);
             createdWindowMono.Initialize();
             return createdWindowMono;
         }
