@@ -12,10 +12,13 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         [SerializeField] private List<Transform> _personParents;
 
         
-        private List<Person> _people = new();
+        private List<Person> _personList = new();
+        private List<Person> _personInBusList = new();
         private int _limit;
 
-        public bool IsBusFull => _limit == _people.Count;
+        public bool IsBusFull => _limit == _personList.Count;
+        
+        public bool IsEverybodyIn =>  _personInBusList.Count == _limit;
 
 
         public void SetPersonLimit(int limit)
@@ -25,7 +28,12 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 
         public void AddPerson(Person person)
         {
-            _people.Add(person);
+            _personList.Add(person);
+        }
+
+        public void AddPersonInBus(Person person)
+        {
+            _personInBusList.Add(person);
         }
 
         public Transform GetPersonBusTransform(Person person)
@@ -36,18 +44,19 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 
         private int GetPersonIndex(Person person)
         {
-            return _people.IndexOf(person);
+            return _personList.IndexOf(person);
         }
 
-        public bool IsLastPerson(Person person)
+        public bool IsFullAndEverybodyIn()
         {
-            return IsBusFull && _people.GetLastElement() == person;
+            return IsBusFull && IsEverybodyIn;
         }
 
         internal override void Reset()
         {
             base.Reset();
-            _people.Clear();
+            _personList.Clear();
+            _personInBusList.Clear();
         }
     }
 }

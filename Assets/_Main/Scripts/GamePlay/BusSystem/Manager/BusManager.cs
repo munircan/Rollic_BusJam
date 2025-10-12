@@ -64,9 +64,9 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
-            var person = customEvent.Person;
             var currentBus = GetCurrentBus();
-            var isLastPerson = currentBus.PersonController.IsLastPerson(person);
+            currentBus.PersonController.AddPersonInBus(customEvent.Person);
+            var isLastPerson = currentBus.PersonController.IsFullAndEverybodyIn();
             if (isLastPerson)
             {
                 _currentIndex++;
