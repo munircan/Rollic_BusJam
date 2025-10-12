@@ -100,6 +100,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         public Bus GetCurrentBus()
         {
+            if (_currentIndex >= _buses.Count)
+            {
+                return null;
+            }
             return _buses[_currentIndex];
         }
     }

@@ -33,13 +33,14 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         {
             // CHANGE THIS LOGIC AFTER TRY TO MOVE PERSON MANAGER
             var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
+            
             var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
-            if (currentBus.Data.PersonColor == BaseComp.Data.Color && !currentBus.PersonController.IsBusFull)
+            if (currentBus && currentBus.Data.PersonColor == BaseComp.Data.Color && !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(BaseComp);
                 MoveToBus(currentBus);
             }
-            else if (firstEmptySlot != null)
+            else if (firstEmptySlot)
             {
                 BaseComp.SetSlot(firstEmptySlot);
                 MoveToSlot(firstEmptySlot);
