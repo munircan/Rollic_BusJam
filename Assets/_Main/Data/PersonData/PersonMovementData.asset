@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PersonMovementData
   m_EditorClassIdentifier: 
   PathMovementData:
-    Duration: 2
+    Duration: 5
     PathType: 1
     PathMode: 1
     Ease: 1

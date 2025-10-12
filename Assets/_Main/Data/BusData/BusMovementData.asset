@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
   - MovementType: 0
-    Duration: 1
-    Ease: 27
+    Duration: 0.5
+    Ease: 1
   - MovementType: 1
-    Duration: 1
+    Duration: 0.5
     Ease: 26

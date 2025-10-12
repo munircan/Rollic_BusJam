@@ -24,6 +24,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                     _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
                 .SetEase(_movementData.PathMovementData.Ease)
                 .SetLink(gameObject)
+                .SetSpeedBased(true)
                 .OnComplete(OnPathMovementComplete);
             // .SetLookAt(0.01f);
         }
