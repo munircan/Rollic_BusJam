@@ -36,41 +36,53 @@ MonoBehaviour:
     - IsLocked: 1
       LockedLevel: 30
     TileWidth: 4
-    TileHeight: 3
+    TileHeight: 4
     Tiles:
     - Type: 1
       PersonData:
-        Color: 2
-    - Type: -1
-      PersonData:
         Color: 0
-    - Type: 0
+    - Type: 1
       PersonData:
         Color: 0
     - Type: 1
       PersonData:
-        Color: 1
-    - Type: 0
+        Color: 0
+    - Type: 1
       PersonData:
         Color: 0
     - Type: 1
       PersonData:
-        Color: 1
+        Color: 0
     - Type: 1
-      PersonData:
-        Color: 1
-    - Type: 0
       PersonData:
         Color: 0
     - Type: 1
       PersonData:
-        Color: 2
-    - Type: 0
+        Color: 0
+    - Type: 1
       PersonData:
         Color: 0
     - Type: 1
       PersonData:
-        Color: 2
-    - Type: 0
+        Color: 0
+    - Type: 1
+      PersonData:
+        Color: 0
+    - Type: 1
+      PersonData:
+        Color: 0
+    - Type: 1
+      PersonData:
+        Color: 0
+    - Type: 1
+      PersonData:
+        Color: 0
+    - Type: 1
+      PersonData:
+        Color: 0
+    - Type: 1
+      PersonData:
+        Color: 0
+    - Type: 1
       PersonData:
         Color: 0
