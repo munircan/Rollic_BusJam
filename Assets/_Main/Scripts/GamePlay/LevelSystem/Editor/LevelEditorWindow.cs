@@ -208,7 +208,8 @@ public class LevelEditorWindow : EditorWindow
 
         if (_levelData.Data.Tiles == null || _levelData.Data.Tiles.Length == 0) return;
 
-        EditorGUILayout.HelpBox("Q = Default, W = Person, E = Obstacle | 1-5 = Person Color", MessageType.Info);
+        string infoText = "Q = Default, W = Person, E = Obstacle \n" + GetPersonColorShortcuts();
+        EditorGUILayout.HelpBox(infoText, MessageType.Info);
 
         _tileScroll = EditorGUILayout.BeginScrollView(_tileScroll);
         DrawTileGrid();
@@ -356,6 +357,25 @@ public class LevelEditorWindow : EditorWindow
             _levelData.Data.Tiles[_selectedTile] = tile;
         }
         EditorGUILayout.EndVertical();
+    }
+    
+    private string GetPersonColorShortcuts()
+    {
+        var colors = Enum.GetValues(typeof(PersonColor));
+        string colorInfo = "";
+    
+        int counter = 1; 
+        foreach (PersonColor color in colors)
+        {
+        
+            if (counter > 1) colorInfo += ", ";
+        
+            colorInfo += $"{counter}={color}";
+        
+            counter++;
+        }
+    
+        return colorInfo;
     }
 
     private void HandleKeyboard()
