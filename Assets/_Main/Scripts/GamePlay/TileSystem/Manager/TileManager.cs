@@ -13,7 +13,6 @@ namespace _Main.GamePlay.TileSystem.Manager
     public class TileManager : MonoBehaviour
     {
         [SerializeField] private Transform _gridParent;
-        [SerializeField] private Transform _exitTransform;
         public List<Tile> Tiles { get; private set; }
 
         private Grid<Tile> _grid;
@@ -66,7 +65,6 @@ namespace _Main.GamePlay.TileSystem.Manager
             if (tilePath != null)
             {
                 path = tilePath.GetPathAsVector3List().ToList();
-                path.Add(_exitTransform.position);
                 return true;
             }
             
