@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _Main.Patterns.Singleton;
 using _Main.Scripts.GamePlay.UI.Settings;
@@ -10,8 +11,20 @@ namespace _Main.Scripts.GamePlay.UI.Manager
     {
         private List<AbstractUIWindowMono> _liveUIWindowList = new List<AbstractUIWindowMono>();
         [SerializeField] private Transform _uiWindowContainer;
-        
-        
+
+
+        private void Start()
+        {
+            InitializeInGameWindow();
+        }
+
+        private void InitializeInGameWindow()
+        {
+            var windowMonoInGame = GetWindow<UIWindowMonoInGame>();
+            windowMonoInGame.Initialize();
+        }
+
+
         public bool IsWindowExist<T>() where T : AbstractUIWindowMono
         {
             var liveUIWindowCount = _liveUIWindowList.Count;
