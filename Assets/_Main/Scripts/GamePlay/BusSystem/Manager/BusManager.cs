@@ -71,7 +71,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
                 if (IsBusesFinished)
                 {
-                    Debug.Log("Level is finished");
+                    EventManager.Publish(EventLevelSuccess.Create());
                 }
                 else
                 {

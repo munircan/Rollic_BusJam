@@ -44,7 +44,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             }
             else
             {
-                Debug.Log("Game is over!");
+                EventManager.Publish(EventLevelFail.Create());
             }
         }
 

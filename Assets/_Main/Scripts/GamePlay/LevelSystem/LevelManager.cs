@@ -1,5 +1,6 @@
 using _Main.GamePlay.TileSystem.Manager;
 using _Main.Patterns.ServiceLocation;
+using _Main.Patterns.Singleton;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
         private TileManager _tileManager;
         private PersonManager _personManager;
@@ -38,8 +39,14 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             _personManager.CreatePeople(_tileManager.Tiles);
             _busManager.CreateBuses(currentLevelData);
         }
+        
+        public void RefreshAndLoadLevel()
+        {
+            UnloadLevel();
+            LoadLevel();
+        }
 
-        public void UnloadLevel()
+        private void UnloadLevel()
         {
             _slotManager.ReleaseSlots();
             _tileManager.ReleaseTiles();
