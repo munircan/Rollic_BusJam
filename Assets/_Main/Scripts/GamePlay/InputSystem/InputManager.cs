@@ -23,7 +23,7 @@ namespace _Main.Scripts.GamePlay.InputSystem
 
         private void Update()
         {
-            if (!_hasInitialized && GameConfig.State != GameState.Playing)
+            if (!_hasInitialized || GameConfig.State != GameState.Playing)
             {
                 return;
             }
