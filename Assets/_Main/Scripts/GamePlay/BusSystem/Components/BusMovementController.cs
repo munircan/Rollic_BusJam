@@ -34,6 +34,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         internal override void Reset()
         {
             base.Reset();
+            transform.DOKill();
         }
     }
 }

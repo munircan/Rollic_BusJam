@@ -78,6 +78,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         internal override void Reset()
         {
             base.Reset();
+            transform.DOKill();
             KillPath();
         }
     }
