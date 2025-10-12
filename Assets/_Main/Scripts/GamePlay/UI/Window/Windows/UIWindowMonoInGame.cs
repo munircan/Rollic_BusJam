@@ -96,7 +96,7 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
         private void UpdateLevelUI()
         {
-            _levelText.text = Keys.Level + " " + LevelSettings.Instance.CurrentLevel;
+            _levelText.text = Keys.LEVEL + " " + LevelSettings.Instance.CurrentLevel;
         }
 
         #endregion

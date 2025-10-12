@@ -39,7 +39,7 @@ namespace _Main.GamePlay.TileSystem.Manager
                 {
                     var tileData = levelData.GetTile(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
-                    var tile = ObjectPooler.Instance.SpawnSc<Tile>(Keys.TILE_POOL_TAG, pos, Quaternion.identity, _gridParent);
+                    var tile = ObjectPooler.Instance.SpawnSc<Tile>(Keys.PoolTags.TILE, pos, Quaternion.identity, _gridParent);
                     tile.Initialize(tileData,i,j,isExitTile);
                     tile.SetIndexes(i,j);
                     Tiles.Add(tile);
@@ -53,7 +53,7 @@ namespace _Main.GamePlay.TileSystem.Manager
             foreach (var tile in Tiles)
             {
                 tile.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(Keys.TILE_POOL_TAG, tile);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.TILE, tile);
             }
             Tiles.Clear();
         }

@@ -31,7 +31,7 @@ namespace _Main.Scripts.GamePlay.SlotSystem
                 {
                     var tileData = levelData.GetSlot(i, j);
                     Vector3 pos = _grid.GetWorldPosition(i, j);
-                    var tile = ObjectPooler.Instance.SpawnSc<Slot>(Keys.SLOT_POOL_TAG, pos, Quaternion.identity, _gridParent);
+                    var tile = ObjectPooler.Instance.SpawnSc<Slot>(Keys.PoolTags.SLOT, pos, Quaternion.identity, _gridParent);
                     tile.Initialize(tileData);
                     Slots.Add(tile);
                 }
@@ -43,7 +43,7 @@ namespace _Main.Scripts.GamePlay.SlotSystem
             foreach (var slot in Slots)
             {
                 slot.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(Keys.SLOT_POOL_TAG, slot);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.SLOT, slot);
             }
             Slots.Clear();
         }

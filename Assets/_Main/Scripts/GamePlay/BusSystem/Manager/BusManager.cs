@@ -43,7 +43,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             {
                 var data = busesData[i];
                 var pos = new Vector3(startPos.x - (i * BUS_OFFSET), startPos.y, startPos.z);
-                var bus = ObjectPooler.Instance.SpawnSc<Bus>(Keys.BUS_POOL_TAG, pos, Quaternion.identity, _busParent);
+                var bus = ObjectPooler.Instance.SpawnSc<Bus>(Keys.PoolTags.BUS, pos, Quaternion.identity, _busParent);
                 bus.Initialize(data);
                 _buses.Add(bus);
             }
@@ -54,7 +54,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             foreach (var bus in _buses)
             {
                 bus.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(Keys.BUS_POOL_TAG, bus);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.BUS, bus);
             }
 
             _currentIndex = 0;

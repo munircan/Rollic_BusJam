@@ -48,7 +48,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 {
                     var personPosition = tile.GetPersonPosition();
                     var personData = tile.Data.PersonData;
-                    var person = ObjectPooler.Instance.SpawnSc<Person>(Keys.PERSON_POOL_TAG, personPosition,
+                    var person = ObjectPooler.Instance.SpawnSc<Person>(Keys.PoolTags.PERSON, personPosition,
                         Quaternion.identity, _personParent);
                     person.Initialize(personData);
                     person.SetTile(tile);
@@ -64,7 +64,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             foreach (var person in _personList)
             {
                 person.Reset();
-                ObjectPooler.Instance.ReleasePooledObject(Keys.PERSON_POOL_TAG, person);
+                ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.PERSON, person);
             }
             _personList.Clear();
             _slotToBusPeopleDictionary.Clear();
