@@ -14,6 +14,8 @@ namespace _Main.Scripts.GamePlay.UI.Window
     public class UIWindowMonoInGame : AbstractUIWindowMono
     {
         [FoldoutGroup("Level Over Panels")] [SerializeField]
+        private LevelOverPanel _tapToStartPanel;
+        [FoldoutGroup("Level Over Panels")] [SerializeField]
         private LevelOverPanel _levelSuccessPanel;
 
         [FoldoutGroup("Level Over Panels")] [SerializeField]
@@ -26,6 +28,7 @@ namespace _Main.Scripts.GamePlay.UI.Window
         private Button _restartLevelButton;
 
 
+        private readonly int h_trigger_tap_to_start = Animator.StringToHash("trigger_start");
         private readonly int h_trigger_idle = Animator.StringToHash("trigger_idle");
         private readonly int h_trigger_success = Animator.StringToHash("trigger_success");
         private readonly int h_trigger_fail = Animator.StringToHash("trigger_fail");
@@ -62,12 +65,13 @@ namespace _Main.Scripts.GamePlay.UI.Window
             EventManager.Subscribe<EventLevelSuccess>(OnLevelSuccess);
             EventManager.Subscribe<EventLevelFail>(OnLevelFail);
 
+            _tapToStartPanel.TapButton.onClick.AddListener(OnClickTapToStartButton);
             _levelSuccessPanel.TapButton.onClick.AddListener(OnClickLevelSuccessPanel);
             _levelFailPanel.TapButton.onClick.AddListener(OnClickLevelFailPanel);
 
             _restartLevelButton.onClick.AddListener(OnClickRestartLevel);
 
-            _animator.SetTrigger(h_trigger_idle);
+            _animator.SetTrigger(h_trigger_tap_to_start);
             UpdateLevelUI();
         }
 
@@ -77,7 +81,8 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
             EventManager.Unsubscribe<EventLevelSuccess>(OnLevelSuccess);
             EventManager.Unsubscribe<EventLevelFail>(OnLevelFail);
-
+            
+            _tapToStartPanel.TapButton.onClick.RemoveListener(OnClickTapToStartButton);
             _levelSuccessPanel.TapButton.onClick.RemoveListener(OnClickLevelSuccessPanel);
             _levelFailPanel.TapButton.onClick.RemoveListener(OnClickLevelFailPanel);
 
@@ -97,20 +102,29 @@ namespace _Main.Scripts.GamePlay.UI.Window
         #endregion
 
         #region OnClickMethods
+        
+        
+        private void OnClickTapToStartButton()
+        {
+            _animator.SetTrigger(h_trigger_idle);
+            EventManager.Publish(EventLevelStart.Create());
+        }
+
+        
 
         private void OnClickLevelSuccessPanel()
         {
-            LevelManager.Instance.RefreshAndLoadLevel();
+            EventManager.Publish(EventLevelLoad.Create());
         }
 
         private void OnClickLevelFailPanel()
         {
-            LevelManager.Instance.RefreshAndLoadLevel();
+            EventManager.Publish(EventLevelLoad.Create());
         }
 
         private void OnClickRestartLevel()
         {
-            LevelManager.Instance.RefreshAndLoadLevel();
+            EventManager.Publish(EventLevelLoad.Create());
         }
 
         private void OnLevelSuccess(EventLevelSuccess customEvent)
@@ -129,7 +143,7 @@ namespace _Main.Scripts.GamePlay.UI.Window
         
         private void OnLevelLoad(EventLevelLoad customEvent)
         {
-            _animator.SetTrigger(h_trigger_idle);
+            _animator.SetTrigger(h_trigger_tap_to_start);
             UpdateLevelUI();
         }
 

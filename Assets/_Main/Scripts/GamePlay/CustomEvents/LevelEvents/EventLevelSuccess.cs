@@ -1,4 +1,6 @@
 using _Main.Patterns.EventSystem;
+using _Main.Scripts.GamePlay.GameStateSystem;
+using _Main.Scripts.Utilities;
 
 namespace _Main.Scripts.GamePlay.CustomEvents
 {
@@ -9,6 +11,7 @@ namespace _Main.Scripts.GamePlay.CustomEvents
 
         public static EventLevelSuccess Create()
         {
+            GameConfig.State = GameState.Success;
             var eventLevelSuccess = new EventLevelSuccess();
             return eventLevelSuccess;
         }

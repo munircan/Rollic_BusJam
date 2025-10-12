@@ -1,7 +1,7 @@
+using System;
 using _Main.GamePlay.TileSystem.Manager;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ServiceLocation;
-using _Main.Patterns.Singleton;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
@@ -11,12 +11,14 @@ using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
 {
-    public class LevelManager : SingletonMonoBehaviour<LevelManager>
+    public class LevelManager : MonoBehaviour
     {
         private TileManager _tileManager;
         private PersonManager _personManager;
         private SlotManager _slotManager;
         private BusManager _busManager;
+
+        public static GameStateSystem.GameState State { get; private set; }
 
 
         private void Awake()
@@ -25,7 +27,20 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             _personManager = ServiceLocator.GetService<PersonManager>();
             _slotManager = ServiceLocator.GetService<SlotManager>();
             _busManager = ServiceLocator.GetService<BusManager>();
+
+            EventManager.Subscribe<EventLoadLevel>(OnEventLoadLevel);
         }
+
+        private void OnDestroy()
+        {
+            ServiceLocator.UnregisterService<TileManager>();
+            ServiceLocator.UnregisterService<PersonManager>();
+            ServiceLocator.UnregisterService<SlotManager>();
+            ServiceLocator.UnregisterService<BusManager>();
+
+            EventManager.Unsubscribe<EventLoadLevel>(OnEventLoadLevel);
+        }
+
 
         private void OnEnable()
         {
@@ -42,7 +57,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             _busManager.CreateBuses(currentLevelData);
             EventManager.Publish(EventLevelLoad.Create());
         }
-        
+
         public void RefreshAndLoadLevel()
         {
             UnloadLevel();
@@ -55,6 +70,12 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             _tileManager.ReleaseTiles();
             _personManager.ReleasePeople();
             _busManager.ReleaseBuses();
+        }
+
+
+        private void OnEventLoadLevel(EventLoadLevel customEvent)
+        {
+            RefreshAndLoadLevel();
         }
     }
 }
