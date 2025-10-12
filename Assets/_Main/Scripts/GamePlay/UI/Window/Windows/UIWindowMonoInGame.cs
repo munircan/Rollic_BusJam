@@ -44,13 +44,13 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
         private void Awake()
         {
-            EventManager.Subscribe<EventLevelLoad>(OnLevelLoad);
+            EventManager.Subscribe<EventLevelLoaded>(OnLevelLoad);
         }
 
 
         private void OnDestroy()
         {
-            EventManager.Unsubscribe<EventLevelLoad>(OnLevelLoad);
+            EventManager.Unsubscribe<EventLevelLoaded>(OnLevelLoad);
         }
 
 
@@ -96,7 +96,7 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
         private void UpdateLevelUI()
         {
-            _levelText.text = Keys.LEVEL + " " + LevelSettings.Instance.CurrentLevel;
+            _levelText.text = Keys.LEVEL + " " + LevelSettings.Instance.GetCurrentLevelName();
         }
 
         #endregion
@@ -114,17 +114,17 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
         private void OnClickLevelSuccessPanel()
         {
-            EventManager.Publish(EventLevelLoad.Create());
+            EventManager.Publish(EventLoadLevel.Create());
         }
 
         private void OnClickLevelFailPanel()
         {
-            EventManager.Publish(EventLevelLoad.Create());
+            EventManager.Publish(EventLoadLevel.Create());
         }
 
         private void OnClickRestartLevel()
         {
-            EventManager.Publish(EventLevelLoad.Create());
+            EventManager.Publish(EventLoadLevel.Create());
         }
 
         private void OnLevelSuccess(EventLevelSuccess customEvent)
@@ -141,7 +141,7 @@ namespace _Main.Scripts.GamePlay.UI.Window
         
         
         
-        private void OnLevelLoad(EventLevelLoad customEvent)
+        private void OnLevelLoad(EventLevelLoaded customEvent)
         {
             _animator.SetTrigger(h_trigger_tap_to_start);
             UpdateLevelUI();

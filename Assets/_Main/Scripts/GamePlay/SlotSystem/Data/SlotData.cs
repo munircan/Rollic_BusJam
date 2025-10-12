@@ -11,7 +11,7 @@ namespace _Main.Scripts.GamePlay.SlotSystem
 
         public bool IsStillLocked()
         {
-            return LevelSettings.Instance.CurrentLevel < LockedLevel;
+            return LevelSettings.Instance.GetCurrentLevel() < LockedLevel;
         }
     }
 }

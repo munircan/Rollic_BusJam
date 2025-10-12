@@ -9,11 +9,11 @@ namespace _Main.Scripts.GamePlay.CustomEvents
         // ADJUST LATER
         public int ClickCount { get; set; }
 
-        public static EventLevelSuccess Create()
+        public static EventLevelSuccess Create(int clickCount)
         {
             GameConfig.State = GameState.Success;
             var eventLevelSuccess = new EventLevelSuccess();
-            eventLevelSuccess.ClickCount = GameConfig.LevelClickCount;
+            eventLevelSuccess.ClickCount = clickCount;
             return eventLevelSuccess;
         }
     }

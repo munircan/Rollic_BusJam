@@ -11,6 +11,10 @@ namespace _Main.Scripts.Utilities
             public const string BUS = "Bus";
         }
         
+        public static class Prefs
+        {
+            public const string CURRENT_LEVEL = "CurrentLevel";
+        }
        
 
         public const string LEVEL = "Level";

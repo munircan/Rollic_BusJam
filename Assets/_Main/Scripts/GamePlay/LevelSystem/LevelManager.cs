@@ -52,12 +52,12 @@ namespace _Main.Scripts.GamePlay.LevelSystem
         public void LoadLevel()
         {
             GameConfig.LevelClickCount = 0;
-            var currentLevelData = LevelSettings.Instance.GetCurrentLevel();
+            var currentLevelData = LevelSettings.Instance.GetCurrentLevelData();
             _slotManager.CreateSlots(currentLevelData);
             _tileManager.CreateTiles(currentLevelData);
             _personManager.CreatePeople(_tileManager.Tiles);
             _busManager.CreateBuses(currentLevelData);
-            EventManager.Publish(EventLevelLoad.Create());
+            EventManager.Publish(EventLevelLoaded.Create());
         }
 
         public void RefreshAndLoadLevel()

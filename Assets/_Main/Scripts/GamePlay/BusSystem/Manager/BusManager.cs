@@ -82,7 +82,8 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
         {
             if (IsBusesFinished)
             {
-                EventManager.Publish(EventLevelSuccess.Create());
+                GameConfig.PlayerPref.CurrentLevel++;
+                EventManager.Publish(EventLevelSuccess.Create(GameConfig.LevelClickCount));
                 return;
             }
 
