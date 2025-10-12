@@ -51,8 +51,9 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         public void ReleaseBuses()
         {
-            foreach (var bus in _buses)
+            for (var i = 0; i < _buses.Count; i++)
             {
+                var bus = _buses[i];
                 bus.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.BUS, bus);
             }
