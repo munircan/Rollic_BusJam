@@ -304,6 +304,18 @@ public class LevelEditorWindow : EditorWindow
                     new Vector3(rect.xMin, rect.yMax),
                     new Vector3(rect.xMin, rect.yMin)
                 });
+                if (_selectedTile == index)
+                {
+                    // Seçili karo için daha belirgin bir vurgu (örn: sarı/beyaz kalın çerçeve)
+                    Handles.color = Color.cyan; 
+                    Handles.DrawAAPolyLine(5f, new Vector3[] { // Çerçeveyi kalınlaştır
+                        new Vector3(rect.xMin, rect.yMin),
+                        new Vector3(rect.xMax, rect.yMin),
+                        new Vector3(rect.xMax, rect.yMax),
+                        new Vector3(rect.xMin, rect.yMax),
+                        new Vector3(rect.xMin, rect.yMin)
+                    });
+                }
 
                 GUIStyle center = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter, wordWrap = true };
                 string label = $"{x},{y}\n{tile.Type}";
