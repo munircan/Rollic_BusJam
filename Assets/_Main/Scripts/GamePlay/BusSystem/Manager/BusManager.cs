@@ -51,12 +51,14 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         public void ReleaseBuses()
         {
-            _currentIndex = 0;
             foreach (var bus in _buses)
             {
                 bus.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.BUS_POOL_TAG, bus);
             }
+
+            _currentIndex = 0;
+            _buses.Clear();
         }
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)

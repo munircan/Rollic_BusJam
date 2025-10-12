@@ -61,13 +61,13 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         public void ReleasePeople()
         {
-            _personList.Clear();
-            _slotToBusPeopleDictionary.Clear();
             foreach (var person in _personList)
             {
                 person.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.PERSON_POOL_TAG, person);
             }
+            _personList.Clear();
+            _slotToBusPeopleDictionary.Clear();
         }
 
         private void SetPeopleCanWalk()

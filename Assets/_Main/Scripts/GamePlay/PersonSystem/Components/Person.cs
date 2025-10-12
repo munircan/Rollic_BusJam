@@ -54,6 +54,8 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         public void Reset()
         {
+            SetTile(null);
+            SetSlot(null);
             _modelController.Reset();
             _movementController.Reset();
         }

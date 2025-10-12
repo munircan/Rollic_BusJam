@@ -45,6 +45,7 @@ namespace _Main.Scripts.GamePlay.SlotSystem
                 slot.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.SLOT_POOL_TAG, slot);
             }
+            Slots.Clear();
         }
 
         public Slot GetFirstEmptySlot()

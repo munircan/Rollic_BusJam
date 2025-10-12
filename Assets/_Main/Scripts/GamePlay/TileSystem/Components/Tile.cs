@@ -71,6 +71,7 @@ namespace _Main.GamePlay.TileSystem
 
         public void Reset()
         {
+            TileObject = null;
             _modelController.Reset();
             _inputController.Reset();
         }

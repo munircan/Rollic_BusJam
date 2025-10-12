@@ -55,6 +55,7 @@ namespace _Main.GamePlay.TileSystem.Manager
                 tile.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.TILE_POOL_TAG, tile);
             }
+            Tiles.Clear();
         }
         
         public bool GetPath(Tile tile, out List<Vector3> path)
