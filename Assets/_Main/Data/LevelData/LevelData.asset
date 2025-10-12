@@ -35,15 +35,9 @@ MonoBehaviour:
       LockedLevel: 0
     - IsLocked: 1
       LockedLevel: 30
-    TileWidth: 4
+    TileWidth: 3
     TileHeight: 3
     Tiles:
-    - Type: 1
-      PersonData:
-        Color: 2
-    - Type: -1
-      PersonData:
-        Color: 0
     - Type: 0
       PersonData:
         Color: 0
@@ -55,7 +49,7 @@ MonoBehaviour:
         Color: 0
     - Type: 1
       PersonData:
-        Color: 1
+        Color: 2
     - Type: 1
       PersonData:
         Color: 1
@@ -65,12 +59,9 @@ MonoBehaviour:
     - Type: 1
       PersonData:
         Color: 2
-    - Type: 0
-      PersonData:
-        Color: 0
     - Type: 1
       PersonData:
         Color: 2
-    - Type: 0
+    - Type: 1
       PersonData:
-        Color: 0
+        Color: 1

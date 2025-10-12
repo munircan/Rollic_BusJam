@@ -102,10 +102,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                     _movementController.MovePath(pathData.PathPositions);
                     Tile.SetTileObject(null);
                 }
-                else
-                {
-                    Debug.Log("I can't walk man!");
-                }
             }
         }
 
