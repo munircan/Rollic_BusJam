@@ -1,4 +1,5 @@
 using _Main.Scripts.GamePlay.Settings;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.InputSystem
@@ -58,6 +59,7 @@ namespace _Main.Scripts.GamePlay.InputSystem
 
             _handlingInteractable.OnPressUp();
             _isHandling = false;
+            GameConfig.LevelClickCount++;
         }
 
         public PressableInputHandler(Camera mainCamera)

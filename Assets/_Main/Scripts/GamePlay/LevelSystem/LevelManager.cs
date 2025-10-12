@@ -7,6 +7,7 @@ using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
@@ -50,6 +51,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem
 
         public void LoadLevel()
         {
+            GameConfig.LevelClickCount = 0;
             var currentLevelData = LevelSettings.Instance.GetCurrentLevel();
             _slotManager.CreateSlots(currentLevelData);
             _tileManager.CreateTiles(currentLevelData);

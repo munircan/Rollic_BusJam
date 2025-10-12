@@ -13,6 +13,7 @@ namespace _Main.Scripts.GamePlay.CustomEvents
         {
             GameConfig.State = GameState.Success;
             var eventLevelSuccess = new EventLevelSuccess();
+            eventLevelSuccess.ClickCount = GameConfig.LevelClickCount;
             return eventLevelSuccess;
         }
     }

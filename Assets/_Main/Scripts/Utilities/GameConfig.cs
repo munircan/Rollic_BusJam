@@ -5,5 +5,7 @@ namespace _Main.Scripts.Utilities
     public static class GameConfig
     {
         public static GameState State { get; set; }
+        
+        public static int LevelClickCount { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+using _Main.Scripts.GamePlay.GameStateSystem;
+using _Main.Scripts.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.InputSystem
@@ -21,7 +23,7 @@ namespace _Main.Scripts.GamePlay.InputSystem
 
         private void Update()
         {
-            if (!_hasInitialized)
+            if (!_hasInitialized && GameConfig.State != GameState.Playing)
             {
                 return;
             }
