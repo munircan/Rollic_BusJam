@@ -71,11 +71,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 _currentIndex++;
                 currentBus.MovementController.SetOnMovementCompleteEvent(SetNextBus);
                 currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
-                if (IsBusesFinished)
-                {
-                    EventManager.Publish(EventLevelSuccess.Create());
-                }
-                else
+                if (!IsBusesFinished)
                 {
                     EventManager.Publish(EventBusChanged.Create(GetCurrentBus()));
                 }
@@ -86,6 +82,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
         {
             if (IsBusesFinished)
             {
+                EventManager.Publish(EventLevelSuccess.Create());
                 return;
             }
 

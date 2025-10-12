@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using _Main.Patterns.Singleton;
 using _Main.Scripts.GamePlay.UI.Settings;

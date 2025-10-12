@@ -37,6 +37,23 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
         #endregion
 
+        #region Unity Events
+
+        private void Awake()
+        {
+            EventManager.Subscribe<EventLevelLoad>(OnLevelLoad);
+        }
+
+
+        private void OnDestroy()
+        {
+            EventManager.Unsubscribe<EventLevelLoad>(OnLevelLoad);
+        }
+
+
+        #endregion
+ 
+
         #region InitializationMethods
 
         public override void Initialize()
@@ -107,6 +124,15 @@ namespace _Main.Scripts.GamePlay.UI.Window
         }
 
         #endregion
+        
+        
+        
+        private void OnLevelLoad(EventLevelLoad customEvent)
+        {
+            _animator.SetTrigger(h_trigger_idle);
+            UpdateLevelUI();
+        }
+
     }
 
     [Serializable]
