@@ -29,7 +29,7 @@ namespace _Main.GamePlay.TileSystem
         {
             get
             {
-                return Data.Type == TileType.None || TileObject != null;
+                return Data.Type == TileType.None || Data.Type == TileType.Obstacle ||TileObject != null;
             }
         }
 
