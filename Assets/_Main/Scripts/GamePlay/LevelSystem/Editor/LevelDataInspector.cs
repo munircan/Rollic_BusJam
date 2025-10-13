@@ -23,6 +23,7 @@ public class LevelDataInspector : Editor
     private PersonType _selectedPersonType; 
     
     private const float CellSize = 70f;
+    private const float SlotCellWidth = 70f; 
 
     private void OnEnable()
     {
@@ -163,6 +164,8 @@ public class LevelDataInspector : Editor
         int height = _levelData.Data.SlotHeight;
         var slots = _levelData.Data.Slots;
 
+        float slotItemWidth = SlotCellWidth; 
+        
         for (int y = 0; y < height; y++)
         {
             EditorGUILayout.BeginHorizontal();
@@ -171,10 +174,20 @@ public class LevelDataInspector : Editor
                 int index = y * width + x;
                 var slot = slots[index];
 
-                EditorGUILayout.BeginVertical("box", GUILayout.Width(120));
-                GUILayout.Label($"Slot ({x},{y})", EditorStyles.centeredGreyMiniLabel);
-                slot.IsLocked = EditorGUILayout.Toggle("Locked", slot.IsLocked);
-                if (slot.IsLocked) slot.LockedLevel = EditorGUILayout.IntField("Locked Level", slot.LockedLevel);
+                EditorGUILayout.BeginVertical("box", GUILayout.Width(slotItemWidth), GUILayout.ExpandHeight(false));
+                
+                GUILayout.Label($"({x},{y})", EditorStyles.centeredGreyMiniLabel);
+                
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label("L:", GUILayout.Width(15));
+                slot.IsLocked = EditorGUILayout.Toggle(slot.IsLocked);
+                EditorGUILayout.EndHorizontal();
+
+                if (slot.IsLocked)
+                {
+                    slot.LockedLevel = EditorGUILayout.IntField(slot.LockedLevel, GUILayout.Width(slotItemWidth - 4));
+                }
+                
                 _levelData.Data.Slots[index] = slot;
                 EditorGUILayout.EndVertical();
             }
