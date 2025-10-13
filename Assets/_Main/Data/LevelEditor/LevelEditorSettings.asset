@@ -15,4 +15,8 @@ MonoBehaviour:
   DefaultTileKey: 113
   PersonTileKey: 119
   ObstacleTileKey: 101
-  NextPersonTypeKey: 109
+  DefaultPersonTypeKey: 100
+  MysteriousPersonTypeKey: 109
+  RedPersonKey: 49
+  BluePersonKey: 50
+  GreenPersonKey: 51

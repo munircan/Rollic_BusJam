@@ -1,11 +1,8 @@
-// LevelEditorSettings.cs (GÜNCELLENMİŞ)
-
 using UnityEngine;
 using UnityEditor;
 
 public class LevelEditorSettings : ScriptableObject
 {
-    // ... (s_Instance ve Instance kısmı aynı kalır) ...
     private static LevelEditorSettings s_Instance;
     public static LevelEditorSettings Instance
     {
@@ -13,15 +10,14 @@ public class LevelEditorSettings : ScriptableObject
         {
             if (s_Instance == null)
             {
-                s_Instance = AssetDatabase.LoadAssetAtPath<LevelEditorSettings>("Assets/Editor/LevelEditorSettings.asset");
+                s_Instance = AssetDatabase.LoadAssetAtPath<LevelEditorSettings>("Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
                 
                 if (s_Instance == null)
                 {
                     s_Instance = CreateInstance<LevelEditorSettings>();
                     s_Instance.ResetToDefaults();
-                    AssetDatabase.CreateAsset(s_Instance, "Assets/Editor/LevelEditorSettings.asset");
+                    AssetDatabase.CreateAsset(s_Instance, "Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
                     AssetDatabase.SaveAssets();
-                    Debug.Log("Level Editor Settings dosyası oluşturuldu: Assets/Editor/LevelEditorSettings.asset");
                 }
             }
             return s_Instance;
@@ -33,26 +29,67 @@ public class LevelEditorSettings : ScriptableObject
     public KeyCode PersonTileKey = KeyCode.W;
     public KeyCode ObstacleTileKey = KeyCode.E;
     
-    [Header("Person Tipi Kısayolu")]
-    public KeyCode NextPersonTypeKey = KeyCode.T;
+    [Header("Person Tipi Kısayolları")] // GÜNCELLENDİ
+    public KeyCode DefaultPersonTypeKey = KeyCode.T; // Örn: T
+    public KeyCode MysteriousPersonTypeKey = KeyCode.Y; // Örn: Y
     
-    [Header("Person Renk Kısayolları")] // YENİ BAŞLIK
-    public KeyCode RedPersonKey = KeyCode.Alpha1;   // Örn: 1
-    public KeyCode BluePersonKey = KeyCode.Alpha2;  // Örn: 2
-    public KeyCode GreenPersonKey = KeyCode.Alpha3; // Örn: 3
-    // Daha fazla renk varsa, buraya ekleyin...
+    [Header("Person Renk Kısayolları")]
+    public KeyCode RedPersonKey = KeyCode.Alpha1;
+    public KeyCode BluePersonKey = KeyCode.Alpha2;
+    public KeyCode GreenPersonKey = KeyCode.Alpha3;
+    
 
     public void ResetToDefaults()
     {
         DefaultTileKey = KeyCode.Q;
         PersonTileKey = KeyCode.W;
         ObstacleTileKey = KeyCode.E;
-        NextPersonTypeKey = KeyCode.T;
         
-        // YENİ: Varsayılan renk tuşları
+        // GÜNCELLENDİ
+        DefaultPersonTypeKey = KeyCode.T;
+        MysteriousPersonTypeKey = KeyCode.Y;
+        
         RedPersonKey = KeyCode.Alpha1;
         BluePersonKey = KeyCode.Alpha2;
         GreenPersonKey = KeyCode.Alpha3;
     }
 }
+
 // LevelEditorSettingsProvider kısmı aynı kalır.
+public class LevelEditorSettingsProvider
+{
+    private static Editor s_SettingsEditor; 
+
+    [SettingsProvider]
+    public static SettingsProvider CreateSettingsProvider()
+    {
+        var provider = new SettingsProvider("Project/LevelEditorSettings", SettingsScope.Project)
+        {
+            label = "Level Editor",
+            guiHandler = (searchContext) =>
+            {
+                var settings = LevelEditorSettings.Instance;
+                
+                if (s_SettingsEditor == null || s_SettingsEditor.target != settings)
+                {
+                    s_SettingsEditor = Editor.CreateEditor(settings);
+                }
+
+                if (s_SettingsEditor != null)
+                {
+                    s_SettingsEditor.OnInspectorGUI();
+                }
+
+                GUILayout.Space(15);
+                if (GUILayout.Button("Varsayılan Tuşlara Dön"))
+                {
+                    settings.ResetToDefaults();
+                    EditorUtility.SetDirty(settings);
+                    AssetDatabase.SaveAssets();
+                }
+            },
+            keywords = new System.Collections.Generic.HashSet<string>(new[] { "Level", "Editor", "Keybinds", "Kısayol" })
+        };
+        return provider;
+    }
+}
