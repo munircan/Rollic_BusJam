@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.BusSystem.Components;
@@ -64,22 +65,29 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
+            // Assign the Task result to the discard variable. 
+            // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
+             _ = MoveBusIfFull(customEvent);
+        }
+
+        private async Task MoveBusIfFull(EventPersonGetIntoBus customEvent)
+        {
             var currentBus = GetCurrentBus();
             currentBus.PersonController.AddPersonInBus(customEvent.Person);
             var isLastPerson = currentBus.PersonController.IsFullAndEverybodyIn();
             if (isLastPerson)
             {
                 _currentIndex++;
-                currentBus.MovementController.SetOnMovementCompleteEvent(SetNextBus);
-                currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
                 if (!IsBusesFinished)
                 {
                     EventManager.Publish(EventBusChanged.Create(GetCurrentBus()));
                 }
+                await currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
+                await SetNextBus();
             }
         }
 
-        private void SetNextBus()
+        private async Task SetNextBus()
         {
             if (IsBusesFinished)
             {
@@ -89,14 +97,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             }
 
             var currentBus = GetCurrentBus();
-            currentBus.MovementController.SetOnMovementCompleteEvent(OnBusMovedIn);
-            currentBus.MovementController.Move(_startTransform.position, MovementType.In);
-        }
-
-        private void OnBusMovedIn()
-        {
+            await currentBus.MovementController.Move(_startTransform.position, MovementType.In);
             EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus()));
         }
+        
 
         public Bus GetCurrentBus()
         {

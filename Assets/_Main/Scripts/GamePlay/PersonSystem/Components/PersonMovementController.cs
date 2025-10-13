@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ModuleSystem;
 using _Main.Patterns.ServiceLocation;
@@ -15,20 +16,23 @@ namespace _Main.Scripts.GamePlay.PersonSystem
     public class PersonMovementController : ComponentModule<Person>
     {
         [SerializeField] private PersonMovementData _movementData;
-        private Tween pathTween;
+        private Tween _pathTween;
 
-        public void MovePath(List<Vector3> path)
+        public async Task MovePathAsync(List<Vector3> path)
         {
             var pathArray = path.ToArray();
-            pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
+    
+            _pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
                     _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
                 .SetEase(_movementData.PathMovementData.Ease)
                 .SetLink(gameObject)
-                .SetSpeedBased(true)
-                .OnComplete(OnPathMovementComplete);
+                .SetSpeedBased(true);
             // .SetLookAt(0.01f);
-        }
 
+            await _pathTween.AsyncWaitForCompletion();
+
+            OnPathMovementComplete(); 
+        }
         public void OnPathMovementComplete()
         {
             // CHANGE THIS LOGIC AFTER TRY TO MOVE PERSON MANAGER
@@ -38,12 +42,16 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             if (currentBus && currentBus.Data.PersonColor == BaseComp.Data.Color && !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(BaseComp);
-                MoveToBus(currentBus);
+                // Assign the Task result to the discard variable. 
+                // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
+                _ = MoveToBusAsync(currentBus);
             }
             else if (firstEmptySlot)
             {
                 BaseComp.SetSlot(firstEmptySlot);
-                MoveToSlot(firstEmptySlot);
+                // Assign the Task result to the discard variable. 
+                // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
+                _ = MoveToSlot(firstEmptySlot);
             }
             else
             {
@@ -51,30 +59,40 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             }
         }
 
-        public void MoveToSlot(Slot slot)
+        public async Task MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
-            transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
+            var slotTween = transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
                 .SetEase(_movementData.SlotMovementData.Ease).SetLink(gameObject);
+            await slotTween.AsyncWaitForCompletion();
+            OnPersonMoveToSlot();
         }
 
-        public void MoveToBus(Bus bus)
+        public async Task MoveToBusAsync(Bus bus)
         {
             var busTransform = bus.PersonController.GetPersonBusTransform(BaseComp);
             transform.SetParent(busTransform);
-            transform.DOLocalJump(Vector3.zero, _movementData.BusMovementData.JumpPower,
+            var jumpTween =transform.DOLocalJump(Vector3.zero, _movementData.BusMovementData.JumpPower,
                     _movementData.BusMovementData.JumpCount, _movementData.BusMovementData.Duration)
-                .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject).OnComplete(OnPersonMoveToBus);
+                .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject);
+
+            await jumpTween.AsyncWaitForCompletion();
+            OnPersonMoveToBus();
         }
 
         private void OnPersonMoveToBus()
         {
             EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
         }
+
+        private void OnPersonMoveToSlot()
+        {
+            
+        }
         
         public void KillPath()
         {
-            pathTween.Kill();
+            _pathTween.Kill();
         }
 
 

@@ -99,8 +99,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                 var pathData = manager.GetPersonPathData(this);
                 if (pathData.HasPath)
                 {
-                    _movementController.MovePath(pathData.PathPositions);
                     Tile.SetTileObject(null);
+                    // Assign the Task result to the discard variable. 
+                    // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
+                    _ = _movementController.MovePathAsync(pathData.PathPositions);
                 }
             }
         }
