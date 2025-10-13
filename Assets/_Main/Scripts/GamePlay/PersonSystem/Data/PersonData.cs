@@ -6,21 +6,13 @@ namespace _Main.Scripts.GamePlay.PersonSystem
     [Serializable]
     public struct PersonData
     {
-        public PersonColor Color;
-        public PersonType Type;
+        public ColorType colorType;
+        public Appearance Appearance;
 
         public PersonData(PersonData data)
         {
-            Color = data.Color;
-            Type = data.Type;
+            colorType = data.colorType;
+            Appearance = data.Appearance;
         }
     }
-
-    public enum PersonType
-    {
-        Default,
-        Mysterious
-    }
-
-   
 }

@@ -15,9 +15,9 @@ MonoBehaviour:
   Data:
     Buses:
     - PersonLimit: 3
-      PersonColor: 1
+      colorType: 1
     - PersonLimit: 3
-      PersonColor: 2
+      colorType: 2
     SlotWidth: 7
     SlotHeight: 1
     Slots:
@@ -40,37 +40,37 @@ MonoBehaviour:
     Tiles:
     - Type: 0
       PersonData:
-        Color: 0
-        Type: 0
+        colorType: 0
+        Appearance: 0
     - Type: 1
       PersonData:
-        Color: 1
-        Type: 0
+        colorType: 1
+        Appearance: 0
     - Type: 0
       PersonData:
-        Color: 0
-        Type: 0
+        colorType: 0
+        Appearance: 0
     - Type: 1
       PersonData:
-        Color: 2
-        Type: 0
+        colorType: 2
+        Appearance: 0
     - Type: 1
       PersonData:
-        Color: 1
-        Type: 0
+        colorType: 1
+        Appearance: 0
     - Type: 0
       PersonData:
-        Color: 0
-        Type: 0
+        colorType: 0
+        Appearance: 0
     - Type: 1
       PersonData:
-        Color: 2
-        Type: 0
+        colorType: 2
+        Appearance: 0
     - Type: 1
       PersonData:
-        Color: 2
-        Type: 0
+        colorType: 2
+        Appearance: 0
     - Type: 1
       PersonData:
-        Color: 1
-        Type: 0
+        colorType: 1
+        Appearance: 0

@@ -16,12 +16,12 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         public void SetColor()
         {
-            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.Color,BaseComp.Data.Type,false);
+            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.colorType,BaseComp.Data.Appearance,false);
         }
 
         public void SetCanPressableColor()
         {
-            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.Color,BaseComp.Data.Type,true);
+            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.colorType,BaseComp.Data.Appearance,true);
         }
     }
 }   

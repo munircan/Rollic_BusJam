@@ -19,8 +19,8 @@ public class LevelDataInspector : Editor
     private int _hoveredTile = -1;
     private int _selectedTile = -1;
     private TileType _selectedTileType;
-    private PersonColor _selectedPersonColor;
-    private PersonType _selectedPersonType; 
+    private ColorType _selectedColorType;
+    private Appearance _selectedPersonType; 
     
     private const float CellSize = 70f;
     private const float SlotCellWidth = 70f; 
@@ -90,7 +90,7 @@ public class LevelDataInspector : Editor
             EditorGUILayout.BeginVertical("box");
             GUILayout.Label($"Bus #{i + 1}", EditorStyles.miniBoldLabel);
             bus.PersonLimit = EditorGUILayout.IntField("Person Limit", Mathf.Max(3, bus.PersonLimit));
-            bus.PersonColor = (PersonColor)EditorGUILayout.EnumPopup("Person Color", bus.PersonColor);
+            bus.colorType = (ColorType)EditorGUILayout.EnumPopup("Person Color", bus.colorType);
             _levelData.Data.Buses[i] = bus;
             EditorGUILayout.EndVertical();
         }
@@ -303,7 +303,7 @@ public class LevelDataInspector : Editor
 
                 Color bgColor = tile.Type switch
                 {
-                    TileType.Person => GetPersonColor(tile.PersonData.Color),
+                    TileType.Person => GetPersonColor(tile.PersonData.colorType),
                     TileType.Obstacle => new Color(0.3f, 0.3f, 0.3f),
                     _ => Color.gray
                 };
@@ -326,8 +326,8 @@ public class LevelDataInspector : Editor
                 string label = $"{x},{y}\n{tile.Type}";
                 if (tile.Type == TileType.Person) 
                 {
-                    int colorCode = (int)tile.PersonData.Color;
-                    label += $"\n[{colorCode}] {tile.PersonData.Color}\n{tile.PersonData.Type}";
+                    int colorCode = (int)tile.PersonData.colorType;
+                    label += $"\n[{colorCode}] {tile.PersonData.colorType}\n{tile.PersonData.Appearance}";
                 }
                 
                 GUI.Label(rect, label, center);
@@ -336,8 +336,8 @@ public class LevelDataInspector : Editor
                 {
                     _selectedTile = index;
                     _selectedTileType = tile.Type;
-                    _selectedPersonColor = tile.PersonData.Color;
-                    _selectedPersonType = tile.PersonData.Type; 
+                    _selectedColorType = tile.PersonData.colorType;
+                    _selectedPersonType = tile.PersonData.Appearance; 
                     
                     e.Use();
                 }
@@ -358,8 +358,8 @@ public class LevelDataInspector : Editor
         
         if (_selectedTileType == TileType.Person)
         {
-            _selectedPersonColor = (PersonColor)EditorGUILayout.EnumPopup("Person Color", _selectedPersonColor);
-            _selectedPersonType = (PersonType)EditorGUILayout.EnumPopup("Person Type", _selectedPersonType);
+            _selectedColorType = (ColorType)EditorGUILayout.EnumPopup("Person Color", _selectedColorType);
+            _selectedPersonType = (Appearance)EditorGUILayout.EnumPopup("Person Type", _selectedPersonType);
         }
 
         if (GUILayout.Button("Apply"))
@@ -369,8 +369,8 @@ public class LevelDataInspector : Editor
             tile.Type = _selectedTileType;
             if (_selectedTileType == TileType.Person)
             {
-                tile.PersonData.Color = _selectedPersonColor;
-                tile.PersonData.Type = _selectedPersonType; 
+                tile.PersonData.colorType = _selectedColorType;
+                tile.PersonData.Appearance = _selectedPersonType; 
             }
             _levelData.Data.Tiles[_selectedTile] = tile;
             EditorUtility.SetDirty(_levelData);
@@ -394,12 +394,12 @@ public class LevelDataInspector : Editor
 
         if (tile.Type == TileType.Person)
         {
-            if (e.keyCode == settings.RedPersonKey) { tile.PersonData.Color = PersonColor.Red; tileChanged = true; }
-            else if (e.keyCode == settings.BluePersonKey) { tile.PersonData.Color = PersonColor.Blue; tileChanged = true; }
-            else if (e.keyCode == settings.GreenPersonKey) { tile.PersonData.Color = PersonColor.Green; tileChanged = true; }
+            if (e.keyCode == settings.RedPersonKey) { tile.PersonData.colorType = ColorType.Red; tileChanged = true; }
+            else if (e.keyCode == settings.BluePersonKey) { tile.PersonData.colorType = ColorType.Blue; tileChanged = true; }
+            else if (e.keyCode == settings.GreenPersonKey) { tile.PersonData.colorType = ColorType.Green; tileChanged = true; }
 
-            else if (e.keyCode == settings.DefaultPersonTypeKey) { tile.PersonData.Type = PersonType.Default; tileChanged = true; }
-            else if (e.keyCode == settings.MysteriousPersonTypeKey) { tile.PersonData.Type = PersonType.Mysterious; tileChanged = true; }
+            else if (e.keyCode == settings.DefaultPersonTypeKey) { tile.PersonData.Appearance = Appearance.Default; tileChanged = true; }
+            else if (e.keyCode == settings.MysteriousPersonTypeKey) { tile.PersonData.Appearance = Appearance.Mysterious; tileChanged = true; }
         }
         
         if (tileChanged)
@@ -411,13 +411,13 @@ public class LevelDataInspector : Editor
         }
     }
 
-    private Color GetPersonColor(PersonColor color)
+    private Color GetPersonColor(ColorType colorType)
     {
-        return color switch
+        return colorType switch
         {
-            PersonColor.Red => Color.red,
-            PersonColor.Blue => Color.blue,
-            PersonColor.Green => Color.green,
+            ColorType.Red => Color.red,
+            ColorType.Blue => Color.blue,
+            ColorType.Green => Color.green,
             _ => Color.white
         };
     }

@@ -39,7 +39,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
             
             var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
-            if (currentBus && currentBus.Data.PersonColor == BaseComp.Data.Color && !currentBus.PersonController.IsBusFull)
+            if (currentBus && currentBus.Data.colorType == BaseComp.Data.colorType && !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(BaseComp);
                 // Assign the Task result to the discard variable. 

@@ -12,12 +12,12 @@ namespace _Main.Scripts.GamePlay.Settings
         public Material MysteriosPersonMaterial;
 
 
-        public Material GetMaterial(PersonColor color)
+        public Material GetMaterial(ColorType colorType)
         {
             for (var i = 0; i < Data.Length; i++)
             {
                 var colorData = Data[i];
-                if (colorData.Color == color)
+                if (colorData.colorType == colorType)
                 {
                     return colorData.Material;
                 }
@@ -26,16 +26,16 @@ namespace _Main.Scripts.GamePlay.Settings
             return null;
         }
         
-        public Material GetPersonMaterial(PersonColor color,PersonType type,bool canWalk)
+        public Material GetPersonMaterial(ColorType colorType,Appearance type,bool canWalk)
         {
-            if (!canWalk && type == PersonType.Mysterious)
+            if (!canWalk && type == Appearance.Mysterious)
             {
                 return MysteriosPersonMaterial;
             }
             for (var i = 0; i < Data.Length; i++)
             {
                 var colorData = Data[i];
-                if (colorData.Color == color)
+                if (colorData.colorType == colorType)
                 {
                     if (canWalk)
                     {
@@ -53,16 +53,22 @@ namespace _Main.Scripts.GamePlay.Settings
     [Serializable]
     public struct ColorData
     {
-        public PersonColor Color;
+        public ColorType colorType;
         public Material Material;
         public Material MaterialWithOutline;
     }
 
-    public enum PersonColor
+    public enum ColorType
     {
         White,
         Blue,
         Red,
         Green
+    }
+    
+    public enum Appearance
+    {
+        Default,
+        Mysterious
     }
 }

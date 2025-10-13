@@ -8,6 +8,6 @@ namespace _Main.Scripts.GamePlay.BusSystem.Data
     public struct BusData
     {
         public int PersonLimit;
-        public PersonColor PersonColor;
+        public ColorType colorType;
     }
 }

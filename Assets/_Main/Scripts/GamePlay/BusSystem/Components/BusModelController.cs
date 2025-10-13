@@ -16,7 +16,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 
         public void SetColor()
         {
-            _meshRenderer.material= ColorSettings.Instance.GetMaterial(BaseComp.Data.PersonColor);
+            _meshRenderer.material= ColorSettings.Instance.GetMaterial(BaseComp.Data.colorType);
         }
         
 
