@@ -8,25 +8,25 @@ using UnityEngine;
 namespace _Main.Scripts.GamePlay.LevelSystem
 {
     [Serializable]
-    public class LevelData
+    public struct LevelData
     {
         [HideInInspector] [FoldoutGroup("Bus")]
         public BusData[] Buses;
 
         [HideInInspector] [FoldoutGroup("Slot")]
-        public int SlotWidth = 5;
+        public int SlotWidth;
 
         [HideInInspector] [FoldoutGroup("Slot")]
-        public int SlotHeight = 1;
+        public int SlotHeight;
 
         [HideInInspector] [FoldoutGroup("Slot")]
         public SlotData[] Slots;
 
         [HideInInspector] [FoldoutGroup("Tile")]
-        public int TileWidth = 5;
+        public int TileWidth;
 
         [HideInInspector] [FoldoutGroup("Tile")]
-        public int TileHeight = 5;
+        public int TileHeight;
 
         [HideInInspector] [FoldoutGroup("Tile")]
         public TileData[] Tiles;
