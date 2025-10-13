@@ -18,6 +18,8 @@ MonoBehaviour:
       PersonColor: 1
     - PersonLimit: 3
       PersonColor: 2
+    - PersonLimit: 3
+      PersonColor: 3
     SlotWidth: 7
     SlotHeight: 1
     Slots:
