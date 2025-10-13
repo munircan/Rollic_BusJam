@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using _Main.Patterns.EventSystem;
@@ -43,11 +42,13 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             for (var i = 0; i < busesData.Length; i++)
             {
                 var data = busesData[i];
-                var pos = new Vector3(startPos.x - (i * BUS_OFFSET), startPos.y, startPos.z);
+                var pos = new Vector3(startPos.x - ((i + 1) * BUS_OFFSET), startPos.y, startPos.z);
                 var bus = ObjectPooler.Instance.SpawnSc<Bus>(Keys.PoolTags.BUS, pos, Quaternion.identity, _busParent);
                 bus.Initialize(data);
                 _buses.Add(bus);
             }
+
+            _ = SetNextBus();
         }
 
         public void ReleaseBuses()
@@ -67,7 +68,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
         {
             // Assign the Task result to the discard variable. 
             // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
-             _ = MoveBusIfFull(customEvent);
+            _ = MoveBusIfFull(customEvent);
         }
 
         private async Task MoveBusIfFull(EventPersonGetIntoBus customEvent)
@@ -82,6 +83,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 {
                     EventManager.Publish(EventBusChanged.Create(GetCurrentBus()));
                 }
+
                 await currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
                 await SetNextBus();
             }
@@ -99,8 +101,22 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             var currentBus = GetCurrentBus();
             await currentBus.MovementController.Move(_startTransform.position, MovementType.In);
             EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus()));
+            _ = MoveNextBuses();
         }
-        
+
+        private async Task MoveNextBuses()
+        {
+            int count = 0;
+            for (int i = _currentIndex + 1; i < _buses.Count; i++)
+            {
+                var nextBus = _buses[i];
+                var xPos = _startTransform.position.x + (count + 1) * -BUS_OFFSET;
+                var newPos = new Vector3(xPos, _startTransform.position.y, _startTransform.position.z);
+                await nextBus.MovementController.Move(newPos, MovementType.In);
+                count++;
+            }
+        }
+
 
         public Bus GetCurrentBus()
         {
