@@ -119,9 +119,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 for (var i = 0; i < personList.Count; i++)
                 {
                     var person = personList[i];
-                    // Assign the Task result to the discard variable. 
-                    // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
-                    _ = person.MovementController.MoveToBusAsync(bus);
+                    person.MovementController.MoveToBusAsync(bus).RunSynchronously();
                 }
             }
         }

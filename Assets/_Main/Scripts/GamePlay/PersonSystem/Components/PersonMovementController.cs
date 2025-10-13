@@ -21,7 +21,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public async Task MovePathAsync(List<Vector3> path)
         {
             var pathArray = path.ToArray();
-    
+
             _pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
                     _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
                 .SetEase(_movementData.PathMovementData.Ease)
@@ -31,27 +31,25 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
             await _pathTween.AsyncWaitForCompletion();
 
-            OnPathMovementComplete(); 
+            OnPathMovementComplete();
         }
+
         public void OnPathMovementComplete()
         {
             // CHANGE THIS LOGIC AFTER TRY TO MOVE PERSON MANAGER
             var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
-            
+
             var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
-            if (currentBus && currentBus.Data.colorType == BaseComp.Data.colorType && !currentBus.PersonController.IsBusFull)
+            if (currentBus && currentBus.Data.colorType == BaseComp.Data.colorType &&
+                !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(BaseComp);
-                // Assign the Task result to the discard variable. 
-                // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
-                _ = MoveToBusAsync(currentBus);
+                MoveToBusAsync(currentBus).RunSynchronously();
             }
             else if (firstEmptySlot)
             {
                 BaseComp.SetSlot(firstEmptySlot);
-                // Assign the Task result to the discard variable. 
-                // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
-                _ = MoveToSlot(firstEmptySlot);
+                MoveToSlot(firstEmptySlot).RunSynchronously();
             }
             else
             {
@@ -72,7 +70,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         {
             var busTransform = bus.PersonController.GetPersonBusTransform(BaseComp);
             transform.SetParent(busTransform);
-            var jumpTween =transform.DOLocalJump(Vector3.zero, _movementData.BusMovementData.JumpPower,
+            var jumpTween = transform.DOLocalJump(Vector3.zero, _movementData.BusMovementData.JumpPower,
                     _movementData.BusMovementData.JumpCount, _movementData.BusMovementData.Duration)
                 .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject);
 
@@ -87,9 +85,8 @@ namespace _Main.Scripts.GamePlay.PersonSystem
 
         private void OnPersonMoveToSlot()
         {
-            
         }
-        
+
         public void KillPath()
         {
             _pathTween.Kill();

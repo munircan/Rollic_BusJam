@@ -48,7 +48,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 _buses.Add(bus);
             }
 
-            _ = SetNextBus();
+            SetNextBus().RunSynchronously();
         }
 
         public void ReleaseBuses()
@@ -66,9 +66,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
-            // Assign the Task result to the discard variable. 
-            // This tells the compiler: "I know this returns a Task, but I'm ignoring it."
-            _ = MoveBusIfFull(customEvent);
+            MoveBusIfFull(customEvent).RunSynchronously();
         }
 
         private async Task MoveBusIfFull(EventPersonGetIntoBus customEvent)
@@ -101,7 +99,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             var currentBus = GetCurrentBus();
             await currentBus.MovementController.Move(_startTransform.position, MovementType.In);
             EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus()));
-            _ = MoveNextBuses();
+            MoveNextBuses().RunSynchronously();
         }
 
         private async Task MoveNextBuses()
