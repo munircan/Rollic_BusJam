@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultTileKey: 113
   PersonTileKey: 119
-  ObstacleTileKey: 101
+  ObstacleTileKey: 111
   DefaultPersonTypeKey: 100
   MysteriousPersonTypeKey: 109
   RedPersonKey: 49
