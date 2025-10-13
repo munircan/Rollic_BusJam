@@ -7,6 +7,8 @@ namespace _Main.Scripts.Utilities
     {
         public static GameState State { get; set; }
         
+        public static FailReason FailReason { get; set; }
+        
         public static int LevelClickCount { get; set; }
         
         

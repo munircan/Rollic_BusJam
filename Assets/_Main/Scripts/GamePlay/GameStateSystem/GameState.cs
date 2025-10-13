@@ -7,4 +7,10 @@ namespace _Main.Scripts.GamePlay.GameStateSystem
         Success,
         Fail
     }
+
+    public enum FailReason
+    {
+        Default,
+        Timeout
+    }
 }
