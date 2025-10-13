@@ -8,9 +8,20 @@ namespace _Main.Scripts.GamePlay.PersonSystem
     {
         [SerializeField] private MeshRenderer _meshRenderer;
 
-        public void SetColor(PersonColor color)
+        internal override void Initialize()
         {
-            _meshRenderer.material = ColorSettings.Instance.GetMaterial(color);
+            base.Initialize();
+            SetColor();
+        }
+
+        public void SetColor()
+        {
+            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.Color,BaseComp.Data.Type,false);
+        }
+
+        public void SetCanPressableColor()
+        {
+            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.Color,BaseComp.Data.Type,true);
         }
     }
-}
+}   

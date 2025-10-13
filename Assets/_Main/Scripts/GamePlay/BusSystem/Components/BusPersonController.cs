@@ -21,9 +21,15 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         public bool IsEverybodyIn =>  _personInBusList.Count == _limit;
 
 
-        public void SetPersonLimit(int limit)
+        internal override void Initialize()
         {
-            _limit = limit;
+            base.Initialize();
+            SetPersonLimit();
+        }
+
+        public void SetPersonLimit()
+        {
+            _limit = BaseComp.Data.PersonLimit;
         }
 
         public void AddPerson(Person person)

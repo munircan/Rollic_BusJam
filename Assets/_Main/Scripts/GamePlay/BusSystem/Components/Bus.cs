@@ -29,9 +29,6 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
             MovementController.Initialize();
             ModelController.Initialize();
             PersonController.Initialize();
-
-            PersonController.SetPersonLimit(Data.PersonLimit);
-            ModelController.SetColor(Data.PersonColor);
         }
 
         public void Reset()

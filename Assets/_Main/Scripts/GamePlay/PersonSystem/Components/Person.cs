@@ -28,6 +28,8 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public PersonData Data { get; private set; }
         
         public PersonMovementController MovementController =>  _movementController;
+        
+        public PersonModelController ModelController => _modelController;
 
         #endregion
 
@@ -48,8 +50,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             Data = data;
             _modelController.Initialize();
             _movementController.Initialize();
-
-            SetColor();
         }
 
         public void Reset()
@@ -81,11 +81,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                 Slot.SetPerson(this);
             }
         }
-
-        private void SetColor()
-        {
-            _modelController.SetColor(Data.Color);
-        }
+        
 
         #endregion
 

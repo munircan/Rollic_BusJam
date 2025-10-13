@@ -89,6 +89,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     personPathData.HasPath = hasPath;
                     personPathData.PathPositions = path;
                     _personPathDictionary.Add(person, personPathData);
+                    if (hasPath)
+                    {
+                        person.ModelController.SetCanPressableColor();
+                    }
                 }
             }
         }

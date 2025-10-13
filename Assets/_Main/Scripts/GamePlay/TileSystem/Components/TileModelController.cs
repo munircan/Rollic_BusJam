@@ -29,7 +29,7 @@ namespace _Main.GamePlay.TileSystem
         internal override void Initialize()
         {
             base.Initialize();
-            SetModelsActive(TileType.None);
+            SetModelsActive(BaseComp.Data.Type);
         }
         
         internal override void Reset()

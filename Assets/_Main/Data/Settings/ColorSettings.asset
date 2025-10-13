@@ -16,9 +16,14 @@ MonoBehaviour:
   Data:
   - Color: 0
     Material: {fileID: 2100000, guid: 0fd3c883c68a12e44bfb2fde8910137c, type: 2}
+    MaterialWithOutline: {fileID: 2100000, guid: 5ff0e3127eb9e234db874b5dec64127b, type: 2}
   - Color: 1
     Material: {fileID: 2100000, guid: 16df830dd998f8346a5ef7c8c1adc8e6, type: 2}
+    MaterialWithOutline: {fileID: 2100000, guid: fbd4f3af5979bac49b1d265d88b28ba0, type: 2}
   - Color: 2
     Material: {fileID: 2100000, guid: fb785d52ff0117547b2e599323d3e9d4, type: 2}
+    MaterialWithOutline: {fileID: 2100000, guid: 43da5a2d8cfc68b45b9c8acf070de53f, type: 2}
   - Color: 3
     Material: {fileID: 2100000, guid: e799aeeb6259a124aafba5ecbfce0a55, type: 2}
+    MaterialWithOutline: {fileID: 2100000, guid: bd602a2be3415d8479d1b886ad8aa679, type: 2}
+  MysteriosPersonMaterial: {fileID: 2100000, guid: 1c18aa2b21b8a3f4e85a4204502def25, type: 2}

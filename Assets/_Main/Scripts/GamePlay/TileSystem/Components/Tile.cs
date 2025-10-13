@@ -57,9 +57,6 @@ namespace _Main.GamePlay.TileSystem
             
             _modelController.Initialize();
             _inputController.Initialize();
-
-
-            _modelController.SetModelsActive(Data.Type);
         }
 
         public void SetIndexes(int x, int y)
