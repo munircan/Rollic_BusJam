@@ -9,6 +9,7 @@ using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.Utilities;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PersonSystem.Manager
@@ -119,7 +120,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 for (var i = 0; i < personList.Count; i++)
                 {
                     var person = personList[i];
-                    person.MovementController.MoveToBusAsync(bus).RunSynchronously();
+                    person.MovementController.MoveToBusAsync(bus).Forget();
                 }
             }
         }

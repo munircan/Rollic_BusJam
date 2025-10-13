@@ -7,6 +7,7 @@ using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.Utilities;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Manager
@@ -48,7 +49,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 _buses.Add(bus);
             }
 
-            SetNextBus().RunSynchronously();
+            SetNextBus().Forget();
         }
 
         public void ReleaseBuses()
@@ -66,10 +67,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
-            MoveBusIfFull(customEvent).RunSynchronously();
+            MoveBusIfFull(customEvent).Forget();
         }
 
-        private async Task MoveBusIfFull(EventPersonGetIntoBus customEvent)
+        private async UniTask MoveBusIfFull(EventPersonGetIntoBus customEvent)
         {
             var currentBus = GetCurrentBus();
             currentBus.PersonController.AddPersonInBus(customEvent.Person);
@@ -87,7 +88,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             }
         }
 
-        private async Task SetNextBus()
+        private async UniTask SetNextBus()
         {
             if (IsBusesFinished)
             {
@@ -99,10 +100,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             var currentBus = GetCurrentBus();
             await currentBus.MovementController.Move(_startTransform.position, MovementType.In);
             EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus()));
-            MoveNextBuses().RunSynchronously();
+            MoveNextBuses().Forget();
         }
 
-        private async Task MoveNextBuses()
+        private async UniTask MoveNextBuses()
         {
             int count = 0;
             for (int i = _currentIndex + 1; i < _buses.Count; i++)

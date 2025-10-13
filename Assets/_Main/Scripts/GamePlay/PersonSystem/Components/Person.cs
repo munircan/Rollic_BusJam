@@ -5,6 +5,7 @@ using _Main.Patterns.ModuleSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PersonSystem
@@ -96,7 +97,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                 if (pathData.HasPath)
                 {
                     Tile.SetTileObject(null);
-                    _movementController.MovePathAsync(pathData.PathPositions).RunSynchronously();
+                    _movementController.MovePathAsync(pathData.PathPositions).Forget();
                 }
             }
         }

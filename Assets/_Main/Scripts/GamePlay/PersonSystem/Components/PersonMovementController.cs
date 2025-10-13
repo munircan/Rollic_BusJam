@@ -8,6 +8,7 @@ using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.Utilities;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         [SerializeField] private PersonMovementData _movementData;
         private Tween _pathTween;
 
-        public async Task MovePathAsync(List<Vector3> path)
+        public async UniTask MovePathAsync(List<Vector3> path)
         {
             var pathArray = path.ToArray();
 
@@ -44,12 +45,12 @@ namespace _Main.Scripts.GamePlay.PersonSystem
                 !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(BaseComp);
-                MoveToBusAsync(currentBus).RunSynchronously();
+                MoveToBusAsync(currentBus).Forget();
             }
             else if (firstEmptySlot)
             {
                 BaseComp.SetSlot(firstEmptySlot);
-                MoveToSlot(firstEmptySlot).RunSynchronously();
+                MoveToSlot(firstEmptySlot).Forget();
             }
             else
             {
@@ -57,7 +58,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             }
         }
 
-        public async Task MoveToSlot(Slot slot)
+        public async UniTask MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
             var slotTween = transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
@@ -66,7 +67,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             OnPersonMoveToSlot();
         }
 
-        public async Task MoveToBusAsync(Bus bus)
+        public async UniTask MoveToBusAsync(Bus bus)
         {
             var busTransform = bus.PersonController.GetPersonBusTransform(BaseComp);
             transform.SetParent(busTransform);
