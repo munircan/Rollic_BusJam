@@ -19,8 +19,7 @@ namespace _Main.Scripts.GamePlay.UI.Manager
 
         private void InitializeInGameWindow()
         {
-            var windowMonoInGame = GetWindow<UIWindowMonoInGame>();
-            windowMonoInGame.Initialize();
+            GetWindow<UIWindowMonoInGame>();
         }
 
 

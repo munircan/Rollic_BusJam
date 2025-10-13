@@ -11,6 +11,7 @@ namespace _Main.Scripts.Utilities
         
         public static int LevelClickCount { get; set; }
         
+        public static int CountdownTimer { get; set; }
         
         
         public static class PlayerPref

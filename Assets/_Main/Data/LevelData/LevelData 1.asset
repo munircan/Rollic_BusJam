@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LevelData 1
   m_EditorClassIdentifier: 
   Data:
+    LevelDuration: 60
     Buses:
     - PersonLimit: 3
       ColorType: 1

@@ -2,7 +2,6 @@ using System;
 using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem
@@ -10,25 +9,20 @@ namespace _Main.Scripts.GamePlay.LevelSystem
     [Serializable]
     public struct LevelData
     {
-        [HideInInspector] [FoldoutGroup("Bus")]
-        public BusData[] Buses;
+        [HideInInspector] public int LevelDuration;
 
-        [HideInInspector] [FoldoutGroup("Slot")]
-        public int SlotWidth;
+        [HideInInspector] public BusData[] Buses;
 
-        [HideInInspector] [FoldoutGroup("Slot")]
-        public int SlotHeight;
+        [HideInInspector] public int SlotWidth;
 
-        [HideInInspector] [FoldoutGroup("Slot")]
-        public SlotData[] Slots;
+        [HideInInspector] public int SlotHeight;
 
-        [HideInInspector] [FoldoutGroup("Tile")]
-        public int TileWidth;
+        [HideInInspector] public SlotData[] Slots;
 
-        [HideInInspector] [FoldoutGroup("Tile")]
-        public int TileHeight;
+        [HideInInspector] public int TileWidth;
 
-        [HideInInspector] [FoldoutGroup("Tile")]
-        public TileData[] Tiles;
+        [HideInInspector] public int TileHeight;
+
+        [HideInInspector] public TileData[] Tiles;
     }
 }

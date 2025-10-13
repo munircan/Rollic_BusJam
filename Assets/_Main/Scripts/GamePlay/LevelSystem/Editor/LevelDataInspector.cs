@@ -37,6 +37,16 @@ public class LevelDataInspector : Editor
         GUILayout.Label("🧩 LEVEL EDITOR (Inspector)", EditorStyles.boldLabel);
         EditorGUILayout.Space(10);
 
+        EditorGUILayout.BeginVertical("box");
+        GUILayout.Label("⏰ LEVEL SETTINGS", EditorStyles.boldLabel);
+    
+        var data = _levelData.Data; 
+        data.LevelDuration = EditorGUILayout.IntField("Level Duration (Seconds)", Mathf.Max(0, data.LevelDuration));
+        _levelData.Data = data; 
+    
+        EditorGUILayout.EndVertical();
+        EditorGUILayout.Space(20);
+    
         DrawBusSection();
         EditorGUILayout.Space(20);
         DrawSlotSection();
