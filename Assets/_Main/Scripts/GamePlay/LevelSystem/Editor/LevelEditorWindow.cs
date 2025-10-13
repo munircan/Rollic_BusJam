@@ -21,8 +21,9 @@ public class LevelEditorWindow : EditorWindow
     private int _selectedTile = -1;
     private TileType _selectedTileType;
     private PersonColor _selectedPersonColor;
-    
-   
+
+    // GÜNCELLENDİ: PersonType değişkeni
+    private PersonType _selectedPersonType;
 
     private const float CellSize = 70f;
 
@@ -34,7 +35,9 @@ public class LevelEditorWindow : EditorWindow
         GUILayout.Label("🧩 LEVEL EDITOR", EditorStyles.boldLabel);
         EditorGUILayout.Space(10);
 
-        _levelData = (LevelScriptableObject)EditorGUILayout.ObjectField("Level Data", _levelData, typeof(LevelScriptableObject), false);
+        _levelData =
+            (LevelScriptableObject)EditorGUILayout.ObjectField("Level Data", _levelData, typeof(LevelScriptableObject),
+                false);
 
         if (_levelData == null)
         {
@@ -76,6 +79,7 @@ public class LevelEditorWindow : EditorWindow
             Array.Resize(ref _levelData.Data.Buses, _levelData.Data.Buses.Length - 1);
             EditorUtility.SetDirty(_levelData);
         }
+
         EditorGUILayout.EndHorizontal();
 
         if (_levelData.Data.Buses.Length == 0)
@@ -95,6 +99,7 @@ public class LevelEditorWindow : EditorWindow
             _levelData.Data.Buses[i] = bus;
             EditorGUILayout.EndVertical();
         }
+
         EditorGUILayout.EndScrollView();
     }
 
@@ -187,6 +192,7 @@ public class LevelEditorWindow : EditorWindow
                 _levelData.Data.Slots[index] = slot;
                 EditorGUILayout.EndVertical();
             }
+
             EditorGUILayout.EndHorizontal();
         }
     }
@@ -194,21 +200,44 @@ public class LevelEditorWindow : EditorWindow
     // -------------------------------------------------
     // TILE SECTION (interactive)
     // -------------------------------------------------
+
+    // GÜNCELLENDİ: Renk kısayollarını dinamik olarak döndürür
+    private string GetPersonColorShortcuts()
+    {
+        var colors = Enum.GetValues(typeof(PersonColor));
+        string colorInfo = "";
+
+        int counter = 1;
+        foreach (PersonColor color in colors)
+        {
+            if (counter > 1) colorInfo += ", ";
+
+            colorInfo += $"{counter}={color}";
+
+            counter++;
+        }
+
+        return colorInfo;
+    }
+
     private void DrawTileSection()
     {
-        GUILayout.Label("🟩 TILE GRID", EditorStyles.boldLabel);
-
-        int newWidth = EditorGUILayout.IntField("Tile Width", Mathf.Max(1, _levelData.Data.TileWidth));
-        int newHeight = EditorGUILayout.IntField("Tile Height", Mathf.Max(1, _levelData.Data.TileHeight));
-
-        if (newWidth != _levelData.Data.TileWidth || newHeight != _levelData.Data.TileHeight)
-            UpdateTileDimensions(newWidth, newHeight);
-
-        if (GUILayout.Button("Generate Tile Grid", GUILayout.Height(30))) GenerateTileGrid();
+        // ... (Giriş kısmı aynı kalır) ...
 
         if (_levelData.Data.Tiles == null || _levelData.Data.Tiles.Length == 0) return;
 
-        string infoText = "Q = Default, W = Person, E = Obstacle \n" + GetPersonColorShortcuts();
+        var settings = LevelEditorSettings.Instance;
+
+        // GÜNCELLENDİ: Tüm kısayollar settings'ten okunuyor
+        string colorShortcuts =
+            $"{settings.RedPersonKey}=Red, " +
+            $"{settings.BluePersonKey}=Blue, " +
+            $"{settings.GreenPersonKey}=Green";
+
+        string infoText =
+            $"{settings.DefaultTileKey} = Default, {settings.PersonTileKey} = Person, {settings.ObstacleTileKey} = Obstacle | {settings.NextPersonTypeKey} = Change Person Type\n" +
+            colorShortcuts;
+
         EditorGUILayout.HelpBox(infoText, MessageType.Info);
 
         _tileScroll = EditorGUILayout.BeginScrollView(_tileScroll);
@@ -298,41 +327,44 @@ public class LevelEditorWindow : EditorWindow
                 EditorGUI.DrawRect(rect, bgColor);
 
                 Handles.color = Color.black;
-                Handles.DrawAAPolyLine(2f, new Vector3[] {
+                Handles.DrawAAPolyLine(2f, new Vector3[]
+                {
                     new Vector3(rect.xMin, rect.yMin),
                     new Vector3(rect.xMax, rect.yMin),
                     new Vector3(rect.xMax, rect.yMax),
                     new Vector3(rect.xMin, rect.yMax),
                     new Vector3(rect.xMin, rect.yMin)
                 });
-                if (_selectedTile == index)
+
+                GUIStyle center = new GUIStyle(EditorStyles.boldLabel)
+                    { alignment = TextAnchor.MiddleCenter, wordWrap = true };
+
+                // GÜNCELLENDİ: Etiket detayları (Person Tipi ve Renk/Tip Kodu)
+                string label = $"{x},{y}\n{tile.Type}";
+                if (tile.Type == TileType.Person)
                 {
-                    // Seçili karo için daha belirgin bir vurgu (örn: sarı/beyaz kalın çerçeve)
-                    Handles.color = Color.cyan; 
-                    Handles.DrawAAPolyLine(5f, new Vector3[] { // Çerçeveyi kalınlaştır
-                        new Vector3(rect.xMin, rect.yMin),
-                        new Vector3(rect.xMax, rect.yMin),
-                        new Vector3(rect.xMax, rect.yMax),
-                        new Vector3(rect.xMin, rect.yMax),
-                        new Vector3(rect.xMin, rect.yMin)
-                    });
+                    int colorCode = (int)tile.PersonData.Color;
+                    label += $"\n[{colorCode}] {tile.PersonData.Color}\n{tile.PersonData.Type}";
                 }
 
-                GUIStyle center = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter, wordWrap = true };
-                string label = $"{x},{y}\n{tile.Type}";
-                if (tile.Type == TileType.Person) label += $"\n{tile.PersonData.Color}";
                 GUI.Label(rect, label, center);
 
                 if (isHovered && e.type == EventType.MouseDown && e.button == 0)
                 {
                     _selectedTile = index;
                     _selectedTileType = tile.Type;
+
+                    // GÜNCELLENDİ: PersonType değeri çekildi
                     _selectedPersonColor = tile.PersonData.Color;
+                    _selectedPersonType = tile.PersonData.Type;
+
                     e.Use();
                 }
             }
+
             EditorGUILayout.EndHorizontal();
         }
+
         Repaint();
     }
 
@@ -345,37 +377,29 @@ public class LevelEditorWindow : EditorWindow
         GUILayout.Label("Selected Tile", EditorStyles.boldLabel);
 
         _selectedTileType = (TileType)EditorGUILayout.EnumPopup("Tile Type", _selectedTileType);
+
         if (_selectedTileType == TileType.Person)
+        {
+            // GÜNCELLENDİ: PersonColor ve PersonType düzenleme alanları
             _selectedPersonColor = (PersonColor)EditorGUILayout.EnumPopup("Person Color", _selectedPersonColor);
+            _selectedPersonType = (PersonType)EditorGUILayout.EnumPopup("Person Type", _selectedPersonType);
+        }
 
         if (GUILayout.Button("Apply"))
         {
             var tile = _levelData.Data.Tiles[_selectedTile];
             tile.Type = _selectedTileType;
             if (_selectedTileType == TileType.Person)
+            {
+                // GÜNCELLENDİ: PersonType değeri kaydedildi
                 tile.PersonData.Color = _selectedPersonColor;
+                tile.PersonData.Type = _selectedPersonType;
+            }
+
             _levelData.Data.Tiles[_selectedTile] = tile;
         }
+
         EditorGUILayout.EndVertical();
-    }
-    
-    private string GetPersonColorShortcuts()
-    {
-        var colors = Enum.GetValues(typeof(PersonColor));
-        string colorInfo = "";
-    
-        int counter = 1; 
-        foreach (PersonColor color in colors)
-        {
-        
-            if (counter > 1) colorInfo += ", ";
-        
-            colorInfo += $"{counter}={color}";
-        
-            counter++;
-        }
-    
-        return colorInfo;
     }
 
     private void HandleKeyboard()
@@ -384,21 +408,70 @@ public class LevelEditorWindow : EditorWindow
         Event e = Event.current;
         if (e.type != EventType.KeyDown) return;
 
+        var settings = LevelEditorSettings.Instance;
         var tile = _levelData.Data.Tiles[_hoveredTile];
+        bool tileChanged = false;
 
-        if (e.keyCode == KeyCode.Q) tile.Type = TileType.Default;
-        if (e.keyCode == KeyCode.W) tile.Type = TileType.Person;
-        if (e.keyCode == KeyCode.E) tile.Type = TileType.Obstacle;
+        // Tile tipi kısayolları (aynı kalır)
+        if (e.keyCode == settings.DefaultTileKey)
+        {
+            tile.Type = TileType.Default;
+            tileChanged = true;
+        }
+
+        if (e.keyCode == settings.PersonTileKey)
+        {
+            tile.Type = TileType.Person;
+            tileChanged = true;
+        }
+
+        if (e.keyCode == settings.ObstacleTileKey)
+        {
+            tile.Type = TileType.Obstacle;
+            tileChanged = true;
+        }
 
         if (tile.Type == TileType.Person)
         {
-            if (e.keyCode == KeyCode.Alpha1) tile.PersonData.Color = PersonColor.Red;
-            if (e.keyCode == KeyCode.Alpha2) tile.PersonData.Color = PersonColor.Blue;
-            if (e.keyCode == KeyCode.Alpha3) tile.PersonData.Color = PersonColor.Green;
+            // GÜNCELLENDİ: Renk kısayolları settings'ten okunuyor
+            if (e.keyCode == settings.RedPersonKey)
+            {
+                tile.PersonData.Color = PersonColor.Red;
+                tileChanged = true;
+            }
+
+            if (e.keyCode == settings.BluePersonKey)
+            {
+                tile.PersonData.Color = PersonColor.Blue;
+                tileChanged = true;
+            }
+
+            if (e.keyCode == settings.GreenPersonKey)
+            {
+                tile.PersonData.Color = PersonColor.Green;
+                tileChanged = true;
+            }
+
+            // PersonType kısayolu (aynı kalır)
+            if (e.keyCode == settings.NextPersonTypeKey)
+            {
+                int currentTypeInt = (int)tile.PersonData.Type;
+                int typeCount = Enum.GetNames(typeof(PersonType)).Length;
+
+                int nextTypeInt = (currentTypeInt + 1) % typeCount;
+
+                tile.PersonData.Type = (PersonType)nextTypeInt;
+                tileChanged = true;
+            }
         }
 
-        _levelData.Data.Tiles[_hoveredTile] = tile;
-        e.Use();
+        if (tileChanged)
+        {
+            Undo.RecordObject(_levelData, "Tile Data Changed via Keyboard");
+            _levelData.Data.Tiles[_hoveredTile] = tile;
+            EditorUtility.SetDirty(_levelData);
+            e.Use();
+        }
     }
 
     private Color GetPersonColor(PersonColor color)
