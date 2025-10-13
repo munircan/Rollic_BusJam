@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.UI.Manager
 {
-    public class UIManager : SingletonMonoBehaviour<UIManager>
+    public class UIManager : MonoBehaviour
     {
         private List<AbstractUIWindowMono> _liveUIWindowList = new List<AbstractUIWindowMono>();
         [SerializeField] private RectTransform _uiWindowContainer;
