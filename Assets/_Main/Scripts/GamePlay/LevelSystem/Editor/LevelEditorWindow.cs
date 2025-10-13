@@ -90,7 +90,7 @@ public class LevelEditorWindow : EditorWindow
             var bus = _levelData.Data.Buses[i];
             EditorGUILayout.BeginVertical("box");
             GUILayout.Label($"Bus #{i + 1}", EditorStyles.miniBoldLabel);
-            bus.PersonLimit = EditorGUILayout.IntField("Person Limit", Mathf.Max(1, bus.PersonLimit));
+            bus.PersonLimit = EditorGUILayout.IntField("Person Limit", Mathf.Max(3, bus.PersonLimit));
             bus.PersonColor = (PersonColor)EditorGUILayout.EnumPopup("Person Color", bus.PersonColor);
             _levelData.Data.Buses[i] = bus;
             EditorGUILayout.EndVertical();
