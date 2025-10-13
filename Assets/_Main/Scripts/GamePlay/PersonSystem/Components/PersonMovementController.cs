@@ -41,7 +41,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
 
             var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
-            if (currentBus && currentBus.Data.colorType == BaseComp.Data.colorType &&
+            if (currentBus && currentBus.Data.ColorType == BaseComp.Data.colorType &&
                 !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(BaseComp);

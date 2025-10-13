@@ -15,9 +15,11 @@ MonoBehaviour:
   Data:
     Buses:
     - PersonLimit: 3
-      colorType: 1
+      ColorType: 1
+      Appearance: 0
     - PersonLimit: 3
-      colorType: 2
+      ColorType: 2
+      Appearance: 0
     SlotWidth: 7
     SlotHeight: 1
     Slots:

@@ -138,7 +138,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     break;
                 }
 
-                if (person.Data.colorType == bus.Data.colorType)
+                if (person.Data.colorType == bus.Data.ColorType)
                 {
                     person.Slot.SetPerson(null);
                     person.SetSlot(null);
