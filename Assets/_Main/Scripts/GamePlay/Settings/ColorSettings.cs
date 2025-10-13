@@ -28,7 +28,7 @@ namespace _Main.Scripts.GamePlay.Settings
         
         public Material GetPersonMaterial(PersonColor color,PersonType type,bool canWalk)
         {
-            if (type == PersonType.Mysterious)
+            if (!canWalk && type == PersonType.Mysterious)
             {
                 return MysteriosPersonMaterial;
             }
