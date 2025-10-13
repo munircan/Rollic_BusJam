@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.BusSystem.Components;
@@ -14,14 +13,29 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 {
     public class BusManager : MonoBehaviour
     {
+        #region SerializeFields
+
         [SerializeField] private Transform _busParent;
         [SerializeField] private Transform _startTransform;
         [SerializeField] private Transform _endTransform;
+
+        #endregion
+
+        #region Private Variables
+
         private const float BUS_OFFSET = 5;
         private List<Bus> _buses;
         private int _currentIndex;
 
+        #endregion
+
+        #region Encapsulation
+
         public bool IsBusesFinished => _currentIndex >= _buses.Count;
+
+        #endregion
+
+        #region Unity Events
 
         private void Awake()
         {
@@ -34,6 +48,9 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             EventManager.Unsubscribe<EventPersonGetIntoBus>(OnPersonGetIntoBus);
         }
 
+        #endregion
+
+        #region Create-Release
 
         public void CreateBuses(LevelData levelData)
         {
@@ -49,7 +66,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 _buses.Add(bus);
             }
 
-            SetNextBus().Forget();
+            MoveCurrentBus().Forget();
         }
 
         public void ReleaseBuses()
@@ -64,6 +81,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             _currentIndex = 0;
             _buses.Clear();
         }
+
+        #endregion
+
+        #region Event Methods
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
@@ -84,16 +105,33 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 }
 
                 await currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
-                await SetNextBus();
+                await MoveCurrentBus();
             }
         }
 
-        private async UniTask SetNextBus()
+        #endregion
+
+        #region Set-Get Methods
+
+        public Bus GetCurrentBus()
+        {
+            if (_currentIndex >= _buses.Count)
+            {
+                return null;
+            }
+
+            return _buses[_currentIndex];
+        }
+
+        #endregion
+
+        #region Move Methods
+
+        private async UniTask MoveCurrentBus()
         {
             if (IsBusesFinished)
             {
-                GameConfig.PlayerPref.CurrentLevel++;
-                EventManager.Publish(EventLevelSuccess.Create(GameConfig.LevelClickCount));
+                LevelManager.LevelSuccess();
                 return;
             }
 
@@ -116,14 +154,6 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             }
         }
 
-
-        public Bus GetCurrentBus()
-        {
-            if (_currentIndex >= _buses.Count)
-            {
-                return null;
-            }
-            return _buses[_currentIndex];
-        }
+        #endregion
     }
 }

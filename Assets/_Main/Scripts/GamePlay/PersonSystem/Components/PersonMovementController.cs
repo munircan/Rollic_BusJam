@@ -6,6 +6,7 @@ using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents;
+using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.Utilities;
 using Cysharp.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             }
             else
             {
-                EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount));
+                LevelManager.LevelFailed();
             }
         }
 

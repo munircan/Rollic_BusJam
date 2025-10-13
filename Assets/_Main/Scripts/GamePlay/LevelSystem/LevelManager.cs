@@ -4,6 +4,7 @@ using _Main.Patterns.EventSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents;
+using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
@@ -18,9 +19,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem
         private PersonManager _personManager;
         private SlotManager _slotManager;
         private BusManager _busManager;
-
-        public static GameStateSystem.GameState State { get; private set; }
-
+        
 
         private void Awake()
         {
@@ -74,6 +73,16 @@ namespace _Main.Scripts.GamePlay.LevelSystem
             _busManager.ReleaseBuses();
         }
 
+        public static void LevelSuccess()
+        {
+            GameConfig.PlayerPref.CurrentLevel++;
+            EventManager.Publish(EventLevelSuccess.Create(GameConfig.LevelClickCount));
+        }
+
+        public static void LevelFailed()
+        {
+            EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount,GameConfig.FailReason));
+        }
 
         private void OnEventLoadLevel(EventLoadLevel customEvent)
         {

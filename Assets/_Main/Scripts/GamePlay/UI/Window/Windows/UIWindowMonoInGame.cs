@@ -198,7 +198,8 @@ namespace _Main.Scripts.GamePlay.UI.Window
 
         private void OnTimerComplete()
         {
-            EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount,FailReason.Timeout));
+            GameConfig.FailReason = FailReason.Timeout;
+            LevelManager.LevelFailed();
         }
 
         #endregion

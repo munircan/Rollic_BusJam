@@ -1,15 +1,18 @@
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
-using _Main.Scripts.GamePlay.PersonSystem;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Components
 {
     public class Bus : BaseComponent
     {
+        #region SerializeFields
+
         [SerializeField] private BusMovementController _movementController;
         [SerializeField] private BusModelController _modelController;
         [SerializeField] private BusPersonController _personController;
+
+        #endregion
 
         #region Encapulsation
 
@@ -22,6 +25,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 
         #endregion
 
+        #region Init-Reset
 
         public void Initialize(BusData data)
         {
@@ -37,5 +41,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
             ModelController.Reset();
             PersonController.Reset();
         }
+
+        #endregion
     }
 }

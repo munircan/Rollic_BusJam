@@ -6,7 +6,13 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 {
     public class BusModelController : ComponentModule<Bus>
     {
+        #region SerializeFields
+
         [SerializeField] private MeshRenderer _meshRenderer;
+
+        #endregion
+
+        #region Init-Reset
 
         internal override void Initialize()
         {
@@ -14,15 +20,11 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
             SetColor();
         }
 
-        public void SetColor()
+        private void SetColor()
         {
-            _meshRenderer.material= ColorSettings.Instance.GetMaterial(BaseComp.Data.ColorType);
+            _meshRenderer.material = ColorSettings.Instance.GetMaterial(BaseComp.Data.ColorType);
         }
-        
 
-        internal override void Reset()
-        {
-            base.Reset();
-        }
+        #endregion
     }
 }
