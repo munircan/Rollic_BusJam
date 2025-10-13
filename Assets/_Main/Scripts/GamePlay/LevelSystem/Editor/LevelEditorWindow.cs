@@ -148,7 +148,6 @@ public class LevelEditorWindow : EditorWindow
         }
 
         _levelData.Data.Slots = newSlots;
-        _levelData.Data.Initialize();
         EditorUtility.SetDirty(_levelData);
     }
 
@@ -161,8 +160,7 @@ public class LevelEditorWindow : EditorWindow
         _levelData.Data.Slots = new SlotData[width * height];
         for (int i = 0; i < _levelData.Data.Slots.Length; i++)
             _levelData.Data.Slots[i] = new SlotData { IsLocked = false, LockedLevel = 0 };
-
-        _levelData.Data.Initialize();
+        
         EditorUtility.SetDirty(_levelData);
     }
 
@@ -264,7 +262,6 @@ public class LevelEditorWindow : EditorWindow
         }
 
         _levelData.Data.Tiles = newTiles;
-        _levelData.Data.Initialize();
         EditorUtility.SetDirty(_levelData);
     }
 
@@ -277,8 +274,7 @@ public class LevelEditorWindow : EditorWindow
         _levelData.Data.Tiles = new TileData[width * height];
         for (int i = 0; i < _levelData.Data.Tiles.Length; i++)
             _levelData.Data.Tiles[i] = new TileData { Type = TileType.Default, PersonData = new PersonData() };
-
-        _levelData.Data.Initialize();
+        
         EditorUtility.SetDirty(_levelData);
     }
 

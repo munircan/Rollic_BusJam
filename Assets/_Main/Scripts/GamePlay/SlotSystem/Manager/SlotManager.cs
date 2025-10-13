@@ -21,7 +21,6 @@ namespace _Main.Scripts.GamePlay.SlotSystem
         public void CreateSlots(LevelData levelData)
         {
             Slots = new List<Slot>();
-            levelData.Initialize();
             var width = levelData.SlotWidth;
             var height = levelData.SlotHeight;
             _grid = new Grid<Slot>(width, height, CELL_SIZE,_gridParent.position);

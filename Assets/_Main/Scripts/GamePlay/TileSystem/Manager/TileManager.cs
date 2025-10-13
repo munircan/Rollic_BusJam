@@ -25,7 +25,6 @@ namespace _Main.GamePlay.TileSystem.Manager
    
         public void CreateTiles(LevelData levelData)
         {
-            levelData.Initialize();
             _width = levelData.TileWidth;
             _height = levelData.TileHeight;
             Tiles = new List<Tile>(_width * _height);
