@@ -91,7 +91,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     _personPathDictionary.Add(person, personPathData);
                     if (hasPath)
                     {
-                        person.ModelController.SetCanPressableColor();
+                        person.ModelController.SetOutlineEnable(true);
                     }
                 }
             }
