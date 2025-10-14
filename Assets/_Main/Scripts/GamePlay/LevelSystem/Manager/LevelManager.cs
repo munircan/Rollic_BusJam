@@ -1,18 +1,15 @@
-using System;
 using _Main.GamePlay.TileSystem.Manager;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
-using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
-using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.Utilities;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.LevelSystem
+namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 {
     public class LevelManager : MonoBehaviour
     {

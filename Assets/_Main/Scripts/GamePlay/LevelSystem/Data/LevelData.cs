@@ -4,7 +4,7 @@ using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.LevelSystem
+namespace _Main.Scripts.GamePlay.LevelSystem.Data
 {
     [Serializable]
     public struct LevelData

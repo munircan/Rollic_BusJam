@@ -4,6 +4,8 @@ using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.GridSystem;
 using _Main.Scripts.GamePlay.Helpers;
 using _Main.Scripts.GamePlay.LevelSystem;
+using _Main.Scripts.GamePlay.LevelSystem.Data;
+using _Main.Scripts.GamePlay.LevelSystem.Helpers;
 using _Main.Scripts.GamePlay.PathFinding;
 using _Main.Scripts.Utilities;
 using Sirenix.OdinInspector;

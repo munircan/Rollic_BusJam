@@ -1,95 +1,98 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-public class LevelEditorSettings : ScriptableObject
+namespace _Main.Scripts.GamePlay.LevelSystem.Editor
 {
-    private static LevelEditorSettings s_Instance;
-    public static LevelEditorSettings Instance
+    public class LevelEditorSettings : ScriptableObject
     {
-        get
+        private static LevelEditorSettings s_Instance;
+        public static LevelEditorSettings Instance
         {
-            if (s_Instance == null)
+            get
             {
-                s_Instance = AssetDatabase.LoadAssetAtPath<LevelEditorSettings>("Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
-                
                 if (s_Instance == null)
                 {
-                    s_Instance = CreateInstance<LevelEditorSettings>();
-                    s_Instance.ResetToDefaults();
-                    AssetDatabase.CreateAsset(s_Instance, "Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
-                    AssetDatabase.SaveAssets();
+                    s_Instance = AssetDatabase.LoadAssetAtPath<LevelEditorSettings>("Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
+                
+                    if (s_Instance == null)
+                    {
+                        s_Instance = CreateInstance<LevelEditorSettings>();
+                        s_Instance.ResetToDefaults();
+                        AssetDatabase.CreateAsset(s_Instance, "Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
+                        AssetDatabase.SaveAssets();
+                    }
                 }
+                return s_Instance;
             }
-            return s_Instance;
+        }
+
+        [Header("Tile Tipi Kısayolları")]
+        public KeyCode DefaultTileKey = KeyCode.Q;
+        public KeyCode PersonTileKey = KeyCode.W;
+        public KeyCode ObstacleTileKey = KeyCode.E;
+    
+        [Header("Person Tipi Kısayolları")] // GÜNCELLENDİ
+        public KeyCode DefaultPersonTypeKey = KeyCode.T; // Örn: T
+        public KeyCode MysteriousPersonTypeKey = KeyCode.Y; // Örn: Y
+    
+        [Header("Person Renk Kısayolları")]
+        public KeyCode RedPersonKey = KeyCode.Alpha1;
+        public KeyCode BluePersonKey = KeyCode.Alpha2;
+        public KeyCode GreenPersonKey = KeyCode.Alpha3;
+    
+
+        public void ResetToDefaults()
+        {
+            DefaultTileKey = KeyCode.Q;
+            PersonTileKey = KeyCode.W;
+            ObstacleTileKey = KeyCode.E;
+        
+            // GÜNCELLENDİ
+            DefaultPersonTypeKey = KeyCode.T;
+            MysteriousPersonTypeKey = KeyCode.Y;
+        
+            RedPersonKey = KeyCode.Alpha1;
+            BluePersonKey = KeyCode.Alpha2;
+            GreenPersonKey = KeyCode.Alpha3;
         }
     }
 
-    [Header("Tile Tipi Kısayolları")]
-    public KeyCode DefaultTileKey = KeyCode.Q;
-    public KeyCode PersonTileKey = KeyCode.W;
-    public KeyCode ObstacleTileKey = KeyCode.E;
-    
-    [Header("Person Tipi Kısayolları")] // GÜNCELLENDİ
-    public KeyCode DefaultPersonTypeKey = KeyCode.T; // Örn: T
-    public KeyCode MysteriousPersonTypeKey = KeyCode.Y; // Örn: Y
-    
-    [Header("Person Renk Kısayolları")]
-    public KeyCode RedPersonKey = KeyCode.Alpha1;
-    public KeyCode BluePersonKey = KeyCode.Alpha2;
-    public KeyCode GreenPersonKey = KeyCode.Alpha3;
-    
-
-    public void ResetToDefaults()
-    {
-        DefaultTileKey = KeyCode.Q;
-        PersonTileKey = KeyCode.W;
-        ObstacleTileKey = KeyCode.E;
-        
-        // GÜNCELLENDİ
-        DefaultPersonTypeKey = KeyCode.T;
-        MysteriousPersonTypeKey = KeyCode.Y;
-        
-        RedPersonKey = KeyCode.Alpha1;
-        BluePersonKey = KeyCode.Alpha2;
-        GreenPersonKey = KeyCode.Alpha3;
-    }
-}
-
 // LevelEditorSettingsProvider kısmı aynı kalır.
-public class LevelEditorSettingsProvider
-{
-    private static Editor s_SettingsEditor; 
-
-    [SettingsProvider]
-    public static SettingsProvider CreateSettingsProvider()
+    public class LevelEditorSettingsProvider
     {
-        var provider = new SettingsProvider("Project/LevelEditorSettings", SettingsScope.Project)
+        private static UnityEditor.Editor s_SettingsEditor; 
+
+        [SettingsProvider]
+        public static SettingsProvider CreateSettingsProvider()
         {
-            label = "Level Editor",
-            guiHandler = (searchContext) =>
+            var provider = new SettingsProvider("Project/LevelEditorSettings", SettingsScope.Project)
             {
-                var settings = LevelEditorSettings.Instance;
+                label = "Level Editor",
+                guiHandler = (searchContext) =>
+                {
+                    var settings = LevelEditorSettings.Instance;
                 
-                if (s_SettingsEditor == null || s_SettingsEditor.target != settings)
-                {
-                    s_SettingsEditor = Editor.CreateEditor(settings);
-                }
+                    if (s_SettingsEditor == null || s_SettingsEditor.target != settings)
+                    {
+                        s_SettingsEditor = UnityEditor.Editor.CreateEditor(settings);
+                    }
 
-                if (s_SettingsEditor != null)
-                {
-                    s_SettingsEditor.OnInspectorGUI();
-                }
+                    if (s_SettingsEditor != null)
+                    {
+                        s_SettingsEditor.OnInspectorGUI();
+                    }
 
-                GUILayout.Space(15);
-                if (GUILayout.Button("Varsayılan Tuşlara Dön"))
-                {
-                    settings.ResetToDefaults();
-                    EditorUtility.SetDirty(settings);
-                    AssetDatabase.SaveAssets();
-                }
-            },
-            keywords = new System.Collections.Generic.HashSet<string>(new[] { "Level", "Editor", "Keybinds", "Kısayol" })
-        };
-        return provider;
+                    GUILayout.Space(15);
+                    if (GUILayout.Button("Varsayılan Tuşlara Dön"))
+                    {
+                        settings.ResetToDefaults();
+                        EditorUtility.SetDirty(settings);
+                        AssetDatabase.SaveAssets();
+                    }
+                },
+                keywords = new System.Collections.Generic.HashSet<string>(new[] { "Level", "Editor", "Keybinds", "Kısayol" })
+            };
+            return provider;
+        }
     }
 }
