@@ -147,6 +147,7 @@ namespace _Main.Scripts.GamePlay.UI.Window.Windows
         private void OnClickRestartLevel()
         {
             StopTimer();
+            LevelManager.LevelRestart();
             EventManager.Publish(EventLoadLevel.Create());
         }
 

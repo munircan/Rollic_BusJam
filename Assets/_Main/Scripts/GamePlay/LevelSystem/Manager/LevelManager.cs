@@ -120,6 +120,11 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount, GameConfig.FailReason));
         }
 
+        public static void LevelRestart()
+        {
+            SaveManager.ClearList();
+        }
+
         #endregion
 
         #region Event Methods
