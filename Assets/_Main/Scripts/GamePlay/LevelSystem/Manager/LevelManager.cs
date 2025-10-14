@@ -79,7 +79,6 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
         private async UniTask StartLevelFromSave()
         {
             var tiles = _tileManager.GetTiles();
-            GameConfig.IsMovementInstant = true;
             List<UniTask> tasks = new List<UniTask>();
             foreach (var tileIndex in SaveManager.TileIndexes)
             {
@@ -87,9 +86,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             }
 
             await UniTask.WhenAll(tasks);
-            await Task.Delay(3000);
-            GameConfig.IsMovementInstant = false;
-            SaveManager.ClearList();
+            GameConfig.IsLoadingFromSave = false;
         }
 
         private void RefreshAndLoadLevel()

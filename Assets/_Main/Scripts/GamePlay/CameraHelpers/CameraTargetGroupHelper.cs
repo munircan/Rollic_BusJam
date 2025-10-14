@@ -21,10 +21,21 @@ namespace _Main.Scripts.GamePlay.CameraHelpers
 
         #endregion
 
+        #region Private Variables
+
+        private BusManager _busManager;
+        private SlotManager _slotManager;
+        private TileManager _tileManager;
+
+        #endregion
+
         #region Unity Events
 
         private void Awake()
         {
+            _busManager = ServiceLocator.GetService<BusManager>();
+            _slotManager = ServiceLocator.GetService<SlotManager>();
+            _tileManager = ServiceLocator.GetService<TileManager>();
             EventManager.Subscribe<EventLevelLoaded>(OnLevelLoaded);
         }
 
@@ -60,18 +71,14 @@ namespace _Main.Scripts.GamePlay.CameraHelpers
 
         private void OnLevelLoaded(EventLevelLoaded customEvent)
         {
-            var busManager = ServiceLocator.GetService<BusManager>();
-            var slotManager = ServiceLocator.GetService<SlotManager>();
-            var tileManager = ServiceLocator.GetService<TileManager>();
+            SetBusTransform(_busManager.transform.position);
 
-            SetBusTransform(busManager.transform.position);
-
-            var slots = slotManager.GetSlots();
+            var slots = _slotManager.GetSlots();
             var firstSlot = slots.First();
             var lastSlot = slots.Last();
             SetSlotsPosition(firstSlot.transform.position, lastSlot.transform.position);
 
-            var tiles = tileManager.GetTiles();
+            var tiles = _tileManager.GetTiles();
             var firstTile = tiles.First();
             var lastTile = tiles.Last();
             SetTilesPosition(firstTile.transform.position, lastTile.transform.position);
