@@ -31,10 +31,9 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
 
         #region Set-Get
 
-        private void SetMaterial()
+        public void SetMaterial(bool canWalk = false)
         {
-            _meshRenderer.material =
-                ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.ColorType, BaseComp.Data.Appearance, false);
+            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.ColorType, BaseComp.Data.Appearance, canWalk);
         }
 
 

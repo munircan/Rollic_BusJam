@@ -119,6 +119,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     if (hasPath)
                     {
                         person.ModelController.SetOutlineEnable(true);
+                        person.ModelController.SetMaterial(true);
                     }
                 }
             }
