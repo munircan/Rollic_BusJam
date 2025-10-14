@@ -1,6 +1,6 @@
 using _Main.Patterns.EventSystem;
 
-namespace _Main.Scripts.GamePlay.CustomEvents
+namespace _Main.Scripts.GamePlay.CustomEvents.LevelEvents
 {
     public class EventLoadLevel : ICustomEvent
     {

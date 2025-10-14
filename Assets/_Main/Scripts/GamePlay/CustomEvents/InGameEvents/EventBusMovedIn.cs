@@ -1,7 +1,7 @@
 using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 
-namespace _Main.Scripts.GamePlay.CustomEvents
+namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
 {
     public class EventBusMovedIn : ICustomEvent
     {

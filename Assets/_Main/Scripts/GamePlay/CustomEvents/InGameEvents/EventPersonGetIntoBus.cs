@@ -1,9 +1,9 @@
 using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
 
-namespace _Main.Scripts.GamePlay.CustomEvents
+namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
 {
-    // TODO: CHANGE THIS EVENT LIKE LAST PERSON GET INTO BUS
+    // WE CAN ADD AN EXTRA VARIABLE FOR LAST PERSON GET INTO BUS
     public class EventPersonGetIntoBus : ICustomEvent
     {
         public Person Person { get; set; }

@@ -1,6 +1,7 @@
 using System;
 using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.CustomEvents;
+using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.GamePlay.Helpers;
 using _Main.Scripts.GamePlay.LevelSystem;

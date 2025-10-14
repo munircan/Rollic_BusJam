@@ -1,7 +1,7 @@
 using _Main.GamePlay.TileSystem;
 using _Main.Patterns.EventSystem;
 
-namespace _Main.Scripts.GamePlay.CustomEvents
+namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
 {
     public class EventTileChanged : ICustomEvent
     {

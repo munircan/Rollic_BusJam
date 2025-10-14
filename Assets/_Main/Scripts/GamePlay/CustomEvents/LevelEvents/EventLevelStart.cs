@@ -2,7 +2,7 @@ using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.Utilities;
 
-namespace _Main.Scripts.GamePlay.CustomEvents
+namespace _Main.Scripts.GamePlay.CustomEvents.LevelEvents
 {
     public class EventLevelStart : ICustomEvent
     {

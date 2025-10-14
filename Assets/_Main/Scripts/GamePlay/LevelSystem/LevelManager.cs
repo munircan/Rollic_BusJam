@@ -4,6 +4,7 @@ using _Main.Patterns.EventSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents;
+using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
