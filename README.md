@@ -1,30 +1,33 @@
-# Rollic_BusJam
+# Bus Jam
 
-General Information
-
-Note on Assets: This project was developed entirely using Unity's default assets (primitives).
-
-
-Packages Used
-
-Odin Inspector: For advanced Editor features and improved serialization.
-
-DOTween: Used for fluid animations (Tweening) and object movements.
-
-More Effective Coroutines: For timer.
-
-Quick Outline: For outline.
-
-UniTask: To manage asynchronous operations (asynchronous programming) in a more modern and efficient way.
-
-How to Run
-
-To Play: Simply open the GameplayScene scene and press the Play button in the Unity Editor.
-
-Level Editor
+GENERAL INFORMATION
+This project was developed entirely using Unity's default assets (primitives) for the sake of simplicity and focus on core mechanics.
 
 
-The custom Inspector for the Level Data Scriptable Object allows for quick editing (usage is in infoboxes), and all changes are automatically persisted to the asset.
+PACKAGES AND LIBRARIES
+The project utilizes the following key packages to enhance performance, editor workflow, and asynchronous task management:
+
+Odin Inspector: Employed for advanced Editor features and streamlined serialization.
+
+DOTween: Used for fluid object movements and animations (tweening).
+
+More Effective Coroutines: Integrated for reliable and performant timer implementations.
+
+Quick Outline: Used to provide clear visual outlines for selected or interactive objects.
+
+UniTask: Utilized to manage asynchronous operations in a modern, efficient way, offering a more robust alternative to standard C# tasks.
+
+HOW TO RUN
+To quickly test the game:
+
+Open the project in the Unity Editor.
+
+Navigate to the GameplayScene scene.
+
+Press the Play button.
+
+LEVEL EDITOR
+A custom Inspector was developed for the Level Data Scriptable Object. This allows for quick, intuitive editing (usage instructions are available in the infoboxes), and all changes are automatically persisted to the Scriptable Object asset.
 
 <img width="789" height="861" alt="image" src="https://github.com/user-attachments/assets/077accb3-b73f-481c-ab13-afd62af75d8a" />
 Custom Inspector Controls (LevelEditorSettings)
