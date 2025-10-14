@@ -1,10 +1,8 @@
-using System;
-using _Main.Scripts.GamePlay.TileSystem.Components;
 using _Main.Scripts.GamePlay.TileSystem.Data;
 using _Main.Scripts.Patterns.ModuleSystem;
 using UnityEngine;
 
-namespace _Main.GamePlay.TileSystem
+namespace _Main.Scripts.GamePlay.TileSystem.Components
 {
     public class TileModelController : ComponentModule<Tile>
     {

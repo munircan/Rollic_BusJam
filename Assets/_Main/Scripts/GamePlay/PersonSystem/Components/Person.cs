@@ -1,4 +1,3 @@
-using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem;

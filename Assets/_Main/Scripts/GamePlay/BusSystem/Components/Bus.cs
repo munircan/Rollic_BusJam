@@ -1,4 +1,5 @@
 using _Main.Scripts.GamePlay.BusSystem.Data;
+using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.Patterns.ModuleSystem;
 using UnityEngine;
 
@@ -40,6 +41,15 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
             MovementController.Reset();
             ModelController.Reset();
             PersonController.Reset();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        public bool IsBusColorMatchWithPerson(Person person)
+        {
+            return Data.ColorType == person.Data.ColorType;
         }
 
         #endregion

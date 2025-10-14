@@ -34,7 +34,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         private void SetMaterial()
         {
             _meshRenderer.material =
-                ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.colorType, BaseComp.Data.Appearance, false);
+                ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.ColorType, BaseComp.Data.Appearance, false);
         }
 
 

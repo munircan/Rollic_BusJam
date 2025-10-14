@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+// using UnityEngine;
 
 namespace _Main.Scripts.Patterns.ServiceLocation
 {
@@ -13,7 +13,7 @@ namespace _Main.Scripts.Patterns.ServiceLocation
             var type = typeof(T);
             if (_services.ContainsKey(type))
             {
-                Debug.LogWarning($"{type} already registered.");
+                // Debug.LogWarning($"{type} already registered.");
                 return;
             }
 
@@ -40,7 +40,7 @@ namespace _Main.Scripts.Patterns.ServiceLocation
                 return service as T;
             }
 
-            Debug.LogError($"{type} is not registered in the service locator.");
+            // Debug.LogError($"{type} is not registered in the service locator.");
             return null;
         }
         
@@ -53,7 +53,7 @@ namespace _Main.Scripts.Patterns.ServiceLocation
                 return true;
             }
 
-            Debug.LogError($"{type} is not registered in the service locator.");
+            // Debug.LogError($"{type} is not registered in the service locator.");
             service = null;
             return false;
         }

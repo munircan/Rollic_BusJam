@@ -44,40 +44,15 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
             // .SetLookAt(0.01f);
 
             await _pathTween.AsyncWaitForCompletion();
-
-            OnPathMovementComplete();
         }
+        
 
-        private void OnPathMovementComplete()
-        {
-            // CHANGE THIS LOGIC AFTER TRY TO MOVE PERSON MANAGER
-            var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
-
-            var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
-            if (currentBus && currentBus.Data.ColorType == BaseComp.Data.colorType &&
-                !currentBus.PersonController.IsBusFull)
-            {
-                currentBus.PersonController.AddPerson(BaseComp);
-                MoveToBusAsync(currentBus).Forget();
-            }
-            else if (firstEmptySlot)
-            {
-                BaseComp.SetSlot(firstEmptySlot);
-                MoveToSlot(firstEmptySlot).Forget();
-            }
-            else
-            {
-                LevelManager.LevelFailed();
-            }
-        }
-
-        private async UniTask MoveToSlot(Slot slot)
+        public async UniTask MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
             var slotTween = transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
                 .SetEase(_movementData.SlotMovementData.Ease).SetLink(gameObject);
             await slotTween.AsyncWaitForCompletion();
-            OnPersonMoveToSlot();
         }
 
         public async UniTask MoveToBusAsync(Bus bus)
@@ -89,23 +64,11 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
                 .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject);
 
             await jumpTween.AsyncWaitForCompletion();
-            OnPersonMoveToBus();
+            
         }
 
         #endregion
-
-        #region Movement Complete Methods
-
-        private void OnPersonMoveToBus()
-        {
-            EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
-        }
-
-        private void OnPersonMoveToSlot()
-        {
-        }
-
-        #endregion
+        
         
         #region Init-Reset
 

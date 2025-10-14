@@ -1,6 +1,5 @@
 #if UNITY_EDITOR
 using System;
-using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.PersonSystem;
@@ -326,7 +325,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
 
                     Color bgColor = tile.Type switch
                     {
-                        TileType.Person => GetPersonColor(tile.PersonData.colorType),
+                        TileType.Person => GetPersonColor(tile.PersonData.ColorType),
                         TileType.Obstacle => new Color(0.3f, 0.3f, 0.3f),
                         _ => Color.gray
                     };
@@ -351,8 +350,8 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                     string label = $"{x},{y}\n{tile.Type}";
                     if (tile.Type == TileType.Person)
                     {
-                        int colorCode = (int)tile.PersonData.colorType;
-                        label += $"\n[{colorCode}] {tile.PersonData.colorType}\n{tile.PersonData.Appearance}";
+                        int colorCode = (int)tile.PersonData.ColorType;
+                        label += $"\n[{colorCode}] {tile.PersonData.ColorType}\n{tile.PersonData.Appearance}";
                     }
 
                     GUI.Label(rect, label, center);
@@ -361,7 +360,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                     {
                         _selectedTile = index;
                         _selectedTileType = tile.Type;
-                        _selectedColorType = tile.PersonData.colorType;
+                        _selectedColorType = tile.PersonData.ColorType;
                         _selectedPersonType = tile.PersonData.Appearance;
 
                         e.Use();
@@ -395,7 +394,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                 tile.Type = _selectedTileType;
                 if (_selectedTileType == TileType.Person)
                 {
-                    tile.PersonData.colorType = _selectedColorType;
+                    tile.PersonData.ColorType = _selectedColorType;
                     tile.PersonData.Appearance = _selectedPersonType;
                 }
 
@@ -436,17 +435,17 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
             {
                 if (e.keyCode == settings.RedPersonKey)
                 {
-                    tile.PersonData.colorType = ColorType.Red;
+                    tile.PersonData.ColorType = ColorType.Red;
                     tileChanged = true;
                 }
                 else if (e.keyCode == settings.BluePersonKey)
                 {
-                    tile.PersonData.colorType = ColorType.Blue;
+                    tile.PersonData.ColorType = ColorType.Blue;
                     tileChanged = true;
                 }
                 else if (e.keyCode == settings.GreenPersonKey)
                 {
-                    tile.PersonData.colorType = ColorType.Green;
+                    tile.PersonData.ColorType = ColorType.Green;
                     tileChanged = true;
                 }
 

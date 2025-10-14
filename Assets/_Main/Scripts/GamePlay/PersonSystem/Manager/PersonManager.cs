@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using _Main.GamePlay.TileSystem;
+using System.Threading.Tasks;
 using _Main.Scripts.GamePlay.BusSystem.Components;
+using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
+using _Main.Scripts.GamePlay.LevelSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
@@ -122,6 +124,38 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             }
         }
 
+        public async UniTask MovePersonInPath(Person person)
+        {
+            var personPathData = GetPersonPathData(person);
+            if (personPathData.HasPath)
+            {
+                person.Tile.SetTileObject(null);
+                await person.MovementController.MovePathAsync(personPathData.PathPositions);
+                await DecideNextMovementTarget(person);
+            }
+        }
+
+        private async UniTask DecideNextMovementTarget(Person person)
+        {
+            var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
+            if (currentBus && currentBus.IsBusColorMatchWithPerson(person) && !currentBus.PersonController.IsBusFull)
+            {
+                currentBus.PersonController.AddPerson(person);
+                await person.MovementController.MoveToBusAsync(currentBus);
+                EventManager.Publish(EventPersonGetIntoBus.Create(person));
+                return;
+            }
+            var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
+            if (firstEmptySlot)
+            {
+                person.SetSlot(firstEmptySlot);
+                await person.MovementController.MoveToSlot(firstEmptySlot);
+                return;
+            }
+            // THIS MEANS CURRENT BUS IS THIS PERSON COLOR AND THERE IS NO EMPTY SLOT 
+            LevelManager.LevelFailed();
+        }
+
         public PersonPathData GetPersonPathData(Person person)
         {
             return _personPathDictionary[person];
@@ -175,7 +209,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     break;
                 }
 
-                if (person.Data.colorType == bus.Data.ColorType)
+                if (person.Data.ColorType == bus.Data.ColorType)
                 {
                     person.Slot.SetPerson(null);
                     person.SetSlot(null);

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.BusSystem.Data;
-using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
-using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Manager;
 using _Main.Scripts.GamePlay.Utilities;
@@ -91,10 +89,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         private void OnPersonGetIntoBus(EventPersonGetIntoBus customEvent)
         {
-            MoveBusIfFull(customEvent).Forget();
+            MoveIfBusIsFull(customEvent).Forget();
         }
 
-        private async UniTask MoveBusIfFull(EventPersonGetIntoBus customEvent)
+        private async UniTask MoveIfBusIsFull(EventPersonGetIntoBus customEvent)
         {
             var currentBus = GetCurrentBus();
             currentBus.PersonController.AddPersonInBus(customEvent.Person);

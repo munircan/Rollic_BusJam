@@ -8,12 +8,12 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Data
     [Serializable]
     public struct PersonData
     {
-        public ColorType colorType;
+        public ColorType ColorType;
         public Appearance Appearance;
 
         public PersonData(PersonData data)
         {
-            colorType = data.colorType;
+            ColorType = data.ColorType;
             Appearance = data.Appearance;
         }
     }
