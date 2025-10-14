@@ -5,24 +5,13 @@ namespace _Main.Scripts.GamePlay.Settings
 {
     public class SettingsManager : MonoBehaviour
     {
-        [SerializeField] private SingletonScriptableObject[] _settings;
-        
-        
-        public void InitializeManagers()
-        {
-            var essentialsGameSettingsCount = _settings.Length;
-            for (int i = 0; i < essentialsGameSettingsCount; i++)
-                _settings[i].Initialize();
-            
-        }
+        #region SerializeFields
 
-        public void TerminateManagers()
-        {
-            var essentialsGameSettingsCount = _settings.Length;
-            for (int i = 0; i < essentialsGameSettingsCount; i++)
-                _settings[i].Terminate();
-        }
-        
+        [SerializeField] private SingletonScriptableObject[] _settings;
+
+        #endregion
+
+        #region Unity Events
 
         private void Awake()
         {
@@ -33,5 +22,25 @@ namespace _Main.Scripts.GamePlay.Settings
         {
             TerminateManagers();
         }
+
+        #endregion
+
+        #region Init-Terminate
+
+        private void InitializeManagers()
+        {
+            var essentialsGameSettingsCount = _settings.Length;
+            for (int i = 0; i < essentialsGameSettingsCount; i++)
+                _settings[i].Initialize();
+        }
+
+        private void TerminateManagers()
+        {
+            var essentialsGameSettingsCount = _settings.Length;
+            for (int i = 0; i < essentialsGameSettingsCount; i++)
+                _settings[i].Terminate();
+        }
+
+        #endregion
     }
 }
