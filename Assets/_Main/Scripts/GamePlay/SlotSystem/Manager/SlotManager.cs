@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using _Main.GamePlay.GridSystem;
 using _Main.Patterns.ObjectPooling;
+using _Main.Scripts.GamePlay.GridSystem;
 using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
 using _Main.Scripts.Utilities;

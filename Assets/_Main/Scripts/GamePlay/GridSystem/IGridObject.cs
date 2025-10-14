@@ -1,4 +1,4 @@
-﻿namespace _Main.GamePlay.GridSystem
+﻿namespace _Main.Scripts.GamePlay.GridSystem
 {
     public interface IGridObject
     {

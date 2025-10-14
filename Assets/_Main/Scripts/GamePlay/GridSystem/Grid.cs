@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Main.GamePlay.GridSystem
+namespace _Main.Scripts.GamePlay.GridSystem
 {
     public class Grid<T> where T : IGridObject
     {

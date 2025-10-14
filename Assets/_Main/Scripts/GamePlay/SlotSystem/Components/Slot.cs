@@ -1,5 +1,5 @@
 using System;
-using _Main.GamePlay.GridSystem;
+using _Main.Scripts.GamePlay.GridSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
 using UnityEngine;
 
