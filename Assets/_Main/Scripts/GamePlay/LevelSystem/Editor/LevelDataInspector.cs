@@ -2,10 +2,8 @@
 using System;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
-using _Main.Scripts.GamePlay.PersonSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.Settings;
-using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Data;
 using _Main.Scripts.GamePlay.TileSystem.Data;
 using UnityEditor;
