@@ -1,14 +1,16 @@
 using _Main.Scripts.GamePlay.GridSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.GamePlay.SlotSystem.Data;
+using _Main.Scripts.Patterns.ModuleSystem;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.SlotSystem.Components
 {
-    public class Slot : MonoBehaviour, IGridObject
+    public class Slot : BaseComponent, IGridObject
     {
         #region SerializeFields
 
+        [SerializeField] private SlotModelController  _slotModelController;
         [SerializeField] private Transform _personTransform;
 
         #endregion
@@ -36,11 +38,13 @@ namespace _Main.Scripts.GamePlay.SlotSystem.Components
         {
             _slotData = data;
             IsLocked = _slotData.IsStillLocked();
+            _slotModelController.Initialize();
         }
 
         public void Reset()
         {
             SetPerson(null);
+            _slotModelController.Reset();
         }
 
         #endregion
