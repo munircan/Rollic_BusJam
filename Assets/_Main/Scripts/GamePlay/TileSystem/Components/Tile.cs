@@ -22,9 +22,13 @@ namespace _Main.Scripts.GamePlay.TileSystem.Components
         {
             get { return Data.Type == TileType.None || Data.Type == TileType.Obstacle || TileObject != null; }
         }
+        
+        public TileInputController  InputController =>  _inputController;
 
         public ITileObject TileObject { get; set; }
         public TileData Data { get; set; }
+        
+        public int Index { get; set; }
 
 
         // Maybe we can refactor as level data option
@@ -37,12 +41,12 @@ namespace _Main.Scripts.GamePlay.TileSystem.Components
 
         #region Init-Reset Methods
 
-        public void Initialize(TileData data, int x, int y, bool isExitTile)
+        public void Initialize(TileData data, int x, int y, bool isExitTile,int index)
         {
             Data = data;
             SetIndexes(x, y);
             IsExitTile = isExitTile;
-
+            Index = index;
             _modelController.Initialize();
             _inputController.Initialize();
         }
@@ -84,5 +88,6 @@ namespace _Main.Scripts.GamePlay.TileSystem.Components
         }
 
         #endregion
+        
     }
 }

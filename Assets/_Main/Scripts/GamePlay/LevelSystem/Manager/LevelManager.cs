@@ -1,6 +1,7 @@
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
+using _Main.Scripts.GamePlay.SaveSystem;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
@@ -84,12 +85,14 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 
         public static void LevelSuccess()
         {
+            SaveManager.ClearList();
             GameConfig.PlayerPref.CurrentLevel++;
             EventManager.Publish(EventLevelSuccess.Create(GameConfig.LevelClickCount));
         }
 
         public static void LevelFailed()
         {
+            SaveManager.ClearList();
             EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount, GameConfig.FailReason));
         }
 

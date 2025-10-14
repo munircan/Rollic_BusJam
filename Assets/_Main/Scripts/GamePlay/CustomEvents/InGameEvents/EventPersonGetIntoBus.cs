@@ -7,10 +7,12 @@ namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
     public class EventPersonGetIntoBus : ICustomEvent
     {
         public Person Person { get; set; }
-        public static EventPersonGetIntoBus Create(Person person)
+        public bool IsInstant {get; set;}
+        public static EventPersonGetIntoBus Create(Person person,bool isInstant)
         {
             var eventLastPersonGetIntoBus = new EventPersonGetIntoBus();
             eventLastPersonGetIntoBus.Person = person;
+            eventLastPersonGetIntoBus.IsInstant = isInstant;
             return eventLastPersonGetIntoBus;
         }
     }
