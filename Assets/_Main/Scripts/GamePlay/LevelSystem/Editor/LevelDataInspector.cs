@@ -245,7 +245,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                 $"{settings.YellowPersonKey}=Yellow";
 
             string infoText =
-                $"{settings.DefaultTileKey} = Default, {settings.PersonTileKey} = Person, {settings.ObstacleTileKey} = Obstacle\n" +
+                $"{settings.NoneTileKey} = None, {settings.DefaultTileKey} = Default, {settings.PersonTileKey} = Person, {settings.ObstacleTileKey} = Obstacle\n" +
                 $"Types: ({typeShortcuts})\n" +
                 $"Colors: ({colorShortcuts})";
 
@@ -326,6 +326,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
 
                     Color bgColor = tile.Type switch
                     {
+                        TileType.None => Color.black,
                         TileType.Person => GetPersonColor(tile.PersonData.ColorType),
                         TileType.Obstacle => new Color(0.3f, 0.3f, 0.3f),
                         _ => Color.gray
@@ -416,7 +417,12 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
             var tile = _levelData.Data.Tiles[_hoveredTile];
             bool tileChanged = false;
 
-            if (e.keyCode == settings.DefaultTileKey)
+            if (e.keyCode == settings.NoneTileKey)
+            {
+                tile.Type = TileType.None;
+                tileChanged = true;
+            }
+            else if (e.keyCode == settings.DefaultTileKey)
             {
                 tile.Type = TileType.Default;
                 tileChanged = true;

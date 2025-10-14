@@ -27,6 +27,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
         }
 
         [Header("Tile Type Shortcuts")]
+        public KeyCode NoneTileKey = KeyCode.A;
         public KeyCode DefaultTileKey = KeyCode.Q;
         public KeyCode PersonTileKey = KeyCode.W;
         public KeyCode ObstacleTileKey = KeyCode.E;
@@ -46,6 +47,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
 
         public void ResetToDefaults()
         {
+            NoneTileKey = KeyCode.A;
             DefaultTileKey = KeyCode.Q;
             PersonTileKey = KeyCode.W;
             ObstacleTileKey = KeyCode.E;
