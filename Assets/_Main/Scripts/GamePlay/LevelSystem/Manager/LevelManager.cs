@@ -87,9 +87,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             }
 
             await UniTask.WhenAll(tasks);
-            await Task.Delay(3000);
             GameConfig.IsMovementInstant = false;
-            SaveManager.ClearList();
         }
 
         private void RefreshAndLoadLevel()
