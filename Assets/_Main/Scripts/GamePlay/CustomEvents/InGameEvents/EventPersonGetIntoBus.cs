@@ -1,4 +1,3 @@
-using _Main.Scripts.GamePlay.PersonSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.Patterns.EventSystem;
 

@@ -64,6 +64,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
                 .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject);
 
             await jumpTween.AsyncWaitForCompletion();
+            EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
             
         }
 

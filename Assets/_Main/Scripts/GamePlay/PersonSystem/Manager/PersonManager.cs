@@ -142,7 +142,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             {
                 currentBus.PersonController.AddPerson(person);
                 await person.MovementController.MoveToBusAsync(currentBus);
-                EventManager.Publish(EventPersonGetIntoBus.Create(person));
                 return;
             }
             var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
