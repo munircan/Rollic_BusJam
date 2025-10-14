@@ -10,6 +10,8 @@ namespace _Main.Scripts.GamePlay.SaveSystem
         private const string FILE_NAME = "tile_indexes.json";
         
         private static TileIndexData _currentData = new TileIndexData();
+
+        public static int Level => _currentData.Level;
         
         public static IReadOnlyList<int> TileIndexes => _currentData.TileIndexes;
 
@@ -32,6 +34,7 @@ namespace _Main.Scripts.GamePlay.SaveSystem
             
             try
             {
+                _currentData.Level = GameConfig.PlayerPref.CurrentLevel;
                 string json = JsonUtility.ToJson(_currentData, true);
                 File.WriteAllText(path, json);
                 // Debug.Log($"Data saved to: {path}");

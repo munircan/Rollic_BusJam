@@ -7,6 +7,7 @@ namespace _Main.Scripts.GamePlay.SaveSystem
     public class TileIndexData
     {
         public List<int> TileIndexes = new();
+        public int Level;
         
         public void AddTileIndex(int i)
         {
