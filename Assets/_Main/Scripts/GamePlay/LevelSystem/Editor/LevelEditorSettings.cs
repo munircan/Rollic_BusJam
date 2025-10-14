@@ -26,16 +26,16 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
             }
         }
 
-        [Header("Tile Tipi Kısayolları")]
+        [Header("Tile Type Shortcuts")]
         public KeyCode DefaultTileKey = KeyCode.Q;
         public KeyCode PersonTileKey = KeyCode.W;
         public KeyCode ObstacleTileKey = KeyCode.E;
     
-        [Header("Person Tipi Kısayolları")] // GÜNCELLENDİ
-        public KeyCode DefaultPersonTypeKey = KeyCode.T; // Örn: T
-        public KeyCode MysteriousPersonTypeKey = KeyCode.Y; // Örn: Y
+        [Header("Person Type Shortcuts")]
+        public KeyCode DefaultPersonTypeKey = KeyCode.T;
+        public KeyCode MysteriousPersonTypeKey = KeyCode.Y;
     
-        [Header("Person Renk Kısayolları")]
+        [Header("Person Color Shortcuts")]
         public KeyCode RedPersonKey = KeyCode.Alpha1;
         public KeyCode BluePersonKey = KeyCode.Alpha2;
         public KeyCode GreenPersonKey = KeyCode.Alpha3;
@@ -47,7 +47,6 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
             PersonTileKey = KeyCode.W;
             ObstacleTileKey = KeyCode.E;
         
-            // GÜNCELLENDİ
             DefaultPersonTypeKey = KeyCode.T;
             MysteriousPersonTypeKey = KeyCode.Y;
         
@@ -57,7 +56,6 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
         }
     }
 
-// LevelEditorSettingsProvider kısmı aynı kalır.
     public class LevelEditorSettingsProvider
     {
         private static UnityEditor.Editor s_SettingsEditor; 
@@ -83,14 +81,14 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                     }
 
                     GUILayout.Space(15);
-                    if (GUILayout.Button("Varsayılan Tuşlara Dön"))
+                    if (GUILayout.Button("Reset to Default Keybinds"))
                     {
                         settings.ResetToDefaults();
                         EditorUtility.SetDirty(settings);
                         AssetDatabase.SaveAssets();
                     }
                 },
-                keywords = new System.Collections.Generic.HashSet<string>(new[] { "Level", "Editor", "Keybinds", "Kısayol" })
+                keywords = new System.Collections.Generic.HashSet<string>(new[] { "Level", "Editor", "Keybinds", "Shortcut" })
             };
             return provider;
         }
