@@ -36,10 +36,6 @@ namespace _Main.Scripts.GamePlay.Settings
                 var colorData = Data[i];
                 if (colorData.colorType == colorType)
                 {
-                    if (canWalk)
-                    {
-                        return colorData.MaterialWithOutline;
-                    }
                     return colorData.Material;
                 }
             }
@@ -54,7 +50,6 @@ namespace _Main.Scripts.GamePlay.Settings
     {
         public ColorType colorType;
         public Material Material;
-        public Material MaterialWithOutline;
     }
 
     public enum ColorType
