@@ -17,6 +17,9 @@ MonoBehaviour:
   ObstacleTileKey: 111
   DefaultPersonTypeKey: 100
   MysteriousPersonTypeKey: 109
-  RedPersonKey: 49
+  WhitePersonKey: 49
   BluePersonKey: 50
-  GreenPersonKey: 51
+  RedPersonKey: 51
+  GreenPersonKey: 52
+  OrangePersonKey: 53
+  YellowPersonKey: 54
