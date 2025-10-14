@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using _Main.Patterns.Singleton;
+using _Main.Scripts.Patterns.Singleton;
 using UnityEngine;
 
-namespace _Main.Patterns.EventSystem
+namespace _Main.Scripts.Patterns.EventSystem
 {
     public delegate void CustomEventAction<TCustomEvent>(TCustomEvent customEvent) where TCustomEvent : ICustomEvent;
 

@@ -1,5 +1,5 @@
-using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.BusSystem.Components;
+using _Main.Scripts.Patterns.EventSystem;
 
 namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
 {

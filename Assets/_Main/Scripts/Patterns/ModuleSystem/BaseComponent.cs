@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Main.Patterns.ModuleSystem
+namespace _Main.Scripts.Patterns.ModuleSystem
 {
     public abstract class BaseComponent : MonoBehaviour
     {

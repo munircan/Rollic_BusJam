@@ -1,4 +1,4 @@
-﻿namespace _Main.Patterns.Singleton
+﻿namespace _Main.Scripts.Patterns.Singleton
 {
     public class Singleton<T> where T : new()
     {

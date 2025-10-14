@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using _Main.Patterns.EventSystem;
-using _Main.Patterns.ModuleSystem;
-using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
@@ -10,6 +7,9 @@ using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Components;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
+using _Main.Scripts.Patterns.EventSystem;
+using _Main.Scripts.Patterns.ModuleSystem;
+using _Main.Scripts.Patterns.ServiceLocation;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;

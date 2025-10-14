@@ -1,5 +1,3 @@
-using _Main.Patterns.EventSystem;
-using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
@@ -8,6 +6,8 @@ using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
 using _Main.Scripts.GamePlay.Utilities;
+using _Main.Scripts.Patterns.EventSystem;
+using _Main.Scripts.Patterns.ServiceLocation;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem.Manager

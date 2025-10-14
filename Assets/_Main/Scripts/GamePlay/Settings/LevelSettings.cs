@@ -1,7 +1,7 @@
-using _Main.Patterns.Singleton;
 using _Main.Scripts.GamePlay.Helpers;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.Utilities;
+using _Main.Scripts.Patterns.Singleton;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

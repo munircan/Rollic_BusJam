@@ -1,11 +1,10 @@
 ﻿using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
-using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
 using UnityEngine;
 
-namespace _Main.Patterns.ServiceLocation
+namespace _Main.Scripts.Patterns.ServiceLocation
 {
     // EXECUTION ORDER IS -1
     public class ServiceManager : MonoBehaviour
@@ -19,10 +18,7 @@ namespace _Main.Patterns.ServiceLocation
         {
             RegisterServices();
         }
-
-        /// <summary>
-        /// Registers services into the ServiceLocator.
-        /// </summary>
+        
         private void RegisterServices()
         {
             ServiceLocator.RegisterService(_personManager);
@@ -30,10 +26,7 @@ namespace _Main.Patterns.ServiceLocation
             ServiceLocator.RegisterService(_slotManager);
             ServiceLocator.RegisterService(_busManager);
         }
-
-        /// <summary>
-        /// Unregisters services from the ServiceLocator.
-        /// </summary>
+        
         private void UnregisterServices()
         {
             ServiceLocator.UnregisterService<PersonManager>();

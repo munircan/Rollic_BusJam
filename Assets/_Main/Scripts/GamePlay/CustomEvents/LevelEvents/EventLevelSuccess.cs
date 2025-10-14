@@ -1,6 +1,6 @@
-using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.GamePlay.Utilities;
+using _Main.Scripts.Patterns.EventSystem;
 
 namespace _Main.Scripts.GamePlay.CustomEvents.LevelEvents
 {

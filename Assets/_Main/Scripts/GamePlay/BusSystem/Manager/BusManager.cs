@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using _Main.Patterns.EventSystem;
-using _Main.Patterns.ObjectPooling;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.CustomEvents;
@@ -9,6 +7,8 @@ using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Manager;
 using _Main.Scripts.GamePlay.Utilities;
+using _Main.Scripts.Patterns.EventSystem;
+using _Main.Scripts.Patterns.ObjectPooling;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

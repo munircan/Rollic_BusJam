@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
-namespace _Main.Patterns.ModuleSystem
+namespace _Main.Scripts.Patterns.ModuleSystem
 {
     public abstract class ComponentModule<TBaseComponent> : MonoBehaviour where TBaseComponent : BaseComponent
     {
         protected TBaseComponent BaseComp;
-        protected bool HasInitialized = false;
+        private bool _hasInitialized = false;
 
         internal virtual void Initialize()
         {
-            if (HasInitialized) 
+            if (_hasInitialized) 
                 return;
 
             BaseComp = GetComponent<TBaseComponent>();
-            HasInitialized = true;
+            _hasInitialized = true;
         }
 
         internal virtual void Reset()

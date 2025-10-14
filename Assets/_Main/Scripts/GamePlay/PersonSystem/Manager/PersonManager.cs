@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Main.GamePlay.TileSystem;
-using _Main.Patterns.EventSystem;
-using _Main.Patterns.ObjectPooling;
-using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
@@ -14,6 +11,9 @@ using _Main.Scripts.GamePlay.TileSystem.Components;
 using _Main.Scripts.GamePlay.TileSystem.Data;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
 using _Main.Scripts.GamePlay.Utilities;
+using _Main.Scripts.Patterns.EventSystem;
+using _Main.Scripts.Patterns.ObjectPooling;
+using _Main.Scripts.Patterns.ServiceLocation;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

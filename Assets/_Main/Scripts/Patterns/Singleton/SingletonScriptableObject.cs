@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace _Main.Patterns.Singleton
+namespace _Main.Scripts.Patterns.Singleton
 {
     public abstract class SingletonScriptableObject : ScriptableObject
     {

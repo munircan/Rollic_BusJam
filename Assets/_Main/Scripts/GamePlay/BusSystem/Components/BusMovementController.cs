@@ -1,5 +1,5 @@
-using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
+using _Main.Scripts.Patterns.ModuleSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;

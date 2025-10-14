@@ -1,5 +1,5 @@
 using System;
-using _Main.Patterns.Singleton;
+using _Main.Scripts.Patterns.Singleton;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Settings

@@ -1,6 +1,6 @@
-using _Main.Patterns.EventSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
+using _Main.Scripts.Patterns.EventSystem;
 
 namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
 {

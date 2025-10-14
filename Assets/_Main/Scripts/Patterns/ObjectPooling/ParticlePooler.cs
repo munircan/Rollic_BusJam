@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Main.Patterns.Singleton;
+using _Main.Scripts.Patterns.Singleton;
 using UnityEngine;
 
-namespace _Main.Patterns.ObjectPooling
+namespace _Main.Scripts.Patterns.ObjectPooling
 {
     public class ParticlePooler : SingletonMonoBehaviour<ParticlePooler>
     {

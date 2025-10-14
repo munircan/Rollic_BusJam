@@ -1,5 +1,5 @@
-using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.Settings;
+using _Main.Scripts.Patterns.ModuleSystem;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Components
