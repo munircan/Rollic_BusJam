@@ -19,19 +19,13 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
 
         #endregion
 
-        #region Encapsulation
-
-        public List<Tile> Tiles { get; private set; }
-
-        #endregion
-
         #region Private Variables
 
         private Grid<Tile> _grid;
         private Tile[,] _tilesMatrix;
         private int _width;
         private int _height;
-        
+        private List<Tile> _tiles;
 
         #endregion
 
@@ -41,7 +35,7 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
         {
             _width = levelData.TileWidth;
             _height = levelData.TileHeight;
-            Tiles = new List<Tile>(_width * _height);
+            _tiles = new List<Tile>(_width * _height);
             _tilesMatrix = new Tile[_height, _width];
             _grid = new Grid<Tile>(_height, _width, GameConfig.TILE_SIZE, _gridParent.position);
             for (int i = 0; i < _height; i++)
@@ -55,7 +49,7 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
                         _gridParent);
                     tile.Initialize(tileData, i, j, isExitTile);
                     tile.SetIndexes(i, j);
-                    Tiles.Add(tile);
+                    _tiles.Add(tile);
                     _tilesMatrix[i, j] = tile;
                 }
             }
@@ -63,13 +57,13 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
 
         public void ReleaseTiles()
         {
-            foreach (var tile in Tiles)
+            foreach (var tile in _tiles)
             {
                 tile.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.TILE, tile);
             }
 
-            Tiles.Clear();
+            _tiles.Clear();
         }
 
         #endregion
@@ -88,6 +82,11 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
             }
 
             return false;
+        }
+
+        public List<Tile> GetTiles()
+        {
+            return _tiles;
         }
 
         #endregion

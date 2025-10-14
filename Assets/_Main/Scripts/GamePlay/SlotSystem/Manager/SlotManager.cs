@@ -91,6 +91,11 @@ namespace _Main.Scripts.GamePlay.SlotSystem.Manager
             }
         }
 
+        public List<Slot> GetSlots()
+        {
+            return _slots;
+        }
+
         #endregion
     }
 }

@@ -59,7 +59,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             var currentLevelData = LevelSettings.Instance.GetCurrentLevelData();
             _slotManager.CreateSlots(currentLevelData);
             _tileManager.CreateTiles(currentLevelData);
-            _personManager.CreatePeople(_tileManager.Tiles);
+            _personManager.CreatePeople(_tileManager.GetTiles());
             _busManager.CreateBuses(currentLevelData);
             EventManager.Publish(EventLevelLoaded.Create());
         }
