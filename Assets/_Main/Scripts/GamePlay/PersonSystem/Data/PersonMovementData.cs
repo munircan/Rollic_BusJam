@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.PersonSystem
+namespace _Main.Scripts.GamePlay.PersonSystem.Data
 {
     [CreateAssetMenu(fileName = "PersonMovementData", menuName = "PersonData/MovementData", order = 0)]
     public class PersonMovementData : ScriptableObject

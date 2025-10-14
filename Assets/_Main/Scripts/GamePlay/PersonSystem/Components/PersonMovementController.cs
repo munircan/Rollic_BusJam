@@ -1,26 +1,34 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ModuleSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Components;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
-using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
-using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Manager;
+using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
-using _Main.Scripts.Utilities;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.PersonSystem
+namespace _Main.Scripts.GamePlay.PersonSystem.Components
 {
     public class PersonMovementController : ComponentModule<Person>
     {
+        #region SerializeFields
+
         [SerializeField] private PersonMovementData _movementData;
+
+        #endregion
+
+        #region Private Variables
+
         private Tween _pathTween;
+
+        #endregion
+
+        #region Movement Methods
 
         public async UniTask MovePathAsync(List<Vector3> path)
         {
@@ -38,7 +46,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             OnPathMovementComplete();
         }
 
-        public void OnPathMovementComplete()
+        private void OnPathMovementComplete()
         {
             // CHANGE THIS LOGIC AFTER TRY TO MOVE PERSON MANAGER
             var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
@@ -61,7 +69,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             }
         }
 
-        public async UniTask MoveToSlot(Slot slot)
+        private async UniTask MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
             var slotTween = transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
@@ -82,6 +90,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             OnPersonMoveToBus();
         }
 
+        #endregion
+
+        #region Movement Complete Methods
+
         private void OnPersonMoveToBus()
         {
             EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
@@ -91,17 +103,17 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         {
         }
 
-        public void KillPath()
-        {
-            _pathTween.Kill();
-        }
-
+        #endregion
+        
+        #region Init-Reset
 
         internal override void Reset()
         {
             base.Reset();
             transform.DOKill();
-            KillPath();
+            _pathTween.Kill();
         }
+
+        #endregion
     }
 }

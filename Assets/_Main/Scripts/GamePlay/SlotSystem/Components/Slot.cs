@@ -1,6 +1,7 @@
 using System;
 using _Main.Scripts.GamePlay.GridSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
+using _Main.Scripts.GamePlay.PersonSystem.Components;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.SlotSystem

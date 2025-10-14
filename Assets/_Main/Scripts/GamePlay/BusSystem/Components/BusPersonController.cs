@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.PersonSystem;
+using _Main.Scripts.GamePlay.PersonSystem.Components;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.BusSystem.Components

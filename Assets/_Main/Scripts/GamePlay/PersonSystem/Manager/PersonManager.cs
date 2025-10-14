@@ -6,8 +6,9 @@ using _Main.Patterns.EventSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Components;
-using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
+using _Main.Scripts.GamePlay.PersonSystem.Components;
+using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.Utilities;
 using Cysharp.Threading.Tasks;
@@ -17,11 +18,21 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 {
     public class PersonManager : MonoBehaviour
     {
+        #region SerializeFields
+
         [SerializeField] private Transform _personParent;
-        private List<Person> _personList;
+
+        #endregion
+
+        #region Dictionary-List
+
         private Dictionary<Person, PersonPathData> _personPathDictionary;
-        
-        private Dictionary<Bus,List<Person>> _slotToBusPeopleDictionary;
+        private Dictionary<Bus, List<Person>> _slotToBusPeopleDictionary;
+        private List<Person> _personList;
+
+        #endregion
+
+        #region Unity Events
 
         private void Awake()
         {
@@ -38,10 +49,14 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             EventManager.Unsubscribe<EventBusMovedIn>(OnEventBusMovedIn);
         }
 
+        #endregion
+
+        #region Create-Release
+
         public void CreatePeople(List<Tile> tiles)
         {
             _personList = new List<Person>();
-            
+
             _slotToBusPeopleDictionary = new Dictionary<Bus, List<Person>>();
             for (var i = 0; i < tiles.Count; i++)
             {
@@ -58,7 +73,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 }
             }
 
-            SetPeopleCanWalk();
+            SetPeoplePathData();
         }
 
         public void ReleasePeople()
@@ -68,11 +83,16 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 person.Reset();
                 ObjectPooler.Instance.ReleasePooledObject(Keys.PoolTags.PERSON, person);
             }
+
             _personList.Clear();
             _slotToBusPeopleDictionary.Clear();
         }
 
-        private void SetPeopleCanWalk()
+        #endregion
+
+        #region Path Methods
+
+        private void SetPeoplePathData()
         {
             _personPathDictionary = new Dictionary<Person, PersonPathData>();
             if (ServiceLocator.TryGetService(out TileManager tileManager))
@@ -99,9 +119,18 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             }
         }
 
+        public PersonPathData GetPersonPathData(Person person)
+        {
+            return _personPathDictionary[person];
+        }
+
+        #endregion
+
+        #region Event Methods
+
         private void OnEventTileChanged(EventTileChanged customEvent)
         {
-            SetPeopleCanWalk();
+            SetPeoplePathData();
         }
 
         private void OnEventBusChanged(EventBusChanged eventBusChanged)
@@ -113,6 +142,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
         {
             SlotToBusPeopleMovement(eventBusMovedIn.Bus);
         }
+
+        #endregion
+
+        #region Slot-Bus Methods
 
         private void SlotToBusPeopleMovement(Bus bus)
         {
@@ -147,6 +180,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                     personList.Add(person);
                 }
             }
+
             _slotToBusPeopleDictionary.Add(bus, personList);
         }
 
@@ -157,16 +191,8 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             return slotManager.GetSlotPersonList().ToList();
         }
 
-
-        public PersonPathData GetPersonPathData(Person person)
-        {
-            return _personPathDictionary[person];
-        }
+        #endregion
     }
 
-    public struct PersonPathData
-    {
-        public bool HasPath;
-        public List<Vector3> PathPositions;
-    }
+   
 }

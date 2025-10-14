@@ -2,22 +2,39 @@ using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.Settings;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.PersonSystem
+namespace _Main.Scripts.GamePlay.PersonSystem.Components
 {
     public class PersonModelController : ComponentModule<Person>
     {
+        #region SerializeFields
+
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private Outline _outline;
+
+        #endregion
+
+        #region Init-Reset
 
         internal override void Initialize()
         {
             base.Initialize();
-            SetColor();
+            SetMaterial();
         }
 
-        public void SetColor()
+        internal override void Reset()
         {
-            _meshRenderer.material = ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.colorType,BaseComp.Data.Appearance,false);
+            base.Reset();
+            SetOutlineEnable(false);
+        }
+
+        #endregion
+
+        #region Set-Get
+
+        private void SetMaterial()
+        {
+            _meshRenderer.material =
+                ColorSettings.Instance.GetPersonMaterial(BaseComp.Data.colorType, BaseComp.Data.Appearance, false);
         }
 
 
@@ -26,10 +43,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem
             _outline.enabled = value;
         }
 
-        internal override void Reset()
-        {
-            base.Reset();
-            SetOutlineEnable(false);
-        }
+        #endregion
     }
-}   
+}

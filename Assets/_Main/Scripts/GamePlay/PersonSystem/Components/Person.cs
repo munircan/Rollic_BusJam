@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
 using _Main.Patterns.ModuleSystem;
 using _Main.Patterns.ServiceLocation;
+using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.PersonSystem
+namespace _Main.Scripts.GamePlay.PersonSystem.Components
 {
     public class Person : BaseComponent, ITileObject
     {
@@ -18,8 +17,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         [SerializeField] private PersonMovementController _movementController;
 
         #endregion
-
-
+        
         #region Encapsulated Variables
 
         public Tile Tile { get; set; }
@@ -33,8 +31,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         public PersonModelController ModelController => _modelController;
 
         #endregion
-
-
+        
         #region Unity Event Methods
 
         private void OnDisable()
@@ -85,8 +82,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem
         
 
         #endregion
-
-
+        
         #region Implemented Methods
 
         public void Execute()
