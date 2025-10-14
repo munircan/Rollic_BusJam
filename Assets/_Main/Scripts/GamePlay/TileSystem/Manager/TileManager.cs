@@ -4,9 +4,13 @@ using _Main.Scripts.GamePlay.GridSystem;
 using _Main.Scripts.GamePlay.Helpers;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Helpers;
+using _Main.Scripts.GamePlay.SaveSystem;
 using _Main.Scripts.GamePlay.TileSystem.Components;
 using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.ObjectPooling;
+using Cysharp.Threading.Tasks;
+using MEC;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.TileSystem.Manager
@@ -47,7 +51,8 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
                     Vector3 pos = _grid.GetWorldPosition(i, j);
                     var tile = ObjectPooler.Instance.SpawnSc<Tile>(Keys.PoolTags.TILE, pos, Quaternion.identity,
                         _gridParent);
-                    tile.Initialize(tileData, i, j, isExitTile);
+                    var index = _tiles.Count;
+                    tile.Initialize(tileData, i, j, isExitTile,index);
                     tile.SetIndexes(i, j);
                     _tiles.Add(tile);
                     _tilesMatrix[i, j] = tile;
@@ -90,5 +95,9 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
         }
 
         #endregion
+        
+        
+
+       
     }
 }

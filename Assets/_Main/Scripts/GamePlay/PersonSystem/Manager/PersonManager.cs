@@ -7,6 +7,7 @@ using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.LevelSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
+using _Main.Scripts.GamePlay.SaveSystem;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Components;
@@ -125,11 +126,16 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             }
         }
 
-        public async UniTask MovePersonInPath(Person person)
+        public async UniTask MovePersonInPath(Person person,bool save)
         {
             var personPathData = GetPersonPathData(person);
             if (personPathData.HasPath)
             {
+                if (save)
+                {
+                    SaveManager.AddTileIndex(person.Tile.Index);
+                }
+                
                 person.Tile.SetTileObject(null);
                 await person.MovementController.MovePathAsync(personPathData.PathPositions);
                 await DecideNextMovementTarget(person);

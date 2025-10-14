@@ -7,6 +7,7 @@ using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Components;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
+using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.EventSystem;
 using _Main.Scripts.Patterns.ModuleSystem;
 using _Main.Scripts.Patterns.ServiceLocation;
@@ -36,34 +37,53 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         {
             var pathArray = path.ToArray();
 
-            _pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
-                    _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
-                .SetEase(_movementData.PathMovementData.Ease)
-                .SetLink(gameObject)
-                .SetSpeedBased(true);
-            // .SetLookAt(0.01f);
+            if (!GameConfig.IsMovementInstant)
+            {
+                _pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
+                        _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
+                    .SetEase(_movementData.PathMovementData.Ease)
+                    .SetLink(gameObject)
+                    .SetSpeedBased(true);
+                // .SetLookAt(0.01f);
 
-            await _pathTween.AsyncWaitForCompletion();
+                await _pathTween.AsyncWaitForCompletion();
+            }
         }
         
 
         public async UniTask MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
-            var slotTween = transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
-                .SetEase(_movementData.SlotMovementData.Ease).SetLink(gameObject);
-            await slotTween.AsyncWaitForCompletion();
+            if (GameConfig.IsMovementInstant)
+            {
+                transform.position = slotPersonTransform.position;
+            }
+            else
+            {
+                var slotTween = transform.DOMove(slotPersonTransform.position, _movementData.SlotMovementData.Duration)
+                    .SetEase(_movementData.SlotMovementData.Ease).SetLink(gameObject);
+                await slotTween.AsyncWaitForCompletion();
+            }
+         
         }
 
         public async UniTask MoveToBusAsync(Bus bus)
         {
             var busTransform = bus.PersonController.GetPersonBusTransform(BaseComp);
             transform.SetParent(busTransform);
-            var jumpTween = transform.DOLocalJump(Vector3.zero, _movementData.BusMovementData.JumpPower,
-                    _movementData.BusMovementData.JumpCount, _movementData.BusMovementData.Duration)
-                .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject);
+            if (GameConfig.IsMovementInstant)
+            {
+                transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                var jumpTween = transform.DOLocalJump(Vector3.zero, _movementData.BusMovementData.JumpPower,
+                        _movementData.BusMovementData.JumpCount, _movementData.BusMovementData.Duration)
+                    .SetEase(_movementData.BusMovementData.Ease).SetLink(gameObject);
 
-            await jumpTween.AsyncWaitForCompletion();
+                await jumpTween.AsyncWaitForCompletion();
+            }
+          
             EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
             
         }

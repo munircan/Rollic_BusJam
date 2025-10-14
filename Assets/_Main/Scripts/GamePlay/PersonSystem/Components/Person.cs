@@ -85,21 +85,6 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
 
         #endregion
         
-        #region Implemented Methods
-
-        public void Execute()
-        {
-            if (ServiceLocator.TryGetService(out PersonManager manager))
-            {
-                var pathData = manager.GetPersonPathData(this);
-                if (pathData.HasPath)
-                {
-                    Tile.SetTileObject(null);
-                    _movementController.MovePathAsync(pathData.PathPositions).Forget();
-                }
-            }
-        }
-
-        #endregion
+      
     }
 }

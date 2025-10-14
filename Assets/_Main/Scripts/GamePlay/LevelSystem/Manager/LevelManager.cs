@@ -1,12 +1,16 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
+using _Main.Scripts.GamePlay.SaveSystem;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
 using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.EventSystem;
 using _Main.Scripts.Patterns.ServiceLocation;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem.Manager
@@ -55,6 +59,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 
         private void LoadLevel()
         {
+            SaveManager.LoadData();
             GameConfig.LevelClickCount = 0;
             var currentLevelData = LevelSettings.Instance.GetCurrentLevelData();
             _slotManager.CreateSlots(currentLevelData);
@@ -62,6 +67,29 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             _personManager.CreatePeople(_tileManager.GetTiles());
             _busManager.CreateBuses(currentLevelData);
             EventManager.Publish(EventLevelLoaded.Create());
+
+            if (!GameConfig.IsLoadingFromSave)
+            {
+                return;
+            }
+
+            StartLevelFromSave().Forget();
+        }
+
+        private async UniTask StartLevelFromSave()
+        {
+            var tiles = _tileManager.GetTiles();
+            GameConfig.IsMovementInstant = true;
+            List<UniTask> tasks = new List<UniTask>();
+            foreach (var tileIndex in SaveManager.TileIndexes)
+            {
+                tasks.Add(tiles[tileIndex].InputController.ExecuteWithObjectManager(false));
+            }
+
+            await UniTask.WhenAll(tasks);
+            await Task.Delay(3000);
+            GameConfig.IsMovementInstant = false;
+            SaveManager.ClearList();
         }
 
         private void RefreshAndLoadLevel()
@@ -84,12 +112,14 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 
         public static void LevelSuccess()
         {
+            SaveManager.ClearList();
             GameConfig.PlayerPref.CurrentLevel++;
             EventManager.Publish(EventLevelSuccess.Create(GameConfig.LevelClickCount));
         }
 
         public static void LevelFailed()
         {
+            SaveManager.ClearList();
             EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount, GameConfig.FailReason));
         }
 

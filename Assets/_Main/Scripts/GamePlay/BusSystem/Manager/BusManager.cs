@@ -67,6 +67,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 _buses.Add(bus);
             }
 
+            if (GameConfig.IsLoadingFromSave)
+            {
+                return;
+            }
             MoveCurrentBus().Forget();
         }
 

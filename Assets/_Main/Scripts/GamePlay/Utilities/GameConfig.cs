@@ -14,11 +14,10 @@ namespace _Main.Scripts.GamePlay.Utilities
         public static int LevelClickCount { get; set; }
         
         public const float TILE_SIZE = 1.25f;
-
-
-        public const float CAMERA_PADDING = 5;
         
-        
+        public static bool IsLoadingFromSave { get; set; }
+
+        public static bool IsMovementInstant { get; set; }
         
         
         public static class PlayerPref
