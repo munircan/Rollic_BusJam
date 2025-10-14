@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
