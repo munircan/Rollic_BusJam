@@ -28,13 +28,13 @@ namespace _Main.GamePlay.TileSystem
 
         #region Override Methods
 
-        internal override void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
             SetModelsActive(BaseComp.Data.Type);
         }
-        
-        internal override void Reset()
+
+        public override void Reset()
         {
             base.Reset();
             SetModelsActive(TileType.None);

@@ -2,9 +2,10 @@
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
+using _Main.Scripts.Patterns.ServiceLocation;
 using UnityEngine;
 
-namespace _Main.Scripts.Patterns.ServiceLocation
+namespace _Main.Scripts.GamePlay.ServiceManager
 {
     // EXECUTION ORDER IS -1
     public class ServiceManager : MonoBehaviour

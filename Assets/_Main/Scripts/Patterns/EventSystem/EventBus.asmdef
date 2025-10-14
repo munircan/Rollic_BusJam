@@ -1,0 +1,16 @@
+{
+    "name": "EventBus",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bd761f85d82313140a134256853867c1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -15,13 +15,13 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
 
         #region Init-Reset
 
-        internal override void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
             SetMaterial();
         }
 
-        internal override void Reset()
+        public override void Reset()
         {
             base.Reset();
             SetOutlineEnable(false);

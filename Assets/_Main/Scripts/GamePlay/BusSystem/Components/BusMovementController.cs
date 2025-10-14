@@ -28,7 +28,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         
         #region Init-Reset
 
-        internal override void Reset()
+        public override void Reset()
         {
             base.Reset();
             transform.DOKill();

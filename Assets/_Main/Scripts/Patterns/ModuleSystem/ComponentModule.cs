@@ -7,7 +7,7 @@ namespace _Main.Scripts.Patterns.ModuleSystem
         protected TBaseComponent BaseComp;
         private bool _hasInitialized = false;
 
-        internal virtual void Initialize()
+        public virtual void Initialize()
         {
             if (_hasInitialized) 
                 return;
@@ -16,7 +16,7 @@ namespace _Main.Scripts.Patterns.ModuleSystem
             _hasInitialized = true;
         }
 
-        internal virtual void Reset()
+        public virtual void Reset()
         {
         }
     }

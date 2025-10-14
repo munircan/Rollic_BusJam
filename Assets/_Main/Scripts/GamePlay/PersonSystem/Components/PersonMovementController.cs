@@ -109,7 +109,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         
         #region Init-Reset
 
-        internal override void Reset()
+        public override void Reset()
         {
             base.Reset();
             transform.DOKill();

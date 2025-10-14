@@ -14,7 +14,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 
         #region Init-Reset
 
-        internal override void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
             SetColor();
