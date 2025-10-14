@@ -1,11 +1,9 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.UI.Window
 {
     public abstract class AbstractUIWindowMono : MonoBehaviour
     {
-        [FoldoutGroup("Basics")] 
         [SerializeField] protected Animator _animator;
         
         public abstract UIWindowType UIWindowType { get; }

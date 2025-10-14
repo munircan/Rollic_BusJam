@@ -1,52 +1,69 @@
 using System.Collections.Generic;
-using _Main.Patterns.Singleton;
 using _Main.Scripts.GamePlay.UI.Settings;
 using _Main.Scripts.GamePlay.UI.Window;
+using _Main.Scripts.GamePlay.UI.Window.Windows;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.UI.Manager
 {
     public class UIManager : MonoBehaviour
     {
-        private List<AbstractUIWindowMono> _liveUIWindowList = new List<AbstractUIWindowMono>();
+        #region SerializeFields
+
         [SerializeField] private RectTransform _uiWindowContainer;
 
+        #endregion
+
+        #region Private Variables
+
+        private readonly List<AbstractUIWindowMono> _liveUIWindowList = new List<AbstractUIWindowMono>();
+
+        #endregion
+
+        #region Unity Events
 
         private void Start()
         {
             InitializeInGameWindow();
         }
 
+        #endregion
+
+        #region Init
+
         private void InitializeInGameWindow()
         {
             GetWindow<UIWindowMonoInGame>();
         }
 
+        #endregion
+
+        #region Window Helpers
 
         public bool IsWindowExist<T>() where T : AbstractUIWindowMono
         {
             var liveUIWindowCount = _liveUIWindowList.Count;
             for (int i = 0; i < liveUIWindowCount; i++)
             {
-                if (_liveUIWindowList[i].GetType() != typeof(T)) 
+                if (_liveUIWindowList[i].GetType() != typeof(T))
                     continue;
 
                 return true;
             }
-            
+
             return false;
         }
-        
-        
+
+
         public T GetWindow<T>() where T : AbstractUIWindowMono
         {
             T windowMono = null;
             var isWindowExist = false;
-            
+
             var liveUIWindowCount = _liveUIWindowList.Count;
             for (int i = 0; i < liveUIWindowCount; i++)
             {
-                if (_liveUIWindowList[i].GetType() != typeof(T)) 
+                if (_liveUIWindowList[i].GetType() != typeof(T))
                     continue;
                 isWindowExist = true;
                 windowMono = (T)_liveUIWindowList[i];
@@ -61,7 +78,7 @@ namespace _Main.Scripts.GamePlay.UI.Manager
 
             return windowMono;
         }
-        
+
         public void CloseWindow<T>() where T : AbstractUIWindowMono
         {
             var isWindowExist = IsWindowExist<T>();
@@ -73,12 +90,14 @@ namespace _Main.Scripts.GamePlay.UI.Manager
             windowMono.Terminate();
             Destroy(windowMono);
         }
-        
+
         private AbstractUIWindowMono CreateWindow(UIWindowInfo windowInfo)
         {
             var createdWindowMono = Instantiate(windowInfo.WindowPrefab, _uiWindowContainer);
             createdWindowMono.Initialize();
             return createdWindowMono;
         }
+
+        #endregion
     }
 }
