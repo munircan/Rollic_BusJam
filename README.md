@@ -3,6 +3,19 @@
 GENERAL INFORMATION
 This project was developed entirely using Unity's default assets (primitives) for the sake of simplicity and focus on core mechanics.
 
+Simple Save and Replay System
+I have created a basic save system. Right now, it works like this:
+
+It Records: It saves the indexes of all the tiles the player clicks.
+
+It Loads: When the game starts from the save, it goes through the saved indexes and executes the logic that should run when that tile is interacted with to load the game state.
+
+Future Upgrade: Recording Player Timing
+We can easily upgrade this system to see exactly how the player played the game.
+
+The Upgrade Idea:
+
+Instead of just saving the tile index, we will also save the time between each click.
 
 PACKAGES AND LIBRARIES
 The project utilizes the following key packages to enhance performance, editor workflow, and asynchronous task management:
