@@ -2,6 +2,7 @@ using System;
 using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.BusSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.GamePlay.SlotSystem.Data;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem.Data

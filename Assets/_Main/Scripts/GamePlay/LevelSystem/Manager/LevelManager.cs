@@ -6,6 +6,7 @@ using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.Utilities;
 using UnityEngine;
 

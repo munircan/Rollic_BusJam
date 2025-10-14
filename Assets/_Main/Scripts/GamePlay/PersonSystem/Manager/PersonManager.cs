@@ -10,6 +10,7 @@ using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.Utilities;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

@@ -4,6 +4,7 @@ using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.GamePlay.SlotSystem.Components;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

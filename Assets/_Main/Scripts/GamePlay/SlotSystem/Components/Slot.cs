@@ -1,34 +1,51 @@
-using System;
 using _Main.Scripts.GamePlay.GridSystem;
-using _Main.Scripts.GamePlay.PersonSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
+using _Main.Scripts.GamePlay.SlotSystem.Data;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.SlotSystem
+namespace _Main.Scripts.GamePlay.SlotSystem.Components
 {
     public class Slot : MonoBehaviour, IGridObject
     {
-        [SerializeField] private Transform  _personTransform;
-        
-        
-        public Transform  PersonTransform => _personTransform;
-        
-        
-        public bool IsOccupied
-        {
-            get { return _person != null; }
-        }
-        public bool IsLocked {get; private set;}
+        #region SerializeFields
+
+        [SerializeField] private Transform _personTransform;
+
+        #endregion
+
+        #region Encapsulation
+
+        public Transform PersonTransform => _personTransform;
+
+        public bool IsOccupied => _person != null;
+        public bool IsLocked { get; private set; }
+
+        #endregion
+
+        #region Private Variables
 
         private SlotData _slotData;
 
         private Person _person;
+
+        #endregion
+        
+        #region Init-Reset
 
         public void Initialize(SlotData data)
         {
             _slotData = data;
             IsLocked = _slotData.IsStillLocked();
         }
+
+        public void Reset()
+        {
+            SetPerson(null);
+        }
+
+        #endregion
+
+        #region Set-Get Methods
 
         public void SetPerson(Person person)
         {
@@ -40,9 +57,6 @@ namespace _Main.Scripts.GamePlay.SlotSystem
             return _person;
         }
 
-        public void Reset()
-        {
-            SetPerson(null);
-        }
+        #endregion
     }
 }

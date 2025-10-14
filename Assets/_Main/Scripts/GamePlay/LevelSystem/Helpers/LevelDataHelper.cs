@@ -1,6 +1,7 @@
 using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.GamePlay.SlotSystem.Data;
 
 namespace _Main.Scripts.GamePlay.LevelSystem.Helpers
 {

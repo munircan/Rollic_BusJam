@@ -1,7 +1,7 @@
 using System;
 using _Main.Scripts.GamePlay.Settings;
 
-namespace _Main.Scripts.GamePlay.SlotSystem
+namespace _Main.Scripts.GamePlay.SlotSystem.Data
 {
     [Serializable]
     public struct SlotData

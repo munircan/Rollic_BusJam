@@ -8,6 +8,8 @@ using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.LevelSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
+using _Main.Scripts.GamePlay.SlotSystem.Components;
+using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
