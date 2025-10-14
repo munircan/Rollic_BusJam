@@ -1,8 +1,8 @@
-﻿using _Main.GamePlay.TileSystem.Manager;
-using _Main.Scripts.GamePlay.BusSystem.Manager;
+﻿using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
+using _Main.Scripts.GamePlay.TileSystem.Manager;
 using UnityEngine;
 
 namespace _Main.Patterns.ServiceLocation

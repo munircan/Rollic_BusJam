@@ -1,4 +1,3 @@
-using _Main.GamePlay.TileSystem.Manager;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ServiceLocation;
 using _Main.Scripts.GamePlay.BusSystem.Manager;
@@ -7,6 +6,7 @@ using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
+using _Main.Scripts.GamePlay.TileSystem.Manager;
 using _Main.Scripts.Utilities;
 using UnityEngine;
 

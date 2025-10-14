@@ -8,6 +8,7 @@ using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Data;
+using _Main.Scripts.GamePlay.TileSystem.Data;
 using UnityEditor;
 using UnityEngine;
 

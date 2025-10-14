@@ -5,6 +5,7 @@ using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Components;
+using _Main.Scripts.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.TileSystem.Components;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

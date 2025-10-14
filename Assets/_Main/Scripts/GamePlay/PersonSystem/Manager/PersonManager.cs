@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Main.GamePlay.TileSystem;
-using _Main.GamePlay.TileSystem.Manager;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ObjectPooling;
 using _Main.Patterns.ServiceLocation;
@@ -12,6 +11,8 @@ using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Components;
+using _Main.Scripts.GamePlay.TileSystem.Data;
+using _Main.Scripts.GamePlay.TileSystem.Manager;
 using _Main.Scripts.Utilities;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

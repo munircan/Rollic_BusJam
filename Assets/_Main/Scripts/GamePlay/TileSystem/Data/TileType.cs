@@ -1,4 +1,4 @@
-namespace _Main.GamePlay.TileSystem
+namespace _Main.Scripts.GamePlay.TileSystem.Data
 {
     public enum TileType
     {

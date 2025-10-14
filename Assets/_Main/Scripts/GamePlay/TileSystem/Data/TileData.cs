@@ -1,9 +1,9 @@
 using System;
-using _Main.Scripts.GamePlay.PersonSystem;
+using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.PersonSystem.Data;
 using Sirenix.OdinInspector;
 
-namespace _Main.GamePlay.TileSystem
+namespace _Main.Scripts.GamePlay.TileSystem.Data
 {
     [Serializable]
     public struct TileData

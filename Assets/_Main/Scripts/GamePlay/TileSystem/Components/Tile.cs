@@ -3,6 +3,7 @@ using _Main.Patterns.EventSystem;
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.GridSystem;
+using _Main.Scripts.GamePlay.TileSystem.Data;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.TileSystem.Components
