@@ -1,5 +1,6 @@
 using _Main.Scripts.GamePlay.Helpers;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
+using _Main.Scripts.GamePlay.SaveSystem;
 using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.Singleton;
 using Sirenix.OdinInspector;
@@ -42,6 +43,12 @@ namespace _Main.Scripts.GamePlay.Settings
         public void SetPlayerPredCurrentLevel()
         {
             GameConfig.PlayerPref.CurrentLevel = CurrentLevel;
+        }
+
+        [Button(ButtonSizes.Gigantic)]
+        public void ResetSaveData()
+        {
+            SaveManager.ClearList();
         }
     }
 }

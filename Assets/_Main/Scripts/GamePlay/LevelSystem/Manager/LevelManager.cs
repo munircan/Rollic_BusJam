@@ -78,7 +78,14 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
         private async UniTask StartLevelFromSave()
         {
             var tiles = _tileManager.GetTiles();
-            List<UniTask> tasks = new List<UniTask>();
+            var personCount = _personManager.GetPersonList();
+            var tasks = new List<UniTask>();
+            if (personCount.Count == SaveManager.TileIndexes.Count)
+            {
+                IncreaseLevel();
+                RefreshAndLoadLevel();
+                return;
+            }
             foreach (var tileIndex in SaveManager.TileIndexes)
             {
                 tasks.Add(tiles[tileIndex].InputController.ExecuteWithObjectManager(false));
@@ -108,10 +115,15 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 
         public static void LevelSuccess()
         {
-            SaveManager.ClearList();
-            GameConfig.PlayerPref.CurrentLevel++;
+            IncreaseLevel();
             EventManager.Publish(EventLevelSuccess.Create(GameConfig.LevelClickCount));
         }
+
+        private static void IncreaseLevel()
+        {
+            SaveManager.ClearList();
+            GameConfig.PlayerPref.CurrentLevel++;
+        } 
 
         public static void LevelFailed()
         {

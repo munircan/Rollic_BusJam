@@ -244,6 +244,11 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             return _slotManager.GetSlotPersonList().ToList();
         }
 
+        public List<Person> GetPersonList()
+        {
+            return _personList;
+        }
+
         #endregion
     }
 
