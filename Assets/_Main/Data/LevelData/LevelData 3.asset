@@ -16,13 +16,10 @@ MonoBehaviour:
     LevelDuration: 45
     Buses:
     - PersonLimit: 3
-      ColorType: 1
+      ColorType: 0
       Appearance: 0
     - PersonLimit: 3
-      ColorType: 3
-      Appearance: 0
-    - PersonLimit: 3
-      ColorType: 2
+      ColorType: 4
       Appearance: 0
     SlotWidth: 7
     SlotHeight: 1
@@ -41,42 +38,54 @@ MonoBehaviour:
       LockedLevel: 0
     - IsLocked: 1
       LockedLevel: 30
-    TileWidth: 3
+    TileWidth: 4
     TileHeight: 3
     Tiles:
-    - Type: 1
+    - Type: 0
       PersonData:
-        colorType: 3
+        ColorType: 0
+        Appearance: 0
+    - Type: 0
+      PersonData:
+        ColorType: 0
+        Appearance: 0
+    - Type: 0
+      PersonData:
+        ColorType: 0
+        Appearance: 0
+    - Type: 0
+      PersonData:
+        ColorType: 0
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 1
+        ColorType: 0
+        Appearance: 0
+    - Type: -1
+      PersonData:
+        ColorType: 0
+        Appearance: 0
+    - Type: -1
+      PersonData:
+        ColorType: 4
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 1
+        ColorType: 4
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 2
+        ColorType: 0
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 2
+        ColorType: 0
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 1
+        ColorType: 4
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 3
-        Appearance: 0
-    - Type: 1
-      PersonData:
-        colorType: 3
-        Appearance: 0
-    - Type: 1
-      PersonData:
-        colorType: 2
+        ColorType: 4
         Appearance: 0
