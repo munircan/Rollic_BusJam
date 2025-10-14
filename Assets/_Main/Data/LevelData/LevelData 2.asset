@@ -43,37 +43,37 @@ MonoBehaviour:
     Tiles:
     - Type: 2
       PersonData:
-        colorType: 0
-        Appearance: 0
-    - Type: 1
-      PersonData:
-        colorType: 1
-        Appearance: 0
-    - Type: 2
-      PersonData:
-        colorType: 0
-        Appearance: 0
-    - Type: 1
-      PersonData:
-        colorType: 3
-        Appearance: 0
-    - Type: 1
-      PersonData:
-        colorType: 1
-        Appearance: 0
-    - Type: 1
-      PersonData:
-        colorType: 3
+        ColorType: 0
         Appearance: 0
     - Type: 0
       PersonData:
-        colorType: 0
+        ColorType: 0
+        Appearance: 0
+    - Type: 2
+      PersonData:
+        ColorType: 0
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 3
+        ColorType: 1
         Appearance: 0
     - Type: 1
       PersonData:
-        colorType: 1
+        ColorType: 3
+        Appearance: 0
+    - Type: 1
+      PersonData:
+        ColorType: 1
+        Appearance: 0
+    - Type: 1
+      PersonData:
+        ColorType: 3
+        Appearance: 0
+    - Type: 1
+      PersonData:
+        ColorType: 3
+        Appearance: 0
+    - Type: 1
+      PersonData:
+        ColorType: 1
         Appearance: 0
