@@ -27,7 +27,7 @@ namespace _Main.Scripts.GamePlay.TileSystem.Components
         public TileData Data { get; set; }
 
 
-        // TODO: WE SHOULD SELECT FROM LEVEL DATA IF WE WANT
+        // Maybe we can refactor as level data option
         public bool IsExitTile { get; set; }
 
         public int X { get; set; }
