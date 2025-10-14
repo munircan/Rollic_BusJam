@@ -57,7 +57,9 @@ namespace _Main.Scripts.GamePlay.Settings
         White,
         Blue,
         Red,
-        Green
+        Green,
+        Orange,
+        Yellow
     }
     
     public enum Appearance
