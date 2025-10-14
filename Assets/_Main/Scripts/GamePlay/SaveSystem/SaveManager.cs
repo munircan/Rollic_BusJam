@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using _Main.Scripts.GamePlay.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.SaveSystem
@@ -21,6 +22,7 @@ namespace _Main.Scripts.GamePlay.SaveSystem
         public static void ClearList()
         {
             _currentData.ClearList();
+            GameConfig.IsLoadingFromSave = false;
             SaveData();
         }
 
@@ -55,6 +57,10 @@ namespace _Main.Scripts.GamePlay.SaveSystem
             {
                 string json = File.ReadAllText(path);
                 _currentData = JsonUtility.FromJson<TileIndexData>(json);
+                if (_currentData!= null && _currentData.TileIndexes.Count != 0)
+                {
+                    GameConfig.IsLoadingFromSave = true;
+                }
                 Debug.Log($"Data loaded successfully. Count: {_currentData.TileIndexes.Count}");
             }
             catch (System.Exception e)

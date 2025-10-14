@@ -7,6 +7,7 @@ using _Main.Scripts.GamePlay.PersonSystem.Data;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Components;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
+using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.EventSystem;
 using _Main.Scripts.Patterns.ModuleSystem;
 using _Main.Scripts.Patterns.ServiceLocation;
@@ -32,11 +33,11 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
 
         #region Movement Methods
 
-        public async UniTask MovePathAsync(List<Vector3> path,bool isInstant)
+        public async UniTask MovePathAsync(List<Vector3> path)
         {
             var pathArray = path.ToArray();
 
-            if (!isInstant)
+            if (!GameConfig.IsMovementInstant)
             {
                 _pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
                         _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
@@ -50,10 +51,10 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         }
         
 
-        public async UniTask MoveToSlot(Slot slot,bool isInstant)
+        public async UniTask MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
-            if (isInstant)
+            if (GameConfig.IsMovementInstant)
             {
                 transform.position = slotPersonTransform.position;
             }
@@ -66,11 +67,11 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
          
         }
 
-        public async UniTask MoveToBusAsync(Bus bus,bool instant)
+        public async UniTask MoveToBusAsync(Bus bus)
         {
             var busTransform = bus.PersonController.GetPersonBusTransform(BaseComp);
             transform.SetParent(busTransform);
-            if (instant)
+            if (GameConfig.IsMovementInstant)
             {
                 transform.localPosition = Vector3.zero;
             }
@@ -83,7 +84,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
                 await jumpTween.AsyncWaitForCompletion();
             }
           
-            EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp,instant));
+            EventManager.Publish(EventPersonGetIntoBus.Create(BaseComp));
             
         }
 

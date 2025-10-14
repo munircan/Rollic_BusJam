@@ -67,7 +67,11 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 _buses.Add(bus);
             }
 
-            MoveCurrentBus(false).Forget();
+            if (GameConfig.IsLoadingFromSave)
+            {
+                return;
+            }
+            MoveCurrentBus().Forget();
         }
 
         public void ReleaseBuses()
@@ -105,8 +109,8 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                     EventManager.Publish(EventBusChanged.Create(GetCurrentBus()));
                 }
 
-                await currentBus.MovementController.Move(_endTransform.position, MovementType.Out,customEvent.IsInstant);
-                await MoveCurrentBus(customEvent.IsInstant);
+                await currentBus.MovementController.Move(_endTransform.position, MovementType.Out);
+                await MoveCurrentBus();
             }
         }
 
@@ -128,7 +132,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
 
         #region Move Methods
 
-        private async UniTask MoveCurrentBus(bool isInstant)
+        private async UniTask MoveCurrentBus()
         {
             if (IsBusesFinished)
             {
@@ -137,12 +141,12 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
             }
 
             var currentBus = GetCurrentBus();
-            await currentBus.MovementController.Move(_startTransform.position, MovementType.In,isInstant);
-            EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus(),isInstant));
-            MoveNextBuses(isInstant).Forget();
+            await currentBus.MovementController.Move(_startTransform.position, MovementType.In);
+            EventManager.Publish(EventBusMovedIn.Create(GetCurrentBus()));
+            MoveNextBuses().Forget();
         }
 
-        private async UniTask MoveNextBuses(bool isInstant)
+        private async UniTask MoveNextBuses()
         {
             int count = 0;
             for (int i = _currentIndex + 1; i < _buses.Count; i++)
@@ -150,7 +154,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Manager
                 var nextBus = _buses[i];
                 var xPos = _startTransform.position.x + (count + 1) * -BUS_OFFSET;
                 var newPos = new Vector3(xPos, _startTransform.position.y, _startTransform.position.z);
-                await nextBus.MovementController.Move(newPos, MovementType.In,isInstant);
+                await nextBus.MovementController.Move(newPos, MovementType.In);
                 count++;
             }
         }

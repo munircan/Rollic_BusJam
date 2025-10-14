@@ -1,4 +1,5 @@
 using _Main.Scripts.GamePlay.BusSystem.Data;
+using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.ModuleSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -16,12 +17,11 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
 
         #region Movement Methods
 
-        public async UniTask Move(Vector3 position, MovementType movementType,bool isInstant)
+        public async UniTask Move(Vector3 position, MovementType movementType)
         {
             var movementData = _busMovementData.GetMovementData(movementType);
-            if (isInstant)
+            if (GameConfig.IsMovementInstant)
             {
-                transform.DOKill();
                 transform.position = position;
             }
             else
@@ -30,11 +30,10 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
                     .SetLink(gameObject);
                 await moveTween.AsyncWaitForCompletion();
             }
-         
         }
 
         #endregion
-        
+
         #region Init-Reset
 
         public override void Reset()

@@ -8,6 +8,7 @@ using _Main.Scripts.GamePlay.SaveSystem;
 using _Main.Scripts.GamePlay.TileSystem.Components;
 using _Main.Scripts.GamePlay.Utilities;
 using _Main.Scripts.Patterns.ObjectPooling;
+using Cysharp.Threading.Tasks;
 using MEC;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -94,23 +95,9 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
         }
 
         #endregion
+        
+        
 
-        [Button(ButtonSizes.Gigantic)]
-        public void StartLevel()
-        {
-            Timing.RunCoroutine(StartLevelFromSaveData());
-        }
-
-        public IEnumerator<float> StartLevelFromSaveData()
-        {
-            SaveManager.LoadData();
-            foreach (var tileIndex in SaveManager.TileIndexes)
-            {
-                Debug.Log("Tıle index" +tileIndex);
-                _tiles[tileIndex].InputController.ExecuteWithObjectManager(false);
-                yield return Timing.WaitForOneFrame;
-            }
-            SaveManager.ClearList();
-        }
+       
     }
 }

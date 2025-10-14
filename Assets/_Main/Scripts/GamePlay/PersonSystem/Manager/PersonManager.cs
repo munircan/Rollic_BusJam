@@ -126,7 +126,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
             }
         }
 
-        public async UniTask MovePersonInPath(Person person,bool save,bool isInstant)
+        public async UniTask MovePersonInPath(Person person,bool save)
         {
             var personPathData = GetPersonPathData(person);
             if (personPathData.HasPath)
@@ -137,25 +137,25 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                 }
                 
                 person.Tile.SetTileObject(null);
-                await person.MovementController.MovePathAsync(personPathData.PathPositions,isInstant);
-                await DecideNextMovementTarget(person, isInstant);
+                await person.MovementController.MovePathAsync(personPathData.PathPositions);
+                await DecideNextMovementTarget(person);
             }
         }
 
-        private async UniTask DecideNextMovementTarget(Person person,bool isInstant)
+        private async UniTask DecideNextMovementTarget(Person person)
         {
             var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
             if (currentBus && currentBus.IsBusColorMatchWithPerson(person) && !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(person);
-                await person.MovementController.MoveToBusAsync(currentBus,isInstant);
+                await person.MovementController.MoveToBusAsync(currentBus);
                 return;
             }
             var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
             if (firstEmptySlot)
             {
                 person.SetSlot(firstEmptySlot);
-                await person.MovementController.MoveToSlot(firstEmptySlot,isInstant);
+                await person.MovementController.MoveToSlot(firstEmptySlot);
                 return;
             }
             // THIS MEANS CURRENT BUS IS THIS PERSON COLOR AND THERE IS NO EMPTY SLOT 
@@ -183,21 +183,21 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         private void OnEventBusMovedIn(EventBusMovedIn eventBusMovedIn)
         {
-            SlotToBusPeopleMovement(eventBusMovedIn.Bus, eventBusMovedIn.IsInstant);
+            SlotToBusPeopleMovement(eventBusMovedIn.Bus);
         }
 
         #endregion
 
         #region Slot-Bus Methods
 
-        private void SlotToBusPeopleMovement(Bus bus,bool isInstant)
+        private void SlotToBusPeopleMovement(Bus bus)
         {
             if (_slotToBusPeopleDictionary.TryGetValue(bus, out var personList))
             {
                 for (var i = 0; i < personList.Count; i++)
                 {
                     var person = personList[i];
-                    person.MovementController.MoveToBusAsync(bus,isInstant).Forget();
+                    person.MovementController.MoveToBusAsync(bus).Forget();
                 }
             }
         }

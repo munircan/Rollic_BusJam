@@ -24,15 +24,14 @@ namespace _Main.Scripts.GamePlay.TileSystem.Components
                 return;
             }
 
-            ExecuteWithObjectManager(true);
+            ExecuteWithObjectManager(true).Forget();
         }
 
-        public void ExecuteWithObjectManager(bool save)
+        public async UniTask ExecuteWithObjectManager(bool save)
         {
-            var isInstant = !save;
             if (BaseComp.TileObject.Tile.Data.Type == TileType.Person)
             {
-                ServiceLocator.GetService<PersonManager>().MovePersonInPath((Person)BaseComp.TileObject,save,isInstant).Forget();
+               await ServiceLocator.GetService<PersonManager>().MovePersonInPath((Person)BaseComp.TileObject,save);
             }
         }
     }
