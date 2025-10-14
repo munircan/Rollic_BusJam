@@ -1,5 +1,6 @@
 using _Main.GamePlay.TileSystem;
 using _Main.Patterns.EventSystem;
+using _Main.Scripts.GamePlay.TileSystem.Components;
 
 namespace _Main.Scripts.GamePlay.CustomEvents.InGameEvents
 {

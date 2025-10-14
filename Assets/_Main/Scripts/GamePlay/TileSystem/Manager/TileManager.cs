@@ -7,6 +7,7 @@ using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Helpers;
 using _Main.Scripts.GamePlay.PathFinding;
+using _Main.Scripts.GamePlay.TileSystem.Components;
 using _Main.Scripts.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;

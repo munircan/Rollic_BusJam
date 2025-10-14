@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
+using _Main.Scripts.GamePlay.TileSystem.Components;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.PathFinding

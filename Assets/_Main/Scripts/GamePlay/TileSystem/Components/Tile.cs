@@ -1,11 +1,11 @@
+using _Main.GamePlay.TileSystem;
 using _Main.Patterns.EventSystem;
 using _Main.Patterns.ModuleSystem;
-using _Main.Scripts.GamePlay.CustomEvents;
 using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.GridSystem;
 using UnityEngine;
 
-namespace _Main.GamePlay.TileSystem
+namespace _Main.Scripts.GamePlay.TileSystem.Components
 {
     public class Tile : BaseComponent, IGridObject
     {
@@ -16,6 +16,16 @@ namespace _Main.GamePlay.TileSystem
 
         #endregion
 
+        #region Encapsulated Variables
+
+        public bool IsOccupied
+        {
+            get { return Data.Type == TileType.None || Data.Type == TileType.Obstacle || TileObject != null; }
+        }
+
+        public ITileObject TileObject { get; set; }
+        public TileData Data { get; set; }
+
 
         // TODO: WE SHOULD SELECT FROM LEVEL DATA IF WE WANT
         public bool IsExitTile { get; set; }
@@ -23,39 +33,16 @@ namespace _Main.GamePlay.TileSystem
         public int X { get; set; }
         public int Y { get; set; }
 
-
-        #region Encapsulated Variables
-
-        public bool IsOccupied
-        {
-            get
-            {
-                return Data.Type == TileType.None || Data.Type == TileType.Obstacle ||TileObject != null;
-            }
-        }
-
-        public ITileObject TileObject { get; set; }
-        public TileData Data { get; set; }
-
-        #endregion
-
-        #region Unity Event Methods
-
-        private void OnDisable()
-        {
-            Reset();
-        }
-
         #endregion
 
         #region Init-Reset Methods
 
-        public void Initialize(TileData data,int x,int y, bool isExitTile)
+        public void Initialize(TileData data, int x, int y, bool isExitTile)
         {
             Data = data;
-            SetIndexes(x,y);
+            SetIndexes(x, y);
             IsExitTile = isExitTile;
-            
+
             _modelController.Initialize();
             _inputController.Initialize();
         }
@@ -78,7 +65,7 @@ namespace _Main.GamePlay.TileSystem
 
         #region Setter Methods
 
-        public void SetTileObject(ITileObject tileObject,bool initialValue = false)
+        public void SetTileObject(ITileObject tileObject, bool initialValue = false)
         {
             TileObject = tileObject;
             if (!initialValue)
@@ -89,7 +76,7 @@ namespace _Main.GamePlay.TileSystem
 
         #endregion
 
-        #region Helpers
+        #region Get Methods
 
         public Vector3 GetPersonPosition()
         {
