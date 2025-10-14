@@ -37,7 +37,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         {
             var pathArray = path.ToArray();
 
-            if (!GameConfig.IsMovementInstant)
+            if (!GameConfig.IsLoadingFromSave)
             {
                 _pathTween = transform.DOPath(pathArray, _movementData.PathMovementData.Duration,
                         _movementData.PathMovementData.PathType, _movementData.PathMovementData.PathMode)
@@ -54,7 +54,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         public async UniTask MoveToSlot(Slot slot)
         {
             var slotPersonTransform = slot.PersonTransform;
-            if (GameConfig.IsMovementInstant)
+            if (GameConfig.IsLoadingFromSave)
             {
                 transform.position = slotPersonTransform.position;
             }
@@ -71,7 +71,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Components
         {
             var busTransform = bus.PersonController.GetPersonBusTransform(BaseComp);
             transform.SetParent(busTransform);
-            if (GameConfig.IsMovementInstant)
+            if (GameConfig.IsLoadingFromSave)
             {
                 transform.localPosition = Vector3.zero;
             }

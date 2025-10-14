@@ -38,10 +38,21 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         #endregion
 
+        #region Private Variables
+
+        private BusManager _busManager;
+        private SlotManager _slotManager;
+        private TileManager _tileManager;
+
+        #endregion
+
         #region Unity Events
 
         private void Awake()
         {
+            _busManager = ServiceLocator.GetService<BusManager>();
+            _slotManager = ServiceLocator.GetService<SlotManager>();
+            _tileManager = ServiceLocator.GetService<TileManager>();
             EventManager.Subscribe<EventTileChanged>(OnEventTileChanged);
             EventManager.Subscribe<EventBusChanged>(OnEventBusChanged);
             EventManager.Subscribe<EventBusMovedIn>(OnEventBusMovedIn);
@@ -101,7 +112,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
         private void SetPeoplePathData()
         {
             _personPathDictionary = new Dictionary<Person, PersonPathData>();
-            if (ServiceLocator.TryGetService(out TileManager tileManager))
+            if (_tileManager)
             {
                 for (var i = 0; i < _personList.Count; i++)
                 {
@@ -112,7 +123,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
                         continue;
                     }
 
-                    var hasPath = tileManager.GetPath(personTile, out var path);
+                    var hasPath = _tileManager.GetPath(personTile, out var path);
                     var personPathData = new PersonPathData();
                     personPathData.HasPath = hasPath;
                     personPathData.PathPositions = path;
@@ -144,14 +155,14 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         private async UniTask DecideNextMovementTarget(Person person)
         {
-            var currentBus = ServiceLocator.GetService<BusManager>().GetCurrentBus();
+            var currentBus = _busManager.GetCurrentBus();
             if (currentBus && currentBus.IsBusColorMatchWithPerson(person) && !currentBus.PersonController.IsBusFull)
             {
                 currentBus.PersonController.AddPerson(person);
                 await person.MovementController.MoveToBusAsync(currentBus);
                 return;
             }
-            var firstEmptySlot = ServiceLocator.GetService<SlotManager>().GetFirstEmptySlot();
+            var firstEmptySlot = _slotManager.GetFirstEmptySlot();
             if (firstEmptySlot)
             {
                 person.SetSlot(firstEmptySlot);
@@ -230,8 +241,7 @@ namespace _Main.Scripts.GamePlay.PersonSystem.Manager
 
         private List<Person> GetSlotPersonList()
         {
-            var slotManager = ServiceLocator.GetService<SlotManager>();
-            return slotManager.GetSlotPersonList().ToList();
+            return _slotManager.GetSlotPersonList().ToList();
         }
 
         #endregion

@@ -34,7 +34,7 @@ namespace _Main.Scripts.GamePlay.SaveSystem
             {
                 string json = JsonUtility.ToJson(_currentData, true);
                 File.WriteAllText(path, json);
-                Debug.Log($"Data saved to: {path}");
+                // Debug.Log($"Data saved to: {path}");
             }
             catch (System.Exception e)
             {
@@ -61,7 +61,6 @@ namespace _Main.Scripts.GamePlay.SaveSystem
                 {
                     GameConfig.IsLoadingFromSave = true;
                 }
-                Debug.Log($"Data loaded successfully. Count: {_currentData.TileIndexes.Count}");
             }
             catch (System.Exception e)
             {

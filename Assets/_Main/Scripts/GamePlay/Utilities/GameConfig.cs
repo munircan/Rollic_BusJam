@@ -16,8 +16,7 @@ namespace _Main.Scripts.GamePlay.Utilities
         public const float TILE_SIZE = 1.25f;
         
         public static bool IsLoadingFromSave { get; set; }
-
-        public static bool IsMovementInstant { get; set; }
+        
         
         
         public static class PlayerPref

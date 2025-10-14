@@ -20,7 +20,7 @@ namespace _Main.Scripts.GamePlay.BusSystem.Components
         public async UniTask Move(Vector3 position, MovementType movementType)
         {
             var movementData = _busMovementData.GetMovementData(movementType);
-            if (GameConfig.IsMovementInstant)
+            if (GameConfig.IsLoadingFromSave)
             {
                 transform.position = position;
             }
