@@ -2,7 +2,6 @@ using _Main.Scripts.GamePlay.BusSystem.Manager;
 using _Main.Scripts.GamePlay.CustomEvents.LevelEvents;
 using _Main.Scripts.GamePlay.PersonSystem.Manager;
 using _Main.Scripts.GamePlay.Settings;
-using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
 using _Main.Scripts.GamePlay.Utilities;
@@ -14,11 +13,16 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 {
     public class LevelManager : MonoBehaviour
     {
+        #region Managers
+
         private TileManager _tileManager;
         private PersonManager _personManager;
         private SlotManager _slotManager;
         private BusManager _busManager;
-        
+
+        #endregion
+
+        #region Unity Events
 
         private void Awake()
         {
@@ -40,14 +44,16 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             EventManager.Unsubscribe<EventLoadLevel>(OnEventLoadLevel);
         }
 
-
-        private void OnEnable()
+        private void Start()
         {
             LoadLevel();
         }
 
+        #endregion
 
-        public void LoadLevel()
+        #region Load Methods
+
+        private void LoadLevel()
         {
             GameConfig.LevelClickCount = 0;
             var currentLevelData = LevelSettings.Instance.GetCurrentLevelData();
@@ -58,7 +64,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             EventManager.Publish(EventLevelLoaded.Create());
         }
 
-        public void RefreshAndLoadLevel()
+        private void RefreshAndLoadLevel()
         {
             UnloadLevel();
             LoadLevel();
@@ -72,6 +78,10 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
             _busManager.ReleaseBuses();
         }
 
+        #endregion
+
+        #region Succes-Fail
+
         public static void LevelSuccess()
         {
             GameConfig.PlayerPref.CurrentLevel++;
@@ -80,12 +90,18 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Manager
 
         public static void LevelFailed()
         {
-            EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount,GameConfig.FailReason));
+            EventManager.Publish(EventLevelFail.Create(GameConfig.LevelClickCount, GameConfig.FailReason));
         }
+
+        #endregion
+
+        #region Event Methods
 
         private void OnEventLoadLevel(EventLoadLevel customEvent)
         {
             RefreshAndLoadLevel();
         }
+
+        #endregion
     }
 }

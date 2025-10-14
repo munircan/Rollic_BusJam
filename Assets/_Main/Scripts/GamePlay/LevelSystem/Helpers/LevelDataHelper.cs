@@ -1,6 +1,4 @@
-using _Main.GamePlay.TileSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
-using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Data;
 using _Main.Scripts.GamePlay.TileSystem.Data;
 

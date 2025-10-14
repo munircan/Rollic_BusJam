@@ -9,9 +9,16 @@ namespace _Main.Scripts.GamePlay.Utilities
         
         public static FailReason FailReason { get; set; }
         
+        public static Camera MainCamera { get; set; }
+        
         public static int LevelClickCount { get; set; }
         
-        public static int CountdownTimer { get; set; }
+        public const float TILE_SIZE = 1.25f;
+
+
+        public const float CAMERA_PADDING = 5;
+        
+        
         
         
         public static class PlayerPref

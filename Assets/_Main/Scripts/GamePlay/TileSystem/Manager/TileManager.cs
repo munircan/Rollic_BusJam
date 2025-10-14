@@ -31,8 +31,7 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
         private Tile[,] _tilesMatrix;
         private int _width;
         private int _height;
-
-        private const float CELL_SIZE = 1.25f;
+        
 
         #endregion
 
@@ -44,7 +43,7 @@ namespace _Main.Scripts.GamePlay.TileSystem.Manager
             _height = levelData.TileHeight;
             Tiles = new List<Tile>(_width * _height);
             _tilesMatrix = new Tile[_height, _width];
-            _grid = new Grid<Tile>(_height, _width, CELL_SIZE, _gridParent.position);
+            _grid = new Grid<Tile>(_height, _width, GameConfig.TILE_SIZE, _gridParent.position);
             for (int i = 0; i < _height; i++)
             {
                 var isExitTile = i == 0;
