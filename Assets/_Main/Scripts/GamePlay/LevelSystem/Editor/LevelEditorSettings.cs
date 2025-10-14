@@ -13,7 +13,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                 if (s_Instance == null)
                 {
                     s_Instance = AssetDatabase.LoadAssetAtPath<LevelEditorSettings>("Assets/_Main/Data/LevelEditor/LevelEditorSettings.asset");
-                
+
                     if (s_Instance == null)
                     {
                         s_Instance = CreateInstance<LevelEditorSettings>();
@@ -30,35 +30,41 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
         public KeyCode DefaultTileKey = KeyCode.Q;
         public KeyCode PersonTileKey = KeyCode.W;
         public KeyCode ObstacleTileKey = KeyCode.E;
-    
+
         [Header("Person Type Shortcuts")]
         public KeyCode DefaultPersonTypeKey = KeyCode.T;
         public KeyCode MysteriousPersonTypeKey = KeyCode.Y;
-    
+
         [Header("Person Color Shortcuts")]
-        public KeyCode RedPersonKey = KeyCode.Alpha1;
+        public KeyCode WhitePersonKey = KeyCode.Alpha1;
         public KeyCode BluePersonKey = KeyCode.Alpha2;
-        public KeyCode GreenPersonKey = KeyCode.Alpha3;
-    
+        public KeyCode RedPersonKey = KeyCode.Alpha3;
+        public KeyCode GreenPersonKey = KeyCode.Alpha4;
+        public KeyCode OrangePersonKey = KeyCode.Alpha5;
+        public KeyCode YellowPersonKey = KeyCode.Alpha6;
+
 
         public void ResetToDefaults()
         {
             DefaultTileKey = KeyCode.Q;
             PersonTileKey = KeyCode.W;
             ObstacleTileKey = KeyCode.E;
-        
+
             DefaultPersonTypeKey = KeyCode.T;
             MysteriousPersonTypeKey = KeyCode.Y;
-        
-            RedPersonKey = KeyCode.Alpha1;
+
+            WhitePersonKey = KeyCode.Alpha1;
             BluePersonKey = KeyCode.Alpha2;
-            GreenPersonKey = KeyCode.Alpha3;
+            RedPersonKey = KeyCode.Alpha3;
+            GreenPersonKey = KeyCode.Alpha4;
+            OrangePersonKey = KeyCode.Alpha5;
+            YellowPersonKey = KeyCode.Alpha6;
         }
     }
 
     public class LevelEditorSettingsProvider
     {
-        private static UnityEditor.Editor s_SettingsEditor; 
+        private static UnityEditor.Editor s_SettingsEditor;
 
         [SettingsProvider]
         public static SettingsProvider CreateSettingsProvider()
@@ -69,7 +75,7 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                 guiHandler = (searchContext) =>
                 {
                     var settings = LevelEditorSettings.Instance;
-                
+
                     if (s_SettingsEditor == null || s_SettingsEditor.target != settings)
                     {
                         s_SettingsEditor = UnityEditor.Editor.CreateEditor(settings);

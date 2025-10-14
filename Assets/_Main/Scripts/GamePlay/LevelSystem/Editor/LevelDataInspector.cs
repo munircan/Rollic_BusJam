@@ -41,14 +41,14 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
 
             EditorGUILayout.BeginVertical("box");
             GUILayout.Label("⏰ LEVEL SETTINGS", EditorStyles.boldLabel);
-    
-            var data = _levelData.Data; 
+
+            var data = _levelData.Data;
             data.LevelDuration = EditorGUILayout.IntField("Level Duration (Seconds)", Mathf.Max(0, data.LevelDuration));
-            _levelData.Data = data; 
-    
+            _levelData.Data = data;
+
             EditorGUILayout.EndVertical();
             EditorGUILayout.Space(20);
-    
+
             DrawBusSection();
             EditorGUILayout.Space(20);
             DrawSlotSection();
@@ -237,9 +237,12 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                 $"{settings.MysteriousPersonTypeKey} = Mysterious Type";
 
             string colorShortcuts =
+                $"{settings.WhitePersonKey}=White, " +
                 $"{settings.RedPersonKey}=Red, " +
                 $"{settings.BluePersonKey}=Blue, " +
-                $"{settings.GreenPersonKey}=Green";
+                $"{settings.GreenPersonKey}=Green, " +
+                $"{settings.OrangePersonKey}=Orange, " +
+                $"{settings.YellowPersonKey}=Yellow";
 
             string infoText =
                 $"{settings.DefaultTileKey} = Default, {settings.PersonTileKey} = Person, {settings.ObstacleTileKey} = Obstacle\n" +
@@ -431,9 +434,9 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
 
             if (tile.Type == TileType.Person)
             {
-                if (e.keyCode == settings.RedPersonKey)
+                if (e.keyCode == settings.WhitePersonKey)
                 {
-                    tile.PersonData.ColorType = ColorType.Red;
+                    tile.PersonData.ColorType = ColorType.White;
                     tileChanged = true;
                 }
                 else if (e.keyCode == settings.BluePersonKey)
@@ -441,9 +444,24 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
                     tile.PersonData.ColorType = ColorType.Blue;
                     tileChanged = true;
                 }
+                else if (e.keyCode == settings.RedPersonKey)
+                {
+                    tile.PersonData.ColorType = ColorType.Red;
+                    tileChanged = true;
+                }
                 else if (e.keyCode == settings.GreenPersonKey)
                 {
                     tile.PersonData.ColorType = ColorType.Green;
+                    tileChanged = true;
+                }
+                else if (e.keyCode == settings.OrangePersonKey)
+                {
+                    tile.PersonData.ColorType = ColorType.Orange;
+                    tileChanged = true;
+                }
+                else if (e.keyCode == settings.YellowPersonKey)
+                {
+                    tile.PersonData.ColorType = ColorType.Yellow;
                     tileChanged = true;
                 }
 
@@ -472,9 +490,12 @@ namespace _Main.Scripts.GamePlay.LevelSystem.Editor
         {
             return colorType switch
             {
-                ColorType.Red => Color.red,
+                ColorType.White => Color.white,
                 ColorType.Blue => Color.blue,
+                ColorType.Red => Color.red,
                 ColorType.Green => Color.green,
+                ColorType.Orange => new Color(1f, 0.64f, 0f), // Orange
+                ColorType.Yellow => Color.yellow,
                 _ => Color.white
             };
         }
