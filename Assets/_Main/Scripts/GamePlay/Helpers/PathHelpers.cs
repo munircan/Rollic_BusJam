@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using _Main.GamePlay.TileSystem;
 using Vector3 = UnityEngine.Vector3;
 
-namespace _Main.Scripts.Utilities
+namespace _Main.Scripts.GamePlay.Helpers
 {
     public static class PathHelpers
     {

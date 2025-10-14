@@ -1,8 +1,9 @@
+using _Main.Scripts.GamePlay.InputSystem.Interactables;
 using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.Utilities;
 using UnityEngine;
 
-namespace _Main.Scripts.GamePlay.InputSystem
+namespace _Main.Scripts.GamePlay.InputSystem.Handlers
 {
     public class PressableInputHandler : IInputHandler
     {

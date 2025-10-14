@@ -1,5 +1,6 @@
 using _Main.Patterns.ModuleSystem;
 using _Main.Scripts.GamePlay.InputSystem;
+using _Main.Scripts.GamePlay.InputSystem.Interactables;
 
 namespace _Main.GamePlay.TileSystem
 {

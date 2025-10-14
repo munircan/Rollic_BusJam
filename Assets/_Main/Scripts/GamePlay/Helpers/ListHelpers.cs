@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace _Main.Scripts.Utilities
+namespace _Main.Scripts.GamePlay.Helpers
 {
     public static class ListHelpers
     {

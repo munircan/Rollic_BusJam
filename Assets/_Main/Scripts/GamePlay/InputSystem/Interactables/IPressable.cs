@@ -1,4 +1,4 @@
-namespace _Main.Scripts.GamePlay.InputSystem
+namespace _Main.Scripts.GamePlay.InputSystem.Interactables
 {
     public interface IPressable : IInteractable
     {
