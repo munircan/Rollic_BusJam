@@ -1,7 +1,25 @@
 # Rollic_BusJam
 
+General Information
+
+Note on Assets: This project was developed entirely using Unity's default assets (primitives).
 
 
+Packages Used
+
+Odin Inspector: For advanced Editor features and improved serialization.
+
+DOTween: Used for fluid animations (Tweening) and object movements.
+
+More Effective Coroutines: For timer.
+
+Quick Outline: For outline.
+
+UniTask: To manage asynchronous operations (asynchronous programming) in a more modern and efficient way.
+
+How to Run
+
+To Play: Simply open the GameplayScene scene and press the Play button in the Unity Editor.
 
 Level Editor
 
