@@ -8,7 +8,7 @@ using _Main.Scripts.GamePlay.CustomEvents.InGameEvents;
 using _Main.Scripts.GamePlay.LevelSystem;
 using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Manager;
-using _Main.Scripts.Utilities;
+using _Main.Scripts.GamePlay.Utilities;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

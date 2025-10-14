@@ -5,7 +5,7 @@ using _Main.Scripts.GamePlay.LevelSystem.Data;
 using _Main.Scripts.GamePlay.LevelSystem.Helpers;
 using _Main.Scripts.GamePlay.PersonSystem.Components;
 using _Main.Scripts.GamePlay.SlotSystem.Components;
-using _Main.Scripts.Utilities;
+using _Main.Scripts.GamePlay.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.SlotSystem.Manager

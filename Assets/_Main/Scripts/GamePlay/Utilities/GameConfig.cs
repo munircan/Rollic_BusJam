@@ -1,7 +1,7 @@
 using _Main.Scripts.GamePlay.GameStateSystem;
 using UnityEngine;
 
-namespace _Main.Scripts.Utilities
+namespace _Main.Scripts.GamePlay.Utilities
 {
     public static class GameConfig
     {

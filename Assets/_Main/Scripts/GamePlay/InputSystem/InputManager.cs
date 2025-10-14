@@ -1,6 +1,6 @@
 using _Main.Scripts.GamePlay.GameStateSystem;
 using _Main.Scripts.GamePlay.InputSystem.Handlers;
-using _Main.Scripts.Utilities;
+using _Main.Scripts.GamePlay.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.InputSystem

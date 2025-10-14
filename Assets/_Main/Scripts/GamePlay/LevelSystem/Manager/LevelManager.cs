@@ -7,7 +7,7 @@ using _Main.Scripts.GamePlay.Settings;
 using _Main.Scripts.GamePlay.SlotSystem;
 using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
-using _Main.Scripts.Utilities;
+using _Main.Scripts.GamePlay.Utilities;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.LevelSystem.Manager

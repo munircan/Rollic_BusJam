@@ -13,7 +13,7 @@ using _Main.Scripts.GamePlay.SlotSystem.Manager;
 using _Main.Scripts.GamePlay.TileSystem.Components;
 using _Main.Scripts.GamePlay.TileSystem.Data;
 using _Main.Scripts.GamePlay.TileSystem.Manager;
-using _Main.Scripts.Utilities;
+using _Main.Scripts.GamePlay.Utilities;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
